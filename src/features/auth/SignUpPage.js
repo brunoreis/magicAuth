@@ -1,5 +1,5 @@
-import Layout from './Layout'
-import Header from './Header'
+import Layout from './components/Layout'
+import Header from './components/Header'
 
 export default function SignUpPage() {
   return (

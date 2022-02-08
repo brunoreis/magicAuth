@@ -1,11 +1,6 @@
 import GlobalStyle from '../styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
-
-const theme = {
-  colors: {
-    primary: '#fafafa',
-  },
-};
+import theme from '../styles/theme';
 
 function MyApp({ Component, pageProps }) {
   return (
