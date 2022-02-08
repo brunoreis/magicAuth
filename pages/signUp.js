@@ -1,9 +1,7 @@
-import Layout from '../src/features/auth/Layout'
+import SignUpPage from '../src/features/auth/SignUpPage'
 
 export default function SignUp() {
   return (
-    <Layout title="Sign Up">
-        <h1>Sign Up</h1>
-    </Layout>
+    <SignUpPage/>
   )
 }

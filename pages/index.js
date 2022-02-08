@@ -1,10 +1,7 @@
-import Head from 'next/head'
-import Layout from '../src/features/auth/Layout'
+import WelcomePage from '../src/features/auth/WelcomePage'
 
-export default function Home() {
+export default function Welcome() {
   return (
-    <Layout>
-      <h1>Welcome, Bruno</h1>
-    </Layout>
+    <WelcomePage/>
   )
 }
