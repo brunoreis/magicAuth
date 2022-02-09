@@ -6,6 +6,7 @@ const theme = {
     error: '#CC5552',
     success: '#799B67',
     border: '#999',
+    disabled: '#eee',
   },
   borderRadius: '0.5rem',
 };

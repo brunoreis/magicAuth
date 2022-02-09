@@ -14,9 +14,11 @@ const GlobalStyle = createGlobalStyle`
   body{
     background: #fefefe;
     min-height:100vh;
-    padding: 1rem;
-    margin-top:0;
+    padding: 0rem;
+    margin:0;
     font-family:OpenSans;
   }
+
+  
 `;
 export default GlobalStyle;
