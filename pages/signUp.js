@@ -1,7 +1,7 @@
-import SignUpPage from '../features/auth/SignUpPage'
+import SignUpPageContainer from '../features/auth/SignUpPage/SignUpPageContainer'
 
 export default function SignUp() {
   return (
-    <SignUpPage/>
+    <SignUpPageContainer onButtonClick={(v) => console.log(v)}/>
   )
 }
