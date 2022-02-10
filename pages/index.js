@@ -2,6 +2,6 @@ import WelcomePage from '../features/auth/WelcomePage'
 
 export default function Welcome() {
   return (
-    <WelcomePage/>
+    <WelcomePage username="Dude"/>
   )
 }
