@@ -1,8 +1,8 @@
 
-import SignInPage from '../src/features/auth/SignInPage'
+import SignInPage from '../features/auth/SignInPage'
 
 export default function SignIn() {
   return (
-    <SignInPage/>
+    <SignInPage onButtonClick={()=>console.log('button')} onEmailChange={(email) => console.log(email)}/>
   )
 }

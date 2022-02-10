@@ -5,7 +5,13 @@ import Button from '../components/Button';
 import Toggle from '../components/Toggle';
 import { FieldContainer, FieldLabel, ToggleLabelContainer } from './SignInPage.styles';
 
-export default function SignIn() {
+export default function SignIn({ 
+  email, 
+  rememberMe,
+  onEmailChange, 
+  onButtonClick, 
+  onRememberMeToggle 
+}) {
   return (
     <Layout title="Sign In">
       <HeaderContainer>
@@ -14,9 +20,9 @@ export default function SignIn() {
       <FormContainer>
         <FieldLabel htmlFor="email">Your Email</FieldLabel>
         <FieldContainer>
-          <TextField testId="emailInput" id="email" />
+          <TextField testId="emailInput" id="email" value={email} onChange={onEmailChange} />
         </FieldContainer>
-        <Button>Sign In / Sign Up</Button>
+        <Button onClick={onButtonClick}>Sign In / Sign Up</Button>
       </FormContainer>
       <FooterContainer>
         <ToggleLabelContainer>
@@ -24,9 +30,9 @@ export default function SignIn() {
         </ToggleLabelContainer>
         <Toggle
           id="rememberMe"
-          defaultChecked={true}
+          checked={rememberMe}
           icons={false}
-          onChange={() => {}}
+          onChange={onRememberMeToggle}
         />
       </FooterContainer>
     </Layout>

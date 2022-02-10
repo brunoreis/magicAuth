@@ -1,4 +1,4 @@
-import SignUpPage from '../src/features/auth/SignUpPage'
+import SignUpPage from '../features/auth/SignUpPage'
 
 export default function SignUp() {
   return (

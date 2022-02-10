@@ -1,4 +1,4 @@
-import WelcomePage from '../src/features/auth/WelcomePage'
+import WelcomePage from '../features/auth/WelcomePage'
 
 export default function Welcome() {
   return (
