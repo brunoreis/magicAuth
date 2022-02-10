@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import Toggle from '../components/Toggle';
 import { FieldContainer, FieldLabel, ToggleLabelContainer } from './SignInPage.styles';
 
-export default function SignIn({ 
+export default function SignInPage({ 
   email, 
   rememberMe,
   onEmailChange, 
