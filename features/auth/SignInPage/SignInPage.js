@@ -3,7 +3,8 @@ import Header from '../components/Header';
 import TextField from '../components/TextField';
 import Button from '../components/Button';
 import Toggle from '../components/Toggle';
-import { FieldContainer, FieldLabel, ToggleLabelContainer } from './SignInPage.styles';
+import { ToggleLabelContainer } from './SignInPage.styles';
+import { FieldContainer, FieldLabel } from '../components/styles';
 
 export default function SignInPage({ 
   email, 
