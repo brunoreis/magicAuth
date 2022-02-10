@@ -3,3 +3,4 @@
 [] add username validation to the email field
 [] add pointer cursor to the buttons
 [] add some kind of loading behaviour too
+[] move magik key to vercel...
