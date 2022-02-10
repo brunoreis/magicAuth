@@ -32,6 +32,14 @@ describe('SignIn Page', () => {
     expect(button.innerHTML).toBe("Sign In / Sign Up")
   })
 
+  it("Calls onButtonClick when the button is clicked", () => {
+    const onButtonClick = jest.fn();
+    render(<SignInPage onButtonClick={onButtonClick} />)
+    const button = screen.getByRole('button')
+    fireEvent.click(button)
+    expect(onButtonClick).toHaveBeenCalled()
+  })
+
   it("Shows the informed email", () => {
     render(<SignInPage email="partial@" onEmailChange={()=>{}}/>)
     const input = screen.getByLabelText('Your Email')
@@ -44,14 +52,6 @@ describe('SignIn Page', () => {
     const input = screen.getByLabelText('Your Email')
     fireEvent.change(input, {target: {value: '44'}})
     expect(onChange).toHaveBeenCalledWith('44')
-  })
-
-  it("Calls onButtonClick when the button is clicked", () => {
-    const onButtonClick = jest.fn();
-    render(<SignInPage onButtonClick={onButtonClick} />)
-    const button = screen.getByRole('button')
-    fireEvent.click(button)
-    expect(onButtonClick).toHaveBeenCalled()
   })
 
   it("Calls onRememberMeToggle when the toggle is clicked", () => {

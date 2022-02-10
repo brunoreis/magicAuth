@@ -1,9 +1,9 @@
 import { render as tlRender, screen, fireEvent } from '@testing-library/react'
 import SignInPageContainer from './SignInPageContainer'
-import { addTheme } from '../../../util/testHelpers'
+import { addTheme, addReduxProvider } from '../../../util/testHelpers'
 import * as R from 'ramda'
 
-const render = R.compose(tlRender, addTheme)
+const render = R.compose(tlRender, addTheme, addReduxProvider)
 
 describe('SignInPageContainer', () => {
   it('Given that the user filled the email and checked remember me, should return these values when the button is clicked.', () => {
