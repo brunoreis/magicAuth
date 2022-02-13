@@ -1,5 +1,5 @@
-import { takeEvery, all, call, fork } from 'redux-saga/effects';
-import { preload, checkIsLoggedIn, redirects } from '../features/authentication/authentication'
+import { takeEvery, all, call, fork, put } from 'redux-saga/effects';
+import { preload, checkIsLoggedIn } from '../features/authentication/authentication'
 import sagas from './sagas'
 import {
     signIn,
@@ -11,9 +11,9 @@ import {
     handleSignIn,
     handleLogOut
 } from '../features/authentication/authentication'
-import { 
-    navigateTo
-} from '../features/navigation/navigation'
+import { redirects } from '../features/navigation/navigation'
+import { requestNavigation } from '../features/navigation/navigationSlice'
+
 it('preload, check log in, redirects and start other sagas', () => {
     const g = sagas();
     expect(g.next().value).toEqual(fork(preload));
@@ -22,9 +22,9 @@ it('preload, check log in, redirects and start other sagas', () => {
     expect(g.next().value).toEqual(
       all([
         takeEvery(signIn().type, handleSignIn),
-        takeEvery(signInSuccess().type, navigateTo, '/'),
+        takeEvery(signInSuccess().type, put(requestNavigation('/signIn'))),
         takeEvery(logOut().type, handleLogOut),
-        takeEvery(logOutSuccess().type, navigateTo, '/signIn'),
+        takeEvery(logOutSuccess().type, put(requestNavigation('/signIn'))),
       ])
     );
   });

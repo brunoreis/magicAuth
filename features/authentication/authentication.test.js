@@ -1,11 +1,9 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import {
-  redirects,
   preload,
   checkIsLoggedIn,
   handleSignIn,
   handleLogOut,
-  isLoggedIn,
 } from './authentication';
 import magic from '../shared/magic';
 import {
@@ -13,13 +11,7 @@ import {
   checkIsLoggedInReceived,
   signInSuccess,
   logOutSuccess,
-  redirectsStarted,
-  redirectsCompleted,
-} from '../../features/authentication/authenticationSlice';
-import { nav } from '../../features/authentication/navigationSlice';
-import Router from 'next/router';
-
-jest.mock('next/router');
+} from './authenticationSlice';
 
 describe('authentication', () => {
   describe('preload', () => {
@@ -62,71 +54,6 @@ describe('authentication', () => {
       const g = handleLogOut();
       expect(g.next().value).toEqual(call([magic.user, magic.user.logout]));
       expect(g.next().value).toEqual(put(logOutSuccess()));
-    });
-  });
-
-  //@todo: as visible, this sure would profit from a refactoring:
-  describe('redirects', () => {
-    describe('Given user is logged in', () => {
-      it('/ does not redirect', () => {
-        Router.router = { asPath: '/' };
-        const g = redirects();
-        expect(g.next().value).toEqual(put(redirectsStarted()));
-        expect(g.next().value).toEqual(select(isLoggedIn));
-        expect(g.next(true).value).toEqual(put(redirectsCompleted()));
-        expect(g.next().done).toBe(true);
-      });
-      it('/signIn redirects to /', () => {
-        Router.router = { asPath: '/signIn' };
-        const isLogged = true;
-        const g = redirects();
-        expect(g.next().value).toEqual(put(redirectsStarted()));
-        expect(g.next().value).toEqual(select(isLoggedIn));
-        expect(g.next(isLogged).value).toEqual(put(nav('/')));
-        expect(g.next().value).toEqual(put(redirectsCompleted()));
-        expect(g.next().done).toBe(true);
-      });
-      it('/signUp redirects to /', () => {
-        Router.router = { asPath: '/signUp' };
-        const isLogged = true;
-        const g = redirects();
-        expect(g.next().value).toEqual(put(redirectsStarted()));
-        expect(g.next().value).toEqual(select(isLoggedIn));
-        expect(g.next(isLogged).value).toEqual(put(nav('/')));
-        expect(g.next().value).toEqual(put(redirectsCompleted()));
-        expect(g.next().done).toBe(true);
-      });
-
-      describe('Given user is not logged in', () => {
-        it('/ redirectsTo signIn', () => {
-          Router.router = { asPath: '/' };
-          const isLogged = false;
-          const g = redirects();
-          expect(g.next().value).toEqual(put(redirectsStarted()));
-          expect(g.next().value).toEqual(select(isLoggedIn));
-          expect(g.next(isLogged).value).toEqual(put(nav('/signIn')));
-          expect(g.next().value).toEqual(put(redirectsCompleted()));
-          expect(g.next().done).toBe(true);
-        });
-        it('/signIn does not redirect', () => {
-          Router.router = { asPath: '/signIn' };
-          const isLogged = false;
-          const g = redirects();
-          expect(g.next().value).toEqual(put(redirectsStarted()));
-          expect(g.next().value).toEqual(select(isLoggedIn));
-          expect(g.next().value).toEqual(put(redirectsCompleted()));
-          expect(g.next().done).toBe(true);
-        });
-        it('/signUn does not redirect', () => {
-          Router.router = { asPath: '/signUp' };
-          const isLogged = false;
-          const g = redirects();
-          expect(g.next().value).toEqual(put(redirectsStarted()));
-          expect(g.next().value).toEqual(select(isLoggedIn));
-          expect(g.next().value).toEqual(put(redirectsCompleted()));
-          expect(g.next().done).toBe(true);
-        });
-      });
     });
   });
 });

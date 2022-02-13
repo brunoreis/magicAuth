@@ -1,4 +1,4 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import magic from '../shared/magic';
 import Router from 'next/router';
 import {
@@ -7,10 +7,8 @@ import {
   signInSuccess,
   signInFailure,
   logOutSuccess,
-  redirectsStarted,
-  redirectsCompleted,
 } from './authenticationSlice';
-import { nav } from './navigationSlice';
+import { nav } from '../navigation/navigationSlice';
 
 export const isLoggedIn = state=> state.authentication.isLoggedIn
 
@@ -44,22 +42,4 @@ export function* handleSignIn(action) {
 export function* handleLogOut() {
   yield call([magic.user, magic.user.logout]);
   yield put(logOutSuccess());
-}
-
-export function* redirects() {
-  yield put(redirectsStarted())
-  const actualPath = Router.router.asPath
-  const isLogged = yield select(isLoggedIn)
-  if(isLogged) {
-      switch(actualPath) {
-          case '/signIn': yield put(nav('/')); 
-              break;
-          case '/signUp': yield put(nav('/')); break;
-      }
-  } else {
-      switch(actualPath) {
-          case '/': yield put(nav('/signIn')); break;
-      }
-  }
-  yield put(redirectsCompleted())
 }
