@@ -2,6 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isLoggedIn: false,
+  loggedUser: {
+    issuer: null,
+    email: null
+  }
 };
 
 export const authenticationSlice = createSlice({
@@ -9,7 +13,10 @@ export const authenticationSlice = createSlice({
   initialState,
   reducers: { // todo: we should not need reducers just to create action creators. (check createAction)
     signIn: () => {},
-    signInSuccess: () => {},
+    signInSuccess: (state, action) => {
+      state.loggedUser.email = action.payload.email
+      state.loggedUser.issuer = action.payload.issuer
+    },
     signInFailure: () => {},
     logOut: () => {},
     logOutSuccess: () => {},
@@ -37,6 +44,7 @@ export const authenticationSlice = createSlice({
 export const {
   signIn,
   signInSuccess,
+  signInFailure,
   logOut,
   logOutSuccess,
   receiveSignInInfo,
@@ -47,4 +55,6 @@ export const {
   redirectsCompleted
 } = authenticationSlice.actions;
 export const isLoggedIn = (state) => state.isLoggedIn;
+export const getIssuer = (state) => state.loggedUser.issuer;
+export const getEmail = (state) => state.loggedUser.email;
 export default authenticationSlice.reducer;

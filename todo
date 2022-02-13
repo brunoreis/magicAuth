@@ -1,6 +1,7 @@
-[] redirects any logged user that is not signed in to Sign UP
-[] Do the sign up (relate id to the username using the local storage)
-[] redirect any logged and signed up user to the welcome page
+[] grab the user metadata on the first login check too (same thing as the sign in)
+[] try to grab that user (username) from the store's collection
+[] save the user in the collection if he does not exist
+[] move the redirect to after these steps and check if we need to redirect to signUp
 
 [] move magic.link key to vercel...
 [] add some kind of loading behaviour too

@@ -48,7 +48,8 @@ export function* handleSignIn(action) {
       { email: action.payload.email },
       true
     );
-    yield put(signInSuccess());
+    const metadata = yield call([magic.user, magic.user.getMetadata])
+    yield put(signInSuccess(metadata));
   } catch (e) {
     yield put(signInFailure());
   }

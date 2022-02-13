@@ -69,7 +69,9 @@ describe('authentication', () => {
       expect(g.next().value).toEqual(
         call([magic.auth, magic.auth.loginWithMagicLink], { email }, true)
       );
-      expect(g.next().value).toEqual(put(signInSuccess()));
+      expect(g.next().value).toEqual(call([magic.user, magic.user.getMetadata]));
+      const metadata = { email: 'testemail@a.com', issuer: 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'}
+      expect(g.next(metadata).value).toEqual(put(signInSuccess(metadata)));
       expect(g.next().done).toBe(true);
     });
   });
