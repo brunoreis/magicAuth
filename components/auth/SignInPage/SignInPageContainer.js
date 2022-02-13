@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import SignInPage from './SignInPage'
 import { useDispatch } from 'react-redux';
-import {
-  signIn,
-} from '../../../features/authentication/authenticationSlice';
+import { signIn } from '../../../features/authentication/authenticationSlice';
 
 const SignInPageContainer = () => {
   const dispatch = useDispatch();

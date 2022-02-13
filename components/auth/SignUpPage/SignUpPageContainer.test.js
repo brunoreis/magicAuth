@@ -1,24 +1,27 @@
 import { render as tlRender, screen, fireEvent } from '@testing-library/react'
 import SignUpPageContainer from './SignUpPageContainer'
-import { addTheme } from '../../../util/testHelpers'
+import { addTheme, addReduxProvider } from '../../../util/testHelpers'
 import * as R from 'ramda'
+import { store, getUsername } from '../../../app/store'
+import { checkIsLoggedInReceived } from '../../../features/authentication/authenticationSlice'
+import userEvent from '@testing-library/user-event'
 
-const render = R.compose(tlRender, addTheme)
+const render = R.compose(tlRender, addTheme, addReduxProvider)
 
+const metadata = {
+    email: 'doesnot@matter.com',
+    issuer: 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7',
+}
+const addLoggedUserToTheStore = () => store.dispatch(checkIsLoggedInReceived(metadata))
 describe('SignUpPageContainer', () => {
-  it('Given that the user filled the username, should return these values when the button is clicked.', () => {
-    const onButtonClick = jest.fn();
-    render(<SignUpPageContainer onButtonClick={onButtonClick} />)
+  it('Given that the user filled the username, should set the username in the store when the button is clicked.', () => {
+    const username = "dude"; 
+    addLoggedUserToTheStore()
+    render(<SignUpPageContainer />)
+    const input = screen.getByLabelText('Pick a username')
+    userEvent.type(input, username)
     const button = screen.getByRole('button')
     fireEvent.click(button)
-    expect(onButtonClick).toHaveBeenCalledWith({
-      username: '',
-    })
-    const input = screen.getByLabelText('Pick a username')
-    fireEvent.change(input, {target: {value: 'dude'}})
-    fireEvent.click(button)
-    expect(onButtonClick).toHaveBeenCalledWith({
-        username: 'dude',
-    })
+    expect(getUsername(store.getState())).toBe(username)
   })
 })

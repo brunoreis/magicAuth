@@ -5,12 +5,21 @@ const initialState = {
   users: [],// todo: normalize ? 
 };
 
-const hasUser = (state, issuer) => state.users.find( u => u.issuer === issuer)
+const findUserIndex = (state, issuer) => state.users.findIndex( u => u.issuer === issuer)
+const findUser = (state, issuer) => state.users.find( u => u.issuer === issuer)
+const hasUser = (state, issuer) => !!findUser(state, issuer)
 const addUser = (state, { issuer, email }) => state.users.push({ issuer, email })
 
-export const authenticationSlice = createSlice({
+
+export const usersSlice = createSlice({
   name: 'users',
   initialState,
+  reducers: { 
+    receiveUsername: (state, {payload: { loggedUserIssuer, username }}) => {
+      const index = findUserIndex(state, loggedUserIssuer)
+      state.users[index].username = username
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(checkIsLoggedInReceived().type, (state, { payload }) => {
@@ -27,5 +36,5 @@ export const authenticationSlice = createSlice({
       })
   },
 });
-
-export default authenticationSlice.reducer;
+//reducer
+export default usersSlice.reducer;

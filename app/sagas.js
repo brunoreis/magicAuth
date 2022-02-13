@@ -9,8 +9,6 @@ import { redirects, navigationWatcher } from '../features/navigation/navigationS
 import { requestNavigation } from '../features/navigation/navigationSlice';
 import {
   signIn,
-  signInSuccess,
-  checkIsLoggedInReceived,
   logOut,
   logOutSuccess,
 } from '../features/authentication/authenticationSlice';

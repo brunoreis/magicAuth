@@ -1,5 +1,4 @@
 import { takeEvery, all, call, put, select } from 'redux-saga/effects';
-import { store } from '../../app/store';
 
 import Router from 'next/router';
 import {

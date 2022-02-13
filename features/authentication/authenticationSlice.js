@@ -36,6 +36,5 @@ export const checkIsLoggedInStarted = createAction('authentication/checkIsLogged
 //selectors
 export const isLoggedIn = (state) => !!state.issuer;
 export const getIssuer = (state) => state.issuer;
-export const getUsername = (state) => null
 //reducer
 export default authenticationSlice.reducer;
