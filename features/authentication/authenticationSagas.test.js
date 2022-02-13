@@ -4,7 +4,7 @@ import {
   checkIsLoggedIn,
   handleSignIn,
   handleLogOut,
-} from './authentication';
+} from './authenticationSagas';
 import magic from '../shared/magic';
 import {
   checkIsLoggedInStarted,

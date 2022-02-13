@@ -2,7 +2,7 @@ import { put, call, all, takeEvery, select } from 'redux-saga/effects';
 import Router from 'next/router';
 import { requestNavigation } from './navigationSlice';
 import { redirectsStarted, redirectsCompleted, isLoggedIn } from '../authentication/authenticationSlice';
-import { navigation, navigate, redirects, startsWithSlashNav } from './navigation';
+import { navigation, navigate, redirects, startsWithSlashNav } from './navigationSagas';
 
 
 jest.mock('next/router');

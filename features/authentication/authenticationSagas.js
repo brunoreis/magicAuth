@@ -1,6 +1,5 @@
 import { call, put } from 'redux-saga/effects';
 import magic from '../shared/magic';
-import Router from 'next/router';
 import {
   checkIsLoggedInStarted,
   checkIsLoggedInReceived,
@@ -8,11 +7,8 @@ import {
   signInFailure,
   logOutSuccess,
 } from './authenticationSlice';
-import { nav } from '../navigation/navigationSlice';
 
 export const isLoggedIn = state=> state.authentication.isLoggedIn
-
-// --------
 
 export function* preload() {
   yield call([magic, magic.preload]);
