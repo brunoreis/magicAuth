@@ -1,18 +1,23 @@
-import { takeEvery, all, call, put, select } from 'redux-saga/effects'
-import Router from 'next/router'
-import { requestNavigation } from './navigationSlice'
+import { takeEvery, all, call, put, select } from 'redux-saga/effects';
+import { store } from '../../app/store';
+
+import Router from 'next/router';
 import {
+  requestNavigation,
   redirectsStarted,
   redirectsCompleted,
-  isLoggedIn
-} from '../authentication/authenticationSlice';
+} from './navigationSlice';
 
-export const startsWithSlashNav = (action) => action.type.startsWith('nav/')
+const issuer = (state) => state.authentication.issuer
+export const isLoggedIn = (state) => !!issuer(state) // how to user the slice selector here???
 
-export function* navigation() {
-  yield all([
-    takeEvery(startsWithSlashNav, navigate), 
-  ]);
+const findUser = (state, issuer) => state.users.users.find((user) => user.issuer == issuer)
+export const getUsername = (state) => isLoggedIn(state) ? findUser(state, issuer(state)).username : null;
+
+export const startsWithSlashNav = (action) => action.type.startsWith('nav/');
+
+export function* navigationWatcher() {
+  yield all([takeEvery(startsWithSlashNav, navigate)]);
 }
 
 export function* navigate(action) {
@@ -21,19 +26,29 @@ export function* navigate(action) {
 }
 
 export function* redirects() {
-  yield put(redirectsStarted())
-  const actualPath = Router.router.asPath
-  const isLogged = yield select(isLoggedIn)
-  if(isLogged) {
-      switch(actualPath) {
-          case '/signIn': yield put(requestNavigation('/')); 
-              break;
-          case '/signUp': yield put(requestNavigation('/')); break;
-      }
+  yield put(redirectsStarted());
+  const actualPath = Router.router.asPath;
+  const isLogged = yield select(isLoggedIn);
+  const username = yield select(getUsername);
+  if (!username && isLogged) {
+    yield put(requestNavigation('/signUp'));
   } else {
-      switch(actualPath) {
-          case '/': yield put(requestNavigation('/signIn')); break;
+    if (isLogged) {
+      switch (actualPath) {
+        case '/signIn':
+          yield put(requestNavigation('/'));
+          break;
+        case '/signUp':
+          yield put(requestNavigation('/'));
+          break;
       }
+    } else {
+      switch (actualPath) {
+        case '/':
+          yield put(requestNavigation('/signIn'));
+          break;
+      }
+    }
   }
-  yield put(redirectsCompleted())
+  yield put(redirectsCompleted());
 }

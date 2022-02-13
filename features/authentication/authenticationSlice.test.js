@@ -6,8 +6,6 @@ import authenticationReducer, {
   logOut,
   logOutSuccess,
   checkIsLoggedInStarted,
-  redirectsStarted,
-  redirectsCompleted,
   isLoggedIn,
   getIssuer,
 } from './authenticationSlice';
@@ -52,8 +50,6 @@ describe('existent actionCreators', () => {
   it('logOut', () => exist(logOut))
   it('logOutSuccess', () => exist(logOutSuccess))
   it('checkIsLoggedInStarted', () => exist(checkIsLoggedInStarted))
-  it('redirectsStarted', () => exist(redirectsStarted))
-  it('redirectsCompleted', () => exist(redirectsCompleted))
 })
 describe('selectors', () => {
   it('isLoggedIn', () => {
