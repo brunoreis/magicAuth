@@ -5,8 +5,8 @@ import Button from '../components/Button';
 import { useDispatch } from 'react-redux';
 
 import {
-  logOutStart,
-} from '../../../features/auth/authSlice';
+  logOut,
+} from '../../../features/authentication/authenticationSlice';
 
 export default function WelcomePage({ username }) {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export default function WelcomePage({ username }) {
         🚀
       </WelcomeIconContainer>
       <FooterContainer>
-        <Button light onClick={() => dispatch(logOutStart())}>Log Out</Button>        
+        <Button light onClick={() => dispatch(logOut())}>Log Out</Button>        
       </FooterContainer>
     </Layout>
   )

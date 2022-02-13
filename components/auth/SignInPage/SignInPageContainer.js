@@ -3,7 +3,7 @@ import SignInPage from './SignInPage'
 import { useDispatch } from 'react-redux';
 import {
   signIn,
-} from '../../../features/auth/authSlice';
+} from '../../../features/authentication/authenticationSlice';
 
 const SignInPageContainer = () => {
   const dispatch = useDispatch();
