@@ -1,33 +1,18 @@
-import { takeEvery, all, call, put, fork, select } from 'redux-saga/effects';
-import { navigateTo } from './navigation';
-import magic from './shared/magic';
+import { call, put, select } from 'redux-saga/effects';
+import magic from '../shared/magic';
 import Router from 'next/router';
 import {
   checkIsLoggedInStarted,
   checkIsLoggedInReceived,
-  signIn,
   signInSuccess,
   signInFailure,
-  logOut,
   logOutSuccess,
   redirectsStarted,
   redirectsCompleted,
-} from '../../features/authentication/authenticationSlice';
-import { nav } from '../../features/authentication/navigationSlice';
+} from './authenticationSlice';
+import { nav } from './navigationSlice';
 
 export const isLoggedIn = state=> state.authentication.isLoggedIn
-
-export function* authentication() {
-  yield fork(preload);
-  yield call(checkIsLoggedIn);
-  yield call(redirects)
-  yield all([
-    takeEvery(signIn().type, handleSignIn),
-    takeEvery(signInSuccess().type, navigateTo, '/'),
-    takeEvery(logOut().type, handleLogOut),
-    takeEvery(logOutSuccess().type, navigateTo, '/signIn'),
-  ]);
-}
 
 // --------
 
@@ -38,7 +23,8 @@ export function* preload() {
 export function* checkIsLoggedIn() {
   yield put(checkIsLoggedInStarted());
   const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
-  yield put(checkIsLoggedInReceived(isLoggedIn));
+  const metadata = yield call([magic.user, magic.user.getMetadata])
+  yield put(checkIsLoggedInReceived( metadata ));
 }
 
 export function* handleSignIn(action) {

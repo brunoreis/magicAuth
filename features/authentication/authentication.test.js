@@ -1,21 +1,17 @@
-import { fork, all, takeEvery, call, put, select } from 'redux-saga/effects';
-import { navigateTo } from './navigation';
+import { call, put, select } from 'redux-saga/effects';
 import {
   redirects,
-  authentication,
   preload,
   checkIsLoggedIn,
   handleSignIn,
   handleLogOut,
   isLoggedIn,
 } from './authentication';
-import magic from './shared/magic';
+import magic from '../shared/magic';
 import {
   checkIsLoggedInStarted,
   checkIsLoggedInReceived,
-  signIn,
   signInSuccess,
-  logOut,
   logOutSuccess,
   redirectsStarted,
   redirectsCompleted,
@@ -26,23 +22,6 @@ import Router from 'next/router';
 jest.mock('next/router');
 
 describe('authentication', () => {
-  it('preload, check log in,  and redirects actions into sagas', () => {
-    const g = authentication();
-    expect(g.next().value).toEqual(fork(preload));
-    expect(g.next().value).toEqual(call(checkIsLoggedIn));
-    expect(g.next().value).toEqual(call(redirects));
-    expect(g.next().value).toEqual(
-      all([
-        takeEvery(signIn().type, handleSignIn),
-        takeEvery(signInSuccess().type, navigateTo, '/'),
-        takeEvery(logOut().type, handleLogOut),
-        takeEvery(logOutSuccess().type, navigateTo, '/signIn'),
-      ])
-    );
-  });
-
-  // --------
-
   describe('preload', () => {
     it('preloads magic', () => {
       const g = preload();
@@ -56,7 +35,9 @@ describe('authentication', () => {
       const g = checkIsLoggedIn();
       expect(g.next().value).toEqual(put(checkIsLoggedInStarted()));
       expect(g.next().value).toEqual(call([magic.user, magic.user.isLoggedIn]));
-      expect(g.next(true).value).toEqual(put(checkIsLoggedInReceived(true)));
+      expect(g.next(true).value).toEqual(call([magic.user, magic.user.getMetadata]));
+      const payload = { email: 'testemail@a.com', issuer: 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'}
+      expect(g.next(payload).value).toEqual(put(checkIsLoggedInReceived(payload)));
       expect(g.next().done).toBe(true);
     });
   });

@@ -1,8 +1,8 @@
-[] grab the user metadata on the first login check too (same thing as the sign in)
-[] try to grab that user (username) from the store's collection
-[] save the user in the collection if he does not exist
-[] move the redirect to after these steps and check if we need to redirect to signUp
+[x] grab the user metadata on the first login check too (same thing as the sign in)
+[x] save the user in the collection if he does not exist
+[] redirect to 
 
+[] jest expect message to improve some tests
 [] move magic.link key to vercel...
 [] add some kind of loading behaviour too
 [] add pointer cursor to the buttons
