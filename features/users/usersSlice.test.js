@@ -1,4 +1,4 @@
-import usersReducer, { receiveUsername } from './usersSlice';
+import usersReducer, { receiveUsername, getUsernameIsAvailable } from './usersSlice';
 import {
   signInSuccess,
   checkIsLoggedInReceived,

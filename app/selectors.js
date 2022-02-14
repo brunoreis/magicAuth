@@ -9,3 +9,8 @@ export const getUsername = (state) => {
 }
 
 export const getIsLoading = (state) => state.app.loading
+
+export const getUsernameIsAvailable = (username) => (state) => {
+  const found = !!state.users.users.find( (user)=> user.username === username )
+  return !found
+}

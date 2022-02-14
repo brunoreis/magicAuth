@@ -1,10 +1,9 @@
 [] check if usernames are taken
 [] remember me
 [] send callback page to redirect after login
-[] add cursor on buttons
 [] add internal loaders on login
 
-
+[] add integration test to check the taken/available indicator on the SignUp page
 [] test localstorage persist
 [] jest expect message to improve some tests
 [] move magic.link key to vercel...
