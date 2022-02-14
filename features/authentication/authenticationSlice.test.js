@@ -9,14 +9,17 @@ import authenticationReducer, {
   isLoggedIn,
   getIssuer,
 } from './authenticationSlice';
+import Router from 'next/router';
+jest.mock('next/router');
 
 const exist = (actionCreator) => {
   actionCreator()
 }
-describe('auth reducer', () => {
+describe('authentication reducer', () => {
   it('should handle initial state', () => {
     expect(authenticationReducer(undefined, { type: 'unknown' })).toEqual({
       issuer: null,
+      rememberMe: false,
     });
   });
   describe('checkIsLoggedInReceived', () => {

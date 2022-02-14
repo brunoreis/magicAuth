@@ -1,5 +1,4 @@
 import { put, all, takeEvery, select } from 'redux-saga/effects';
-import Router from 'next/router';
 import {
   requestNavigation,
   redirectsStarted,
@@ -14,6 +13,7 @@ import {
   startsWithSlashNav,
 } from './navigationSagas';
 
+import Router from 'next/router';
 jest.mock('next/router');
 
 it('redirects actions into sagas', () => {

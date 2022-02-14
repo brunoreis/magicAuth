@@ -2,7 +2,7 @@
 [] send callback page to redirect after login
 [] add internal loaders on login
 
-[] the initial user check/metadata loading can probably be skipped in some scenarios to make the UX faster
+[] the initial user check/metadata loading can probably be skipped in some scenarios to make the UX faster (checkIsLoggedInLoginReceived)
 [] add integration test to check the taken/available indicator on the SignUp page
 [] add a few e2e tests (testCafe?)
 [] move magic.link key to vercel...

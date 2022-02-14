@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAction } from '@reduxjs/toolkit';
 import { signInSuccess, checkIsLoggedInReceived } from '../authentication/authenticationSlice';
 
 const initialState = {
@@ -41,6 +41,6 @@ export const usersSlice = createSlice({
 export const {
   receiveUsername,
 } = usersSlice.actions;
-
+export const receiveUsernameStart = createAction("users/receiveUsernameStart")
 //reducer
 export default usersSlice.reducer;

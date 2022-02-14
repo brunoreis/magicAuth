@@ -1,4 +1,4 @@
-import usersReducer, { receiveUsername, getUsernameIsAvailable } from './usersSlice';
+import usersReducer, { receiveUsername, receiveUsernameStart, getUsernameIsAvailable } from './usersSlice';
 import {
   signInSuccess,
   checkIsLoggedInReceived,
@@ -51,5 +51,6 @@ describe('users reducer', () => {
   });
   describe('existent actionCreators', () => {
     it('receiveUsername', () => exist(receiveUsername))
+    it('receiveUsernameStart', () => exist(receiveUsernameStart))
   })
 });

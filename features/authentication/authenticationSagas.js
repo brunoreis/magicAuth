@@ -2,6 +2,7 @@ import { call, put, select } from 'redux-saga/effects';
 import magic from '../shared/magic';
 import {
   checkIsLoggedInStarted,
+  checkIsLoggedInLoginReceived,
   checkIsLoggedInReceived,
   signInSuccess,
   signInFailure,
@@ -10,6 +11,8 @@ import {
 import { requestNavigation } from '../navigation/navigationSlice';
 
 export const isLoggedIn = state => state.authentication.isLoggedIn
+export const getRememberMe = state => state.authentication.rememberMe;
+
 import { getUsername } from '../../app/selectors'
 
 export function* preload() {
@@ -17,14 +20,20 @@ export function* preload() {
 }
 
 export function* checkIsLoggedIn() {
-  yield put(checkIsLoggedInStarted());
-  try {
-    const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
-    const metadata = yield call([magic.user, magic.user.getMetadata])
-    yield put(checkIsLoggedInReceived( metadata ));
-  } catch(e) {
-    // basic error handling. Can be improved
-    yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
+  const rememberMe = yield select(getRememberMe)
+  yield put(checkIsLoggedInStarted({ rememberMe }));
+  if(rememberMe) {
+    try {
+      const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
+      yield put(checkIsLoggedInLoginReceived({ isLoggedIn }));
+      const metadata = yield call([magic.user, magic.user.getMetadata])
+      yield put(checkIsLoggedInReceived( metadata ));
+    } catch(e) {
+      // basic error handling. Needs to be improved
+      yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
+    }
+  } else {
+    yield put(checkIsLoggedInReceived({ issuer: null, note: "Remember me disabled" }));
   }
 }
 

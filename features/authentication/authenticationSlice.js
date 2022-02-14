@@ -2,6 +2,7 @@ import { createAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   issuer: null,
+  rememberMe: false,
 };
 
 export const authenticationSlice = createSlice({
@@ -33,6 +34,7 @@ export const signInFailure = createAction('authentication/signInFailure')
 export const logOut = createAction('authentication/logOut')
 export const logOutSuccess = createAction('authentication/logOutSuccess')
 export const checkIsLoggedInStarted = createAction('authentication/checkIsLoggedInStarted')
+export const checkIsLoggedInLoginReceived = createAction('authentication/checkIsLoggedInLoginReceived')
 //selectors
 export const isLoggedIn = (state) => !!state.issuer;
 export const getIssuer = (state) => state.issuer;

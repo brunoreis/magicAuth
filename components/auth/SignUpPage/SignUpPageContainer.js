@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SignUpPage from './SignUpPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsernameIsAvailable } from '../../../app/selectors';
-import { receiveUsernameThunk } from '../../../app/store'; // maybe I should use a saga here
+import { receiveUsernameStart } from '../../../features/users/usersSlice'; // maybe I should use a saga here
 
 export default function SignUpPageContainer() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function SignUpPageContainer() {
       available={username ? isAvailable : null}
       onUsernameChange={setUsername}
       onButtonClick={() => {
-        dispatch(receiveUsernameThunk(username));
+        dispatch(receiveUsernameStart(username));
       }}
     />
   );

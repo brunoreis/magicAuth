@@ -1,6 +1,6 @@
 import { takeEvery, all, call, put, select } from 'redux-saga/effects';
+import { push, path } from '../../app/router';
 
-import Router from 'next/router';
 import {
   requestNavigation,
   redirectsStarted,
@@ -25,12 +25,12 @@ export function* go(path) {
 
 export function* navigate(action) {
   const path = action.type.substring(3);
-  yield call([Router, Router.push], path);
+  yield call(push, path);
 }
 
 export function* redirects() {
   yield put(redirectsStarted());
-  const actualPath = Router.router.asPath;
+  const actualPath = path()
   const isLogged = yield select(isLoggedIn);
   const username = yield select(getUsername);
   if (!username && isLogged) {

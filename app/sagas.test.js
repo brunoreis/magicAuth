@@ -2,7 +2,6 @@ import { takeEvery, all, call, fork, put } from 'redux-saga/effects';
 import sagas from './sagas';
 import {
   signIn,
-  signInSuccess,
   logOut,
   logOutSuccess,
 } from '../features/authentication/authenticationSlice';
@@ -14,7 +13,8 @@ import {
 } from '../features/authentication/authenticationSagas';
 import { redirects, navigationWatcher } from '../features/navigation/navigationSagas';
 import { go } from '../features/navigation/navigationSagas';
-import { receiveUsername } from '../features/users/usersSlice';
+import { receiveUsername, receiveUsernameStart } from '../features/users/usersSlice';
+import { handleReceiveUsername } from '../features/users/usersSagas';
 
 it('preload, check log in, redirects and start other sagas', () => {
   const g = sagas();
@@ -25,8 +25,8 @@ it('preload, check log in, redirects and start other sagas', () => {
   expect(g.next().value).toEqual(
     all([
       takeEvery(signIn().type, handleSignIn),
+      takeEvery(receiveUsernameStart().type, handleReceiveUsername),
       takeEvery(receiveUsername().type, go, "/"),
-      // takeEvery(signInSuccess().type, put(requestNavigation('/signIn'))),
       takeEvery(logOut().type, handleLogOut),
       takeEvery(logOutSuccess().type, go , '/signIn'),
     ])

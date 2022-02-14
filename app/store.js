@@ -20,20 +20,22 @@ import appReducer from '../features/app/appSlice';
 import createSagaMiddleware from 'redux-saga';
 import sagas from './sagas';
 
-const rootReducer = combineReducers({
-  authentication: authenticationReducer,
-  users: usersReducer,
-  app: appReducer,
-})
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  storage,
-  whitelist: ['users']
-}
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 
 export const createStore = () => {
+  const rootReducer = combineReducers({
+    authentication: authenticationReducer,
+    users: usersReducer,
+    app: appReducer,
+  })
+  const persistConfig = {
+    key: 'root',
+    version: 1,
+    storage,
+    whitelist: ['users', 'authentication']
+  }
+  const persistedReducer = persistReducer(persistConfig, rootReducer)
+
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
     reducer: persistedReducer,
@@ -49,19 +51,6 @@ export const createStore = () => {
 }
 export const store = createStore()
 let persistor = persistStore(store)
-
-
-// thunks 
-export const receiveUsernameThunk = (username) => (dispatch, getState) => {
-  const loggedUserIssuer = getIssuer(getState().authentication)
-  if(!loggedUserIssuer) throw new Error("You can't register the username without a logged user")
-  dispatch(
-    receiveUsername({
-      username,
-      loggedUserIssuer,
-    })
-  );
-};
 
 
 
