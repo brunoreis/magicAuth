@@ -36,5 +36,9 @@ export const usersSlice = createSlice({
       })
   },
 });
+// actions
+export const {
+  receiveUsername,
+} = usersSlice.actions;
 //reducer
 export default usersSlice.reducer;

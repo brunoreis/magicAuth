@@ -1,6 +1,5 @@
-[x] grab the user metadata on the first login check too (same thing as the sign in)
-[x] save the user in the collection if he does not exist
-[] redirect to 
+[] navigate to welcome on users/receiveUsername
+[] show username on welcome screen
 
 [] jest expect message to improve some tests
 [] move magic.link key to vercel...

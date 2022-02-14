@@ -19,6 +19,12 @@ export function* navigationWatcher() {
   yield all([takeEvery(startsWithSlashNav, navigate)]);
 }
 
+export function go(path) {
+  return function* goTo() {
+    yield put(requestNavigation(path))
+  }
+}
+
 export function* navigate(action) {
   const path = action.type.substring(3);
   yield call([Router, Router.push], path);

@@ -1,4 +1,4 @@
-import usersReducer from './usersSlice';
+import usersReducer, { receiveUsername } from './usersSlice';
 import {
   signInSuccess,
   checkIsLoggedInReceived,
@@ -28,6 +28,10 @@ const storeWithTwoUsers = {
     },
   ],
 };
+
+const exist = (actionCreator) => { // this should go in some kind of testHelpers file/folder
+  actionCreator()
+}
 describe('users reducer', () => {
   describe('signInSuccess', () => {
     it('Given auth user data is not in the store, should create one', () => {
@@ -45,17 +49,7 @@ describe('users reducer', () => {
       expect(state.users.length).toBe(1);
     });
   });
-  // describe('receiveUsername', () => {
-    // it('Should set the username in the actual logged user', () => {
-    //   let state = usersReducer(
-    //     storeWithTwoUsers,
-    //     receiveUsername({
-    //       username: 'dude',
-    //       loggedUserIssuer:
-    //         'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7',
-    //     })
-    //   );
-    //   expect(state.users[1].username).toEqual('dude');
-    // });
-  // });
+  describe('existent actionCreators', () => {
+    it('receiveUsername', () => exist(receiveUsername))
+  })
 });

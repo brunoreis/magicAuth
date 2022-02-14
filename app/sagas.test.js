@@ -13,7 +13,8 @@ import {
   checkIsLoggedIn,
 } from '../features/authentication/authenticationSagas';
 import { redirects, navigationWatcher } from '../features/navigation/navigationSagas';
-import { requestNavigation } from '../features/navigation/navigationSlice';
+import { go } from '../features/navigation/navigationSagas';
+import { receiveUsername } from '../features/users/usersSlice';
 
 it('preload, check log in, redirects and start other sagas', () => {
   const g = sagas();
@@ -24,9 +25,10 @@ it('preload, check log in, redirects and start other sagas', () => {
   expect(g.next().value).toEqual(
     all([
       takeEvery(signIn().type, handleSignIn),
+      takeEvery(receiveUsername().type, call(go,"/")),
       // takeEvery(signInSuccess().type, put(requestNavigation('/signIn'))),
       takeEvery(logOut().type, handleLogOut),
-      takeEvery(logOutSuccess().type, put(requestNavigation('/signIn'))),
+      takeEvery(logOutSuccess().type, call(go,'/signIn')),
     ])
   );
 });

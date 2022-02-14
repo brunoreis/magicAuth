@@ -1,8 +1,8 @@
-import { configureStore, createAction } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import authenticationReducer, {
   getIssuer,
 } from '../features/authentication/authenticationSlice';
-import usersReducer from '../features/users/usersSlice';
+import usersReducer, { receiveUsername } from '../features/users/usersSlice';
 import createSagaMiddleware from 'redux-saga';
 import sagas from './sagas';
 
@@ -19,7 +19,7 @@ export const store = configureStore({
 });
 sagaMiddleware.run(sagas);
 
-const receiveUsername = createAction('users/receiveUsername');
+
 
 export const receiveUsernameThunk = (username) => (dispatch, getState) => {
   const loggedUserIssuer = getIssuer(getState().authentication)
