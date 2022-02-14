@@ -8,11 +8,11 @@ import {
 } from './navigationSlice';
 
 const issuer = (state) => state.authentication.issuer
-export const isLoggedIn = (state) => !!issuer(state) // how to user the slice selector here???
+export const isLoggedIn = (state) => !!issuer(state) 
 
+// trying to use these "global" selectors from the store is generating a circular dependency and breaking jest. 
 const findUser = (state, issuer) => state.users.users.find((user) => user.issuer == issuer)
 export const getUsername = (state) => isLoggedIn(state) ? findUser(state, issuer(state)).username : null;
-
 export const startsWithSlashNav = (action) => action.type.startsWith('nav/');
 
 export function* navigationWatcher() {

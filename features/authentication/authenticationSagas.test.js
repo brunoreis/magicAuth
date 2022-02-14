@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import {
   preload,
   checkIsLoggedIn,
@@ -12,6 +12,8 @@ import {
   signInSuccess,
   logOutSuccess,
 } from './authenticationSlice';
+import { getUsername } from '../../app/selectors'
+import { requestNavigation } from '../navigation/navigationSlice';
 
 describe('authentication', () => {
   describe('preload', () => {
@@ -35,17 +37,35 @@ describe('authentication', () => {
   });
 
   describe('signIn', () => {
-    it('signIn with the email and dispaches auth/signInSucces', () => {
-      // this is throwing a TypeError: Converting circular structure to JSON error if it fails (jest bug?)
-      const email = 'testemail@a.com';
-      const g = handleSignIn({ payload: { email } });
-      expect(g.next().value).toEqual(
-        call([magic.auth, magic.auth.loginWithMagicLink], { email }, true)
-      );
-      expect(g.next().value).toEqual(call([magic.user, magic.user.getMetadata]));
-      const metadata = { email: 'testemail@a.com', issuer: 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'}
-      expect(g.next(metadata).value).toEqual(put(signInSuccess(metadata)));
-      expect(g.next().done).toBe(true);
+    describe('signIn with the email, dispaches auth/signInSucces and', () => {
+      it('redirects to welcome if username exists', () => {
+        // this is throwing a TypeError: Converting circular structure to JSON error if it fails (jest bug?)
+        const email = 'testemail@a.com';
+        const g = handleSignIn({ payload: { email } });
+        expect(g.next().value).toEqual(
+          call([magic.auth, magic.auth.loginWithMagicLink], { email }, true)
+        );
+        expect(g.next().value).toEqual(call([magic.user, magic.user.getMetadata]));
+        const metadata = { email: 'testemail@a.com', issuer: 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'}
+        expect(g.next(metadata).value).toEqual(put(signInSuccess(metadata)));
+        expect(g.next().value).toEqual(select(getUsername));
+        expect(g.next('mockedUsername').value).toEqual(put(requestNavigation('/')));
+        expect(g.next().done).toBe(true);
+      })
+      it('redirects to /signUp if username does not exists', () => {
+        // this is throwing a TypeError: Converting circular structure to JSON error if it fails (jest bug?)
+        const email = 'testemail@a.com';
+        const g = handleSignIn({ payload: { email } });
+        expect(g.next().value).toEqual(
+          call([magic.auth, magic.auth.loginWithMagicLink], { email }, true)
+        );
+        expect(g.next().value).toEqual(call([magic.user, magic.user.getMetadata]));
+        const metadata = { email: 'testemail@a.com', issuer: 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'}
+        expect(g.next(metadata).value).toEqual(put(signInSuccess(metadata)));
+        expect(g.next().value).toEqual(select(getUsername));
+        expect(g.next().value).toEqual(put(requestNavigation('/signUp')));
+        expect(g.next().done).toBe(true);
+      })
     });
   });
 

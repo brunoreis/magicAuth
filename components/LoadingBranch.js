@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { getIsLoading } from '../app/store';
+import { getIsLoading } from '../app/selectors';
 import Image from 'next/image'
 import styled from 'styled-components';
 

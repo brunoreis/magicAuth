@@ -1,8 +1,9 @@
-[] redirect after login (test 2 flows)
+[] keep localstorage data
 [] check if usernames are taken
 [] remember me
 [] send callback page to redirect after login
-
+[] add cursor on buttons
+[] add internal loaders on login
 
 
 [] jest expect message to improve some tests

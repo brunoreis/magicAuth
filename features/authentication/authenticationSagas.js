@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import magic from '../shared/magic';
 import {
   checkIsLoggedInStarted,
@@ -7,8 +7,10 @@ import {
   signInFailure,
   logOutSuccess,
 } from './authenticationSlice';
+import { requestNavigation } from '../navigation/navigationSlice';
 
-export const isLoggedIn = state=> state.authentication.isLoggedIn
+export const isLoggedIn = state => state.authentication.isLoggedIn
+import { getUsername } from '../../app/selectors'
 
 export function* preload() {
   yield call([magic, magic.preload]);
@@ -30,6 +32,12 @@ export function* handleSignIn(action) {
     );
     const metadata = yield call([magic.user, magic.user.getMetadata])
     yield put(signInSuccess(metadata));
+    const username = yield select(getUsername)
+    if(username) {
+      yield put(requestNavigation('/'));
+    } else { 
+      yield put(requestNavigation('/signUp'));
+    }
   } catch (e) {
     yield put(signInFailure());
   }
