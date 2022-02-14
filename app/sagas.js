@@ -1,4 +1,4 @@
-import { takeEvery, all, call, fork, take, put } from 'redux-saga/effects';
+import { takeEvery, all, call, fork, take } from 'redux-saga/effects';
 import {
   preload,
   checkIsLoggedIn,
@@ -14,6 +14,7 @@ import {
   logOutSuccess,
 } from '../features/authentication/authenticationSlice';
 
+// I started pulverizing these sagas, but then realized they are a lot more readable together 
 export default function* sagas() {
   yield fork(preload);
   yield fork(navigationWatcher);

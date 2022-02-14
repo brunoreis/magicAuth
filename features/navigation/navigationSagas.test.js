@@ -22,7 +22,8 @@ it('redirects actions into sagas', () => {
   expect(g.next().done).toBe(true);
 });
 
-//@todo: as visible, this sure would profit from a refactoring:
+//@todo: as visible, these can be refactored to use some kind of helper. 
+// or the main redirect logic can be extracted from the saga and unit tested
 describe('redirects', () => {
   it('if logged in and has no username, goes to /signUp', () => {
     const isLogged = true;

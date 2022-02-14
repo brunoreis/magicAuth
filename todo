@@ -1,17 +1,12 @@
-[] remember me
-[] send callback page to redirect after login
-[] add internal loaders on login
-
-[] the initial user check/metadata loading can probably be skipped in some scenarios to make the UX faster (checkIsLoggedInLoginReceived)
-[] add integration test to check the taken/available indicator on the SignUp page
-[] add a few e2e tests (testCafe?)
+[] block sending email and username without a value
+[] send magic redirectURI to redirect after the login and improve UX (https://magic.link/docs/api-reference/client-side-sdks/web#loginwithmagiclink)
 [] move magic.link key to vercel...
-[] add some kind of loading behaviour too
-[] add pointer cursor to the buttons
-[] add username validation to the email field
+[] add a loading spinner after the user clicks the login button
+[] the initial user check/metadata loading can probably be skipped in some scenarios to make the UX faster (checkIsLoggedInLoginReceived)
+[] add a test to check the taken/available indicator on the SignUp page
 [] add email validation to the email field
 [] review the layout when the page reduce height
-[] redirects redirectsAccordingToLogin tests
-
-doubts: 
-What are the good practices about the selectors. The slice selectors don't make much sense in the context of sagas and useSelector. 
+[] find a better way to organize the selectors, study best practices on the theme
+[] refactor redirectsAccordingToLogin tests
+[] study a better way and refactor container tests (like the)
+[] add e2e tests (testCafe? Would that have to open my email client?)
