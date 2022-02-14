@@ -1,11 +1,10 @@
-[] check if usernames are taken
 [] remember me
 [] send callback page to redirect after login
 [] add internal loaders on login
 
+[] the initial user check/metadata loading can probably be skipped in some scenarios to make the UX faster
 [] add integration test to check the taken/available indicator on the SignUp page
-[] test localstorage persist
-[] jest expect message to improve some tests
+[] add a few e2e tests (testCafe?)
 [] move magic.link key to vercel...
 [] add some kind of loading behaviour too
 [] add pointer cursor to the buttons
@@ -13,3 +12,6 @@
 [] add email validation to the email field
 [] review the layout when the page reduce height
 [] redirects redirectsAccordingToLogin tests
+
+doubts: 
+What are the good practices about the selectors. The slice selectors don't make much sense in the context of sagas and useSelector. 

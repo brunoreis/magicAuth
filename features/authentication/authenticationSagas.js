@@ -18,9 +18,14 @@ export function* preload() {
 
 export function* checkIsLoggedIn() {
   yield put(checkIsLoggedInStarted());
-  const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
-  const metadata = yield call([magic.user, magic.user.getMetadata])
-  yield put(checkIsLoggedInReceived( metadata ));
+  try {
+    const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
+    const metadata = yield call([magic.user, magic.user.getMetadata])
+    yield put(checkIsLoggedInReceived( metadata ));
+  } catch(e) {
+    // basic error handling. Can be improved
+    yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
+  }
 }
 
 export function* handleSignIn(action) {

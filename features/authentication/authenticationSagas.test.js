@@ -37,6 +37,7 @@ describe('authentication', () => {
   });
 
   describe('signIn', () => {
+    //@todo: test the exception flow
     describe('signIn with the email, dispaches auth/signInSucces and', () => {
       it('redirects to welcome if username exists', () => {
         // this is throwing a TypeError: Converting circular structure to JSON error if it fails (jest bug?)
@@ -53,7 +54,6 @@ describe('authentication', () => {
         expect(g.next().done).toBe(true);
       })
       it('redirects to /signUp if username does not exists', () => {
-        // this is throwing a TypeError: Converting circular structure to JSON error if it fails (jest bug?)
         const email = 'testemail@a.com';
         const g = handleSignIn({ payload: { email } });
         expect(g.next().value).toEqual(
