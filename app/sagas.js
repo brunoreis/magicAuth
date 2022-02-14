@@ -1,4 +1,4 @@
-import { takeEvery, all, call, fork } from 'redux-saga/effects';
+import { takeEvery, all, call, fork, take, put } from 'redux-saga/effects';
 import {
   preload,
   checkIsLoggedIn,
@@ -17,7 +17,9 @@ import {
 export default function* sagas() {
   yield fork(preload);
   yield fork(navigationWatcher);
+  yield take('persist/REHYDRATE')
   yield call(checkIsLoggedIn);
+  yield take('app/routerReady')
   yield call(redirects);
   yield all([
     takeEvery(signIn().type, handleSignIn),

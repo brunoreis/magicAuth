@@ -20,6 +20,7 @@ describe('SignUpPageContainer', () => {
   it('Given that the user filled the username, should set the username in the store when the button is clicked.', () => {
     const username = "dude"; 
     addLoggedUserToTheStore()
+    store.dispatch({ type: 'app/routerReady'})
     render(<SignUpPageContainer />)
     const input = screen.getByLabelText('Pick a username')
     userEvent.type(input, username)

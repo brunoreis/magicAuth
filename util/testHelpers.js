@@ -5,3 +5,4 @@ import { Provider } from 'react-redux';
 
 export const addTheme = component => <ThemeProvider theme={theme}>{component}</ThemeProvider>
 export const addReduxProvider = component => <Provider store={store}>{component}</Provider>
+

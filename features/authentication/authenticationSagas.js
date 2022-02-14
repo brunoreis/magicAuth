@@ -16,7 +16,9 @@ export const getRememberMe = state => state.authentication.rememberMe;
 import { getUsername } from '../../app/selectors'
 
 export function* preload() {
-  yield call([magic, magic.preload]);
+  if(typeof window !== 'undefined') {
+    yield call([magic, magic.preload]);
+  }
 }
 
 export function* checkIsLoggedIn() {

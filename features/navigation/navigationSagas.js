@@ -29,10 +29,11 @@ export function* navigate(action) {
 }
 
 export function* redirects() {
-  yield put(redirectsStarted());
-  const actualPath = path()
+  const actualPath = yield path()
   const isLogged = yield select(isLoggedIn);
   const username = yield select(getUsername);
+  const infoPayload = { actualPath, isLogged, username }
+  yield put(redirectsStarted(infoPayload));
   if (!username && isLogged) {
     yield put(requestNavigation('/signUp'));
   } else {
@@ -47,6 +48,7 @@ export function* redirects() {
       }
     } else {
       switch (actualPath) {
+        case '/signUp':
         case '/':
           yield put(requestNavigation('/signIn'));
           break;
