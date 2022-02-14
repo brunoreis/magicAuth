@@ -17,10 +17,12 @@ const metadata = {
 const addLoggedUserToTheStore = () => store.dispatch(checkIsLoggedInReceived(metadata))
 
 describe('SignUpPageContainer', () => {
+  // I may think about a better way to init data, these dispatches seems too coupled
   it('Given that the user filled the username, should set the username in the store when the button is clicked.', () => {
     const username = "dude"; 
-    addLoggedUserToTheStore()
+    store.dispatch({ type: 'persist/REHYDRATE'})
     store.dispatch({ type: 'app/routerReady'})
+    addLoggedUserToTheStore()
     render(<SignUpPageContainer />)
     const input = screen.getByLabelText('Pick a username')
     userEvent.type(input, username)
