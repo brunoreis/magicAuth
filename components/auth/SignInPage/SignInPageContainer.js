@@ -5,7 +5,7 @@ import { signIn } from '../../../features/authentication/authenticationSlice';
 
 const SignInPageContainer = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("bruno.p.reis@gmail.com");
+  const [email, setEmail] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   const doLogIn = () => dispatch(

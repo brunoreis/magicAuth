@@ -8,6 +8,7 @@ import authenticationReducer, {
   checkIsLoggedInStarted,
   isLoggedIn,
   getIssuer,
+  getRememberMe
 } from './authenticationSlice';
 import Router from 'next/router';
 jest.mock('next/router');
@@ -35,6 +36,15 @@ describe('authentication reducer', () => {
       expect(isLoggedIn(state)).toBe(false)
       expect(getIssuer(state)).toBe(null)
     })
+  })
+  describe('signIn', () => {
+    it('sets rememberMe', () => {
+      let state = authenticationReducer(undefined, signIn({ rememberMe: false }))
+      expect(getRememberMe(state)).toBe(false)
+      state = authenticationReducer(undefined, signIn({ rememberMe: true }))
+      expect(getRememberMe(state)).toBe(true)
+    })
+    
   })
   describe('signInSuccess', () => {
     it('sets issuer if logged in', () => {

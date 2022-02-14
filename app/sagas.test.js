@@ -21,8 +21,8 @@ it('preload, check log in, redirects and start other sagas', () => {
   expect(g.next().value).toEqual(fork(preload));
   expect(g.next().value).toEqual(fork(navigationWatcher));
   expect(g.next().value).toEqual(take('persist/REHYDRATE'));
-  expect(g.next().value).toEqual(call(checkIsLoggedIn));
   expect(g.next().value).toEqual(take('app/routerReady'));
+  expect(g.next().value).toEqual(call(checkIsLoggedIn));
   expect(g.next().value).toEqual(call(redirects));
   expect(g.next().value).toEqual(
     all([

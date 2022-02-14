@@ -9,6 +9,9 @@ export const authenticationSlice = createSlice({
   name: 'authentication',
   initialState,
   reducers: { 
+    signIn: (state, action) => {
+      state.rememberMe = action.payload.rememberMe
+    },
     signInSuccess: (state, action) => {
       state.issuer = action.payload.issuer
       state.isLoggedIn = true
@@ -26,10 +29,10 @@ export const authenticationSlice = createSlice({
 
 //actions
 export const {
+  signIn,
   signInSuccess,
   checkIsLoggedInReceived,
 } = authenticationSlice.actions;
-export const signIn = createAction('authentication/signIn')
 export const signInFailure = createAction('authentication/signInFailure')
 export const logOut = createAction('authentication/logOut')
 export const logOutSuccess = createAction('authentication/logOutSuccess')
@@ -38,5 +41,6 @@ export const checkIsLoggedInLoginReceived = createAction('authentication/checkIs
 //selectors
 export const isLoggedIn = (state) => !!state.issuer;
 export const getIssuer = (state) => state.issuer;
+export const getRememberMe = (state) => state.rememberMe
 //reducer
 export default authenticationSlice.reducer;
