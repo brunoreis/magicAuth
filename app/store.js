@@ -3,6 +3,7 @@ import authenticationReducer, {
   getIssuer,
 } from '../features/authentication/authenticationSlice';
 import usersReducer, { receiveUsername } from '../features/users/usersSlice';
+import appReducer from '../features/app/appReducer';
 import createSagaMiddleware from 'redux-saga';
 import sagas from './sagas';
 
@@ -13,6 +14,7 @@ export const store = configureStore({
   reducer: {
     authentication: authenticationReducer,
     users: usersReducer,
+    app: appReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),
