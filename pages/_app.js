@@ -3,8 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../styles/theme';
 import { store } from '../app/store';
 import { Provider } from 'react-redux';
-
-
+import LoadingBranch from '../components/LoadingBranch'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -12,7 +11,9 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <Component {...pageProps} />
+            <LoadingBranch>
+              <Component {...pageProps} />
+            </LoadingBranch>
           </Provider> 
       </ThemeProvider>
     </>

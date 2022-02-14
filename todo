@@ -1,8 +1,8 @@
-[] block render before login info is retrieved
 [] redirect after login (test 2 flows)
 [] check if usernames are taken
 [] remember me
 [] send callback page to redirect after login
+
 
 
 [] jest expect message to improve some tests

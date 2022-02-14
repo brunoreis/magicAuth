@@ -39,3 +39,5 @@ export const getUsername = (state) => {
   const user = findUser(state, loggedUserIssuer)
   return user.username
 }
+
+export const getIsLoading = (state) => state.app.loading
