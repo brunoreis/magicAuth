@@ -13,4 +13,7 @@ export const ButtonStyled = styled.button`
   justify-content: center;
   align-items: center;
   height: 3rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;

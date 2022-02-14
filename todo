@@ -5,6 +5,7 @@
 [] add internal loaders on login
 
 
+[] test localstorage persist
 [] jest expect message to improve some tests
 [] move magic.link key to vercel...
 [] add some kind of loading behaviour too
