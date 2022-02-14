@@ -1,5 +1,10 @@
-[] navigate to welcome on users/receiveUsername
+[x] navigate to welcome on users/receiveUsername
 [] show username on welcome screen
+[] redirect after login (test 2 flows)
+[] block render before login info is retrieved
+[] check if usernames are takes
+[] remember me
+
 
 [] jest expect message to improve some tests
 [] move magic.link key to vercel...

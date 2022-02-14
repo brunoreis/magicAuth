@@ -6,7 +6,6 @@ import {
   handleLogOut,
 } from '../features/authentication/authenticationSagas';
 import { redirects, navigationWatcher, go } from '../features/navigation/navigationSagas';
-import { requestNavigation } from '../features/navigation/navigationSlice';
 import { receiveUsername } from '../features/users/usersSlice';
 import {
   signIn,
@@ -21,9 +20,9 @@ export default function* sagas() {
   yield call(redirects);
   yield all([
     takeEvery(signIn().type, handleSignIn),
-    takeEvery(receiveUsername().type, call(go,"/")),
+    takeEvery(receiveUsername().type, go, "/"),
     //takeEvery(signInSuccess().type, go('/')),
     takeEvery(logOut().type, handleLogOut),
-    takeEvery(logOutSuccess().type, call(go,'/signIn')),
+    takeEvery(logOutSuccess().type, go, '/signIn'),
   ]);
 }

@@ -25,10 +25,10 @@ it('preload, check log in, redirects and start other sagas', () => {
   expect(g.next().value).toEqual(
     all([
       takeEvery(signIn().type, handleSignIn),
-      takeEvery(receiveUsername().type, call(go,"/")),
+      takeEvery(receiveUsername().type, go, "/"),
       // takeEvery(signInSuccess().type, put(requestNavigation('/signIn'))),
       takeEvery(logOut().type, handleLogOut),
-      takeEvery(logOutSuccess().type, call(go,'/signIn')),
+      takeEvery(logOutSuccess().type, go , '/signIn'),
     ])
   );
 });

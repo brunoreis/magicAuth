@@ -1,4 +1,4 @@
-import { render as tlRender, screen, fireEvent } from '@testing-library/react'
+import { render as tlRender, screen } from '@testing-library/react'
 import WelcomePage from './WelcomePage'
 import { addTheme, addReduxProvider } from '../../../util/testHelpers'
 import * as R from 'ramda'
@@ -23,12 +23,4 @@ describe('Welcome', () => {
     const button = screen.getByRole('button')
     expect(button.innerHTML).toBe("Log Out")
   })
-
-  // it("Calls onButtonClick when the button is clicked", () => {
-  //   const onButtonClick = jest.fn();
-  //   render(<WelcomePage onButtonClick={onButtonClick} />)
-  //   const button = screen.getByRole('button')
-  //   fireEvent.click(button)
-  //   expect(onButtonClick).toHaveBeenCalled()
-  // })
 })
