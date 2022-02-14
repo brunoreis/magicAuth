@@ -3,7 +3,7 @@ import authenticationReducer, {
   getIssuer,
 } from '../features/authentication/authenticationSlice';
 import usersReducer, { receiveUsername } from '../features/users/usersSlice';
-import appReducer from '../features/app/appReducer';
+import appReducer from '../features/app/appSlice';
 import createSagaMiddleware from 'redux-saga';
 import sagas from './sagas';
 
