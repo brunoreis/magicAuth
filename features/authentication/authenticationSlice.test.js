@@ -21,6 +21,7 @@ describe('authentication reducer', () => {
     expect(authenticationReducer(undefined, { type: 'unknown' })).toEqual({
       issuer: null,
       rememberMe: false,
+      loading: false
     });
   });
   describe('checkIsLoggedInReceived', () => {

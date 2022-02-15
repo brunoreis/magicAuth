@@ -31,26 +31,6 @@ export function* preload() {
   }
 }
 
-export function* checkIsLoggedIn() {
-  const rememberMe = yield select(getRememberMe);
-  yield put(checkIsLoggedInStarted({ rememberMe }));
-  if (rememberMe) {
-    try {
-      const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
-      yield put(checkIsLoggedInLoginReceived({ isLoggedIn }));
-      const metadata = yield call([magic.user, magic.user.getMetadata]);
-      yield put(checkIsLoggedInReceived(metadata));
-    } catch (e) {
-      // basic error handling. Needs to be improved
-      yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
-    }
-  } else {
-    yield put(
-      checkIsLoggedInReceived({ issuer: null, note: 'Remember me disabled' })
-    );
-  }
-}
-
 export function* handleSignIn(action) {
   try {
     const idToken = yield call(
@@ -75,3 +55,25 @@ export function* handleLogOut() {
   yield call([magic.user, magic.user.logout]);
   yield put(logOutSuccess());
 }
+
+
+export function* checkIsLoggedIn() {
+  const rememberMe = yield select(getRememberMe);
+  yield put(checkIsLoggedInStarted({ rememberMe }));
+  if (rememberMe) {
+    try {
+      const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
+      yield put(checkIsLoggedInLoginReceived({ isLoggedIn }));
+      const metadata = yield call([magic.user, magic.user.getMetadata]);
+      yield put(checkIsLoggedInReceived(metadata));
+    } catch (e) {
+      // basic error handling. Needs to be improved
+      yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
+    }
+  } else {
+    yield put(
+      checkIsLoggedInReceived({ issuer: null, note: 'Remember me disabled' })
+    );
+  }
+}
+

@@ -3,6 +3,7 @@ import { createAction, createSlice } from '@reduxjs/toolkit';
 const initialState = {
   issuer: null,
   rememberMe: false,
+  loading: false
 };
 
 export const authenticationSlice = createSlice({
@@ -11,10 +12,12 @@ export const authenticationSlice = createSlice({
   reducers: { 
     signIn: (state, action) => {
       state.rememberMe = action.payload.rememberMe
+      state.loading = true
     },
     signInSuccess: (state, action) => {
       state.issuer = action.payload.issuer
       state.isLoggedIn = true
+      state.loading = false
     },
     checkIsLoggedInReceived: (state, action) => {
       const issuer = action.payload.issuer
