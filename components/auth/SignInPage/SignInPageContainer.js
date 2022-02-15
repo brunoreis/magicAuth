@@ -17,7 +17,7 @@ const SignInPageContainer = () => {
     const payload = {
       email,
       rememberMe,
-      redirectURI: `http://${document.location.host}/`
+      redirectURI: `${document.location.protocol}//${document.location.host}/`
     }
     dispatch(signIn(payload));
   };

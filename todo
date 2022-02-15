@@ -1,4 +1,3 @@
-[] add email validation to the email field
 [] check the user info in the background if the user is already logged in
 
 [] study runSagas and other resources and make the saga tests easier to write and readable
