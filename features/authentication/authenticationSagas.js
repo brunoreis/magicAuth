@@ -1,5 +1,7 @@
 import { call, put, select, all, takeEvery } from 'redux-saga/effects';
 import magic from '../shared/magic';
+import { getSearch } from '../../app/router'
+
 import {
   signIn,
   logOut,
@@ -37,7 +39,7 @@ export function* preload() {
 
 export function* handleSignIn(action) {
   try {
-    const idToken = yield call(
+    yield call(
       [magic.auth, magic.auth.loginWithMagicLink],
       { 
         email: action.payload.email,
@@ -66,21 +68,29 @@ export function* handleLogOut() {
 
 export function* checkIsLoggedIn() {
   const rememberMe = yield select(getRememberMe);
-  yield put(checkIsLoggedInStarted({ rememberMe }));
-  if (rememberMe) {
-    try {
-      const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
-      yield put(checkIsLoggedInLoginReceived({ isLoggedIn }));
-      const metadata = yield call([magic.user, magic.user.getMetadata]);
-      yield put(checkIsLoggedInReceived(metadata));
-    } catch (e) {
-      // basic error handling. Needs to be improved
-      yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
-    }
+  const magicCredential = new URLSearchParams(getSearch()).get('magic_credential')
+  yield put(checkIsLoggedInStarted({ rememberMe, magicCredential }));
+  if(magicCredential) {
+    const isLoggedIn = yield call([magic.auth, magic.auth.loginWithCredential]);
+    yield put(checkIsLoggedInLoginReceived({ isLoggedIn, method: 'loginWithCredential' }));
+    const metadata = yield call([magic.user, magic.user.getMetadata]);
+    yield put(checkIsLoggedInReceived(metadata));
   } else {
-    yield put(
-      checkIsLoggedInReceived({ issuer: null, note: 'Remember me disabled' })
-    );
+    if (rememberMe) {
+      try {
+        const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
+        yield put(checkIsLoggedInLoginReceived({ isLoggedIn, method: 'isLoggedIn' }));
+        const metadata = yield call([magic.user, magic.user.getMetadata]);
+        yield put(checkIsLoggedInReceived(metadata));
+      } catch (e) {
+        // basic error handling. Needs to be improved
+        yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
+      }
+    } else {
+      yield put(
+        checkIsLoggedInReceived({ issuer: null, note: 'Remember me disabled' })
+      );
+    }
   }
 }
 

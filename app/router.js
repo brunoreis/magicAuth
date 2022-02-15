@@ -15,3 +15,11 @@ export const push = (path) => {
         return "**routerNotInstantiated**"
     }
 }
+
+export const getSearch = () => {
+    if(Router.router) {
+        return window.location.search
+    } else {
+        return "?nowindowdefined"
+    }
+}

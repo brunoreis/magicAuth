@@ -13,8 +13,6 @@ import authenticationReducer, {
   preloadMagicLinkIFrameStarted
 } from './authenticationSlice';
 
-import Router from 'next/router';
-jest.mock('next/router');
 
 const exist = (actionCreator) => {
   actionCreator()
