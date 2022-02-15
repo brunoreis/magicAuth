@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   redirectsCompleted,
 } from '../navigation/navigationSlice';
+';
 
 const initialState = {
   loading: true

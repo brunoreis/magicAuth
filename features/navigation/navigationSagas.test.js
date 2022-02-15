@@ -11,13 +11,13 @@ import {
   navigationWatcher,
   navigate,
   redirects,
-  startsWithSlashNav,
+  startsWithNavSlash,
 } from './navigationSagas';
 
 it('redirects actions into sagas', () => {
   const g = navigationWatcher();
   expect(g.next().value).toStrictEqual(
-    all([takeEvery(startsWithSlashNav, navigate)])
+    all([takeEvery(startsWithNavSlash, navigate)])
   );
   expect(g.next().done).toBe(true);
 });
@@ -109,6 +109,25 @@ describe('redirects', () => {
       const g = redirects();
       expect(g.next().value).toEqual(path());
       expect(g.next('/').value).toEqual(select(isLoggedIn));
+      expect(g.next(false).value).toEqual(select(getUsername));
+      expect(g.next('username').value).toEqual(
+        put(
+          redirectsStarted({
+            actualPath: '/',
+            isLogged: false,
+            username: 'username',
+          })
+        )
+      );
+      expect(g.next().value).toEqual(put(requestNavigation('/signIn')));
+      expect(g.next().value).toEqual(put(redirectsCompleted()));
+      expect(g.next().done).toBe(true);
+    });
+    it('/?something redirectsTo signIn', () => {
+      const isLogged = true;
+      const g = redirects();
+      expect(g.next().value).toEqual(path());
+      expect(g.next('/?something').value).toEqual(select(isLoggedIn));
       expect(g.next(false).value).toEqual(select(getUsername));
       expect(g.next('username').value).toEqual(
         put(

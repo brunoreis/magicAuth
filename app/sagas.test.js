@@ -9,7 +9,6 @@ import userSagas from '../features/users/usersSagas';
 
 it('preload, check log in, redirects and start other sagas', () => {
   const g = sagas();
-  expect(g.next().value).toEqual(fork(preload));
   expect(g.next().value).toEqual(fork(navigationWatcher));
   expect(g.next().value).toEqual(take('persist/REHYDRATE'));
   expect(g.next().value).toEqual(take('app/routerReady'));

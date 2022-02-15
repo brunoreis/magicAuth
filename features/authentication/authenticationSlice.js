@@ -41,6 +41,8 @@ export const logOut = createAction('authentication/logOut')
 export const logOutSuccess = createAction('authentication/logOutSuccess')
 export const checkIsLoggedInStarted = createAction('authentication/checkIsLoggedInStarted')
 export const checkIsLoggedInLoginReceived = createAction('authentication/checkIsLoggedInLoginReceived')
+export const preloadMagicLinkIFrame = createAction('authentication/preloadMagicLinkIFrame')
+export const preloadMagicLinkIFrameStarted = createAction('authentication/preloadMagicLinkIFrameStarted')
 //selectors
 export const isLoggedIn = (state) => !!state.issuer;
 export const getIssuer = (state) => state.issuer;

@@ -9,7 +9,8 @@ import authenticationReducer, {
   isLoggedIn,
   getIssuer,
   getRememberMe,
-  getLoading
+  preloadMagicLinkIFrame,
+  preloadMagicLinkIFrameStarted
 } from './authenticationSlice';
 
 import Router from 'next/router';
@@ -66,6 +67,8 @@ describe('existent actionCreators', () => {
   it('logOut', () => exist(logOut))
   it('logOutSuccess', () => exist(logOutSuccess))
   it('checkIsLoggedInStarted', () => exist(checkIsLoggedInStarted))
+  it('preloadMagicLinkIFrame', () => exist(preloadMagicLinkIFrame))
+  it('preloadMagicLinkIFrameStarted', () => exist(preloadMagicLinkIFrameStarted))
 })
 describe('selectors', () => {
   it('isLoggedIn', () => {

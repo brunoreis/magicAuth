@@ -9,6 +9,8 @@ import {
   checkIsLoggedInReceived,
   signInSuccess,
   signInFailure,
+  preloadMagicLinkIFrame,
+  preloadMagicLinkIFrameStarted
 } from './authenticationSlice';
 import { requestNavigation } from '../navigation/navigationSlice';
 import { go } from '../navigation/navigationSagas';
@@ -23,10 +25,12 @@ export default function* authenticationSagas() {
     takeEvery(signIn().type, handleSignIn),
     takeEvery(logOut().type, handleLogOut),
     takeEvery(logOutSuccess().type, go, '/signIn'),
+    takeEvery(preloadMagicLinkIFrame().type, preload),
   ]);
 }
 export function* preload() {
   if (typeof window !== 'undefined') {
+    yield put(preloadMagicLinkIFrameStarted())
     yield call([magic, magic.preload]);
   }
 }

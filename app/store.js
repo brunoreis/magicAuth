@@ -10,12 +10,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { PersistGate } from 'redux-persist/integration/react';
 import loadingReducer from '../features/loading/loadingSlice';
-import authenticationReducer, {
-  getIssuer,
-} from '../features/authentication/authenticationSlice';
-import usersReducer, { receiveUsername } from '../features/users/usersSlice';
+import authenticationReducer from '../features/authentication/authenticationSlice';
+import usersReducer from '../features/users/usersSlice';
 import appReducer from '../features/app/appSlice';
 
 import createSagaMiddleware from 'redux-saga';
@@ -52,7 +49,7 @@ export const createStore = () => {
       }).concat(sagaMiddleware),
   });
   sagaMiddleware.run(sagas);
-  let persistor = persistStore(store);
+  persistStore(store);
   return store;
 };
 

@@ -15,6 +15,8 @@ import {
   checkIsLoggedInLoginReceived,
   checkIsLoggedInReceived,
   signInSuccess,
+  preloadMagicLinkIFrame,
+  preloadMagicLinkIFrameStarted
 } from './authenticationSlice';
 
 import { requestNavigation } from '../navigation/navigationSlice';
@@ -32,6 +34,7 @@ describe('authenticationSagas', () => {
         takeEvery(signIn().type, handleSignIn),
         takeEvery(logOut().type, handleLogOut),
         takeEvery(logOutSuccess().type, go, '/signIn'),
+        takeEvery(preloadMagicLinkIFrame().type, preload),
       ])
     );
     expect(g.next().done).toBe(true);
@@ -41,6 +44,7 @@ describe('authenticationSagas', () => {
 describe('preload', () => {
   it('preloads magic', () => {
     const g = preload();
+    expect(g.next().value).toEqual(put(preloadMagicLinkIFrameStarted()));
     expect(g.next().value).toEqual(call([magic, magic.preload]));
     expect(g.next().done).toBe(true);
   });
