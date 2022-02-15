@@ -8,8 +8,10 @@ import authenticationReducer, {
   checkIsLoggedInStarted,
   isLoggedIn,
   getIssuer,
-  getRememberMe
+  getRememberMe,
+  getLoading
 } from './authenticationSlice';
+
 import Router from 'next/router';
 jest.mock('next/router');
 

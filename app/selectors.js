@@ -14,3 +14,4 @@ export const getUsernameIsAvailable = (username) => (state) => {
   const found = !!state.users.users.find( (user)=> user.username === username )
   return !found
 }
+export const getLoading = (key) => (state) => state.loading[key]

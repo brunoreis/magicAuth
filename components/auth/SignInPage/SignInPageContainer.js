@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import SignInPage from './SignInPage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../../features/authentication/authenticationSlice';
+import { getLoading } from '../../../app/selectors';
 
 const SignInPageContainer = () => {
   const dispatch = useDispatch();
+  const loading = useSelector(getLoading('authentication'))
   const [email, setEmail] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -26,6 +28,7 @@ const SignInPageContainer = () => {
       onRememberMeToggle={() => setRememberMe(!rememberMe)}
       onButtonClick={doLogIn}
       canSubmit={canSubmit}
+      loading={loading}
     />
   );
 };

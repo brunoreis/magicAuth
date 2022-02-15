@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/integration/react';
-
+import loadingReducer from '../features/loading/loadingSlice';
 import authenticationReducer, {
   getIssuer,
 } from '../features/authentication/authenticationSlice';
@@ -31,6 +31,7 @@ export const createStore = () => {
     authentication: authenticationReducer,
     users: usersReducer,
     app: appReducer,
+    loading: loadingReducer, 
   });
   const persistConfig = {
     key: 'root',

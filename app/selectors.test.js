@@ -1,4 +1,4 @@
-import { getUsernameIsAvailable} from './selectors'
+import { getUsernameIsAvailable, getLoading } from './selectors'
 
 
 describe('getUsernameIsAvaliable', ()=> {
@@ -13,4 +13,13 @@ describe('getUsernameIsAvaliable', ()=> {
     })
 })
 
-
+it('getLoading', () => {
+    const state = { 
+        loading: { 
+            authentication: false
+        }
+    }
+    expect(getLoading('authentication')(state)).toBe(false)
+    state.loading.authentication = true
+    expect(getLoading('authentication')(state)).toBe(true)
+  })
