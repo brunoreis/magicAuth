@@ -1,4 +1,5 @@
 [] check the user info and if the user is already logged in do not show the loader
+[] do not logout a "non remember me" user in an open browser (cookie session lifespan)
 
 [] study runSagas and other resources and make the saga tests easier to write and readable
 [] find a better way to organize the selectors, study best practices on the theme
