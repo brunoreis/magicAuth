@@ -1,15 +1,14 @@
 [] move magic.link key to vercel...
 
 [] add email validation to the email field
-[] add some kind of cookie to keep the user logged while the browser is still open (avoid logout on refresh)
-
-[] the initial user check/metadata loading can probably be skipped in some scenarios to make the UX faster (checkIsLoggedInLoginReceived)
-[] add a test to check the taken/available indicator on the SignUp page
-[] test the LoadingBranch component
+[] check the user info in the background if the user is already logged in
 
 [] study runSagas and other resources and make the saga tests easier to write and readable
 [] find a better way to organize the selectors, study best practices on the theme
 [] refactor redirectsAccordingToLogin tests
-[] add e2e tests (testCafe? Would that have to open my email client?)
 
+[] add a test to check the taken/available indicator on the SignUp page
+[] test the LoadingBranch component
+
+[] add e2e tests (testCafe? Would that have to open my email client?)
 [] review the layout when the page reduce height
