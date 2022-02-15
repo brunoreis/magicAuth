@@ -1,10 +1,10 @@
-import React from 'react'
-import { ButtonStyled } from './Button.styles'
+import React from 'react';
+import { ButtonStyled } from './Button.styles';
 
-export default function Button({ children, onClick, light }){
-    return (
-        <ButtonStyled onClick={onClick} light={light}>
-            {children}
-        </ButtonStyled>
-    )
+export default function Button({ children, onClick, light, disabled }) {
+  return (
+    <ButtonStyled onClick={onClick} light={light} disabled={disabled}>
+      {children}
+    </ButtonStyled>
+  );
 }

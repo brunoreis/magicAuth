@@ -3,6 +3,7 @@ import SignUpPage from './SignUpPage'
 import { addTheme } from '../../../util/testHelpers'
 import {within} from '@testing-library/dom'
 import * as R from 'ramda'
+import userEvent from '@testing-library/user-event'
 
 const render = R.compose(tlRender, addTheme)
 
@@ -41,8 +42,7 @@ describe('Sign Up', () => {
   it("Calls onUsernameChange when the user types in the input", () => {
     const onChange = jest.fn();
     render(<SignUpPage onUsernameChange={onChange} />)
-    const input = screen.getByLabelText('Pick a username')
-    fireEvent.change(input, {target: {value: 'dude'}})
+    userEvent.type(screen.getByLabelText('Pick a username'), 'dude')
     expect(onChange).toHaveBeenCalledWith('dude')
   })
 
@@ -66,9 +66,8 @@ describe('Sign Up', () => {
 
   it("Calls onButtonClick when the button is clicked", () => {
     const onButtonClick = jest.fn();
-    render(<SignUpPage onButtonClick={onButtonClick} />)
-    const button = screen.getByRole('button')
-    fireEvent.click(button)
+    render(<SignUpPage onButtonClick={onButtonClick} canSubmit={true}/>)
+    userEvent.click(screen.getByRole('button'))
     expect(onButtonClick).toHaveBeenCalled()
   })
 })

@@ -3,6 +3,7 @@ import SignInPage from './SignInPage'
 import {within} from '@testing-library/dom'
 import { addTheme } from '../../../util/testHelpers'
 import * as R from 'ramda'
+import userEvent from '@testing-library/user-event'
 
 const render = R.compose(tlRender, addTheme)
 
@@ -35,8 +36,7 @@ describe('SignIn Page', () => {
   it("Calls onButtonClick when the button is clicked", () => {
     const onButtonClick = jest.fn();
     render(<SignInPage onButtonClick={onButtonClick} />)
-    const button = screen.getByRole('button')
-    fireEvent.click(button)
+    userEvent.click(screen.getByRole('button'))
     expect(onButtonClick).toHaveBeenCalled()
   })
 
@@ -49,16 +49,14 @@ describe('SignIn Page', () => {
   it("Calls onEmailChange when the user types in the input", () => {
     const onChange = jest.fn();
     render(<SignInPage onEmailChange={onChange} />)
-    const input = screen.getByLabelText('Your Email')
-    fireEvent.change(input, {target: {value: '44'}})
+    userEvent.type(screen.getByLabelText('Your Email'), '44')
     expect(onChange).toHaveBeenCalledWith('44')
   })
 
   it("Calls onRememberMeToggle when the toggle is clicked", () => {
     const onRememberMeToggle = jest.fn();
     render(<SignInPage onRememberMeToggle={onRememberMeToggle} />)
-    const toggle = screen.getByLabelText('Remember me')
-    fireEvent.click(toggle)
+    userEvent.click(screen.getByLabelText('Remember me'))
     expect(onRememberMeToggle).toHaveBeenCalled()
   })
 

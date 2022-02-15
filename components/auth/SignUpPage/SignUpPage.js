@@ -1,11 +1,17 @@
 import Layout, { HeaderContainer, FormContainer } from '../components/Layout';
-import Header from '../components/Header'
+import Header from '../components/Header';
 import { FieldContainer, FieldLabel } from '../components/styles';
 import TextField from '../components/TextField';
 import Button from '../components/Button';
-import { MessageContainer } from './SignUpPage.styles.js'
+import { MessageContainer } from './SignUpPage.styles.js';
 
-export default function SignUpPage({ username, onUsernameChange, available, onButtonClick }) {
+export default function SignUpPage({
+  username,
+  onUsernameChange,
+  available,
+  onButtonClick,
+  canSubmit,
+}) {
   return (
     <Layout title="Sign Up">
       <HeaderContainer>
@@ -14,15 +20,24 @@ export default function SignUpPage({ username, onUsernameChange, available, onBu
       <FormContainer>
         <FieldLabel htmlFor="username">Pick a username</FieldLabel>
         <FieldContainer>
-          <TextField testId="usernameInput" id="username" value={username} onChange={onUsernameChange}/>
+          <TextField
+            testId="usernameInput"
+            id="username"
+            value={username}
+            onChange={onUsernameChange}
+          />
         </FieldContainer>
-        <Button onClick={onButtonClick}>Create Account</Button>
+        <Button onClick={onButtonClick} disabled={!canSubmit}>
+          Create Account
+        </Button>
         <MessageContainer data-testid="message" available={available}>
-          {
-            ![false,true].includes(available) ? "" : available ? "✔ Available!" : "✘ Taken 🙁"
-          }
+          {![false, true].includes(available)
+            ? ''
+            : available
+            ? '✔ Available!'
+            : '✘ Taken 🙁'}
         </MessageContainer>
       </FormContainer>
     </Layout>
-  )
+  );
 }
