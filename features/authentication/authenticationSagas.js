@@ -37,7 +37,7 @@ export function* handleSignIn(action) {
       [magic.auth, magic.auth.loginWithMagicLink],
       { 
         email: action.payload.email,
-        redirectUrl: action.payload.redirectUrl
+        redirectURI: action.payload.redirectURI
       },
       true
     );

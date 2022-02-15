@@ -89,12 +89,12 @@ describe('signIn', () => {
     it('redirects to welcome if username exists', () => {
       // this is throwing a TypeError: Converting circular structure to JSON error if it fails (jest bug?)
       const email = 'testemail@a.com';
-      const redirectUrl = 'http://localhost:3000/';
-      const g = handleSignIn({ payload: { email, redirectUrl } });
+      const redirectURI = 'http://localhost:3000/';
+      const g = handleSignIn({ payload: { email, redirectURI } });
       expect(g.next().value).toEqual(
         call(
           [magic.auth, magic.auth.loginWithMagicLink],
-          { email, redirectUrl },
+          { email, redirectURI },
           true
         )
       );
@@ -114,13 +114,13 @@ describe('signIn', () => {
     });
     it('redirects to /signUp if username does not exists', () => {
       const email = 'testemail@a.com';
-      const redirectUrl = 'http://localhost:3000/';
-      const g = handleSignIn({ payload: { email, redirectUrl } });
+      const redirectURI = 'http://localhost:3000/';
+      const g = handleSignIn({ payload: { email, redirectURI } });
 
       expect(g.next().value).toEqual(
         call(
           [magic.auth, magic.auth.loginWithMagicLink],
-          { email, redirectUrl },
+          { email, redirectURI },
           true
         )
       );
