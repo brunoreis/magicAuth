@@ -3,12 +3,15 @@ import SignInPage from './SignInPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../../features/authentication/authenticationSlice';
 import { getLoading } from '../../../app/selectors';
+import useDebouncedValidEmailErrorMessage from './useDebouncedValidEmailErrorMessage';
 
 const SignInPageContainer = () => {
   const dispatch = useDispatch();
   const loading = useSelector(getLoading('authentication'))
   const [email, setEmail] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  
+  const errorMessage = useDebouncedValidEmailErrorMessage(email)
 
   const doLogIn = () => {
     const payload = {
@@ -30,6 +33,7 @@ const SignInPageContainer = () => {
       onButtonClick={doLogIn}
       canSubmit={canSubmit}
       loading={loading}
+      errorMessage={errorMessage}
     />
   );
 };

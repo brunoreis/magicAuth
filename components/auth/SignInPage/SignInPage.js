@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import TextField from '../components/TextField';
 import Button from '../components/Button';
 import Toggle from '../components/Toggle';
-import { ToggleLabelContainer } from './SignInPage.styles';
+import { ToggleLabelContainer, ErrorMessage } from './SignInPage.styles';
 import { FieldContainer, FieldLabel } from '../components/styles';
 
 export default function SignInPage({ 
@@ -14,6 +14,7 @@ export default function SignInPage({
   onRememberMeToggle,
   canSubmit, 
   loading,
+  errorMessage,
 }) {
   return (
     <Layout title="Sign In">
@@ -26,6 +27,7 @@ export default function SignInPage({
           <TextField testId="emailInput" id="email" value={email} onChange={onEmailChange} />
         </FieldContainer>
         <Button onClick={onButtonClick} disabled={!canSubmit} loading={loading}>Sign In / Sign Up</Button>
+        <ErrorMessage>{errorMessage}</ErrorMessage>
       </FormContainer>
       <FooterContainer>
         <ToggleLabelContainer>

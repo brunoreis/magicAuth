@@ -8,3 +8,11 @@ export const ToggleLabelContainer = styled.div`
     margin-right: 1rem;
 `
 
+export const ErrorMessage = styled.div`
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    color: ${({theme}) => theme.colors.error}
+`

@@ -1,5 +1,3 @@
-[] move magic.link key to vercel...
-
 [] add email validation to the email field
 [] check the user info in the background if the user is already logged in
 
@@ -11,4 +9,6 @@
 [] test the LoadingBranch component
 
 [] add e2e tests (testCafe? Would that have to open my email client?)
+
+[] move magic.link public key to Vercel
 [] review the layout when the page reduce height
