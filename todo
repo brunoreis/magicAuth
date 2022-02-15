@@ -1,4 +1,3 @@
-[] block moving forward on signup when username is take (error checks)
 [] block sending email and username without a value
 [] send magic redirectURI to redirect after the login and improve UX (https://magic.link/docs/api-reference/client-side-sdks/web#loginwithmagiclink)
 [] move magic.link key to vercel...

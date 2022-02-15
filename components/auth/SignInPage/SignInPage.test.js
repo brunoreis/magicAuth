@@ -35,9 +35,17 @@ describe('SignIn Page', () => {
 
   it("Calls onButtonClick when the button is clicked", () => {
     const onButtonClick = jest.fn();
-    render(<SignInPage onButtonClick={onButtonClick} />)
+    render(<SignInPage onButtonClick={onButtonClick} canSubmit={true}/>)
     userEvent.click(screen.getByRole('button'))
-    expect(onButtonClick).toHaveBeenCalled()
+    userEvent.type(screen.getByLabelText('Your Email'), '44')
+    expect(onButtonClick).toHaveBeenCalled();
+  })
+
+  it("Do not calls onButtonClick if canSubmit is false", () => {
+    const onButtonClick = jest.fn();
+    render(<SignInPage onButtonClick={onButtonClick} canSubmit={false}/>)
+    userEvent.click(screen.getByRole('button'))
+    expect(onButtonClick).not.toHaveBeenCalled()
   })
 
   it("Shows the informed email", () => {

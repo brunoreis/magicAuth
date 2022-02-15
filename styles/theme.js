@@ -8,6 +8,7 @@ const theme = {
     success: '#799B67',
     border: '#999',
     light: '#eee',
+    disabled: '#eee',
   },
   borderRadius: '0.5rem',
 };

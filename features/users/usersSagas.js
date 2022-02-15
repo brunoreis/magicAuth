@@ -16,7 +16,6 @@ export function* callReceiveUsernameWithTheLoggedUserIssuer({ payload }) {
     const loggedUserIssuer = yield select(getIssuer)
     const selector = yield call(getUsernameIsAvailable,username)
     const usernameAvailable = yield select(selector)
-    console.log(usernameAvailable)
     if(usernameAvailable) {
       if(!loggedUserIssuer) throw new Error("You can't register the username without a logged user")
       yield put(receiveUsername({

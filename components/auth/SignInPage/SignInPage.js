@@ -11,7 +11,8 @@ export default function SignInPage({
   rememberMe,
   onEmailChange, 
   onButtonClick, 
-  onRememberMeToggle 
+  onRememberMeToggle,
+  canSubmit, 
 }) {
   return (
     <Layout title="Sign In">
@@ -23,7 +24,7 @@ export default function SignInPage({
         <FieldContainer>
           <TextField testId="emailInput" id="email" value={email} onChange={onEmailChange} />
         </FieldContainer>
-        <Button onClick={onButtonClick}>Sign In / Sign Up</Button>
+        <Button onClick={onButtonClick} disabled={!canSubmit}>Sign In / Sign Up</Button>
       </FormContainer>
       <FooterContainer>
         <ToggleLabelContainer>
