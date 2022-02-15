@@ -35,7 +35,10 @@ export function* handleSignIn(action) {
   try {
     const idToken = yield call(
       [magic.auth, magic.auth.loginWithMagicLink],
-      { email: action.payload.email },
+      { 
+        email: action.payload.email,
+        redirectUrl: action.payload.redirectUrl
+      },
       true
     );
     const metadata = yield call([magic.user, magic.user.getMetadata]);

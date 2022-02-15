@@ -1,13 +1,11 @@
-[] add a loading spinner after the user clicks the login button
-
-[] send magic redirectURI to redirect after the login and improve UX (https://magic.link/docs/api-reference/client-side-sdks/web#loginwithmagiclink)
 [] move magic.link key to vercel...
 
 [] add email validation to the email field
-[] add a test to check the taken/available indicator on the SignUp page
-
 [] add some kind of cookie to keep the user logged while the browser is still open (avoid logout on refresh)
+
 [] the initial user check/metadata loading can probably be skipped in some scenarios to make the UX faster (checkIsLoggedInLoginReceived)
+[] add a test to check the taken/available indicator on the SignUp page
+[] test the LoadingBranch component
 
 [] study runSagas and other resources and make the saga tests easier to write and readable
 [] find a better way to organize the selectors, study best practices on the theme
