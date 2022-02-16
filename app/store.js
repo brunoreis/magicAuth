@@ -27,7 +27,7 @@ export const createStore = () => {
   const rootReducer = combineReducers({
     authentication: authenticationReducer,
     users: usersReducer,
-    app: appReducer,
+    app: appReducer, //todo: merge app and loading into one. 
     loading: loadingReducer, 
   });
   const persistConfig = {

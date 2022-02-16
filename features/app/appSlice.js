@@ -1,3 +1,5 @@
+// @todo: merge this into the loadingSlice
+
 import { createSlice } from '@reduxjs/toolkit';
 import {
   redirectsCompleted,

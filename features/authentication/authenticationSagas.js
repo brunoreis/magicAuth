@@ -84,6 +84,7 @@ export function* checkIsLoggedIn() {
         yield put(checkIsLoggedInReceived(metadata));
       } catch (e) {
         // basic error handling. Needs to be improved
+        // https://magic.link/docs/api-reference/client-side-sdks/web#rpcerror
         yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
       }
     } else {
