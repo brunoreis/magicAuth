@@ -8,12 +8,14 @@ import {
   isLoggedIn
 } from '../authenticationSlice';
 import { getRememberMe } from './authenticationSagas';
+import Cookie from 'js-cookie'
 
 
 export default function* checkIsLoggedIn() {
-  const rememberMe = yield select(getRememberMe);
+  const rememberMe = yield select(getRememberMe); 
+  const isLoggedInCookie = yield call([Cookie, Cookie.get], 'isLoggedIn');
   const magicCredential = new URLSearchParams(getSearch()).get('magic_credential');
-  yield put(checkIsLoggedInStarted({ rememberMe, magicCredential }));
+  yield put(checkIsLoggedInStarted({ rememberMe, magicCredential, isLoggedInCookie }));
   if (magicCredential) {
     const loggedIn = yield call([magic.auth, magic.auth.loginWithCredential]);
     yield put(checkIsLoggedInLoginReceived({ isLoggedIn: loggedIn, method: 'loginWithCredential' }));
@@ -21,7 +23,7 @@ export default function* checkIsLoggedIn() {
     yield put(checkIsLoggedInReceived(metadata));
     yield put(isLoggedIn());
   } else {
-    if (rememberMe) {
+    if (rememberMe || isLoggedInCookie) {
       try {
         const loggedIn = yield call([magic.user, magic.user.isLoggedIn]);
         yield put(checkIsLoggedInLoginReceived({ isLoggedIn: loggedIn, method: 'isLoggedIn' }));
