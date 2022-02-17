@@ -4,10 +4,10 @@ import { getSearch } from '../../../app/router';
 import {
   checkIsLoggedInStarted,
   checkIsLoggedInLoginReceived,
-  checkIsLoggedInReceived
+  checkIsLoggedInReceived,
+  isLoggedIn
 } from '../authenticationSlice';
 import { getRememberMe } from './authenticationSagas';
-
 
 
 export default function* checkIsLoggedIn() {
@@ -15,17 +15,19 @@ export default function* checkIsLoggedIn() {
   const magicCredential = new URLSearchParams(getSearch()).get('magic_credential');
   yield put(checkIsLoggedInStarted({ rememberMe, magicCredential }));
   if (magicCredential) {
-    const isLoggedIn = yield call([magic.auth, magic.auth.loginWithCredential]);
-    yield put(checkIsLoggedInLoginReceived({ isLoggedIn, method: 'loginWithCredential' }));
+    const loggedIn = yield call([magic.auth, magic.auth.loginWithCredential]);
+    yield put(checkIsLoggedInLoginReceived({ isLoggedIn: loggedIn, method: 'loginWithCredential' }));
     const metadata = yield call([magic.user, magic.user.getMetadata]);
     yield put(checkIsLoggedInReceived(metadata));
+    yield put(isLoggedIn());
   } else {
     if (rememberMe) {
       try {
-        const isLoggedIn = yield call([magic.user, magic.user.isLoggedIn]);
-        yield put(checkIsLoggedInLoginReceived({ isLoggedIn, method: 'isLoggedIn' }));
+        const loggedIn = yield call([magic.user, magic.user.isLoggedIn]);
+        yield put(checkIsLoggedInLoginReceived({ isLoggedIn: loggedIn, method: 'isLoggedIn' }));
         const metadata = yield call([magic.user, magic.user.getMetadata]);
         yield put(checkIsLoggedInReceived(metadata));
+        yield put(isLoggedIn());
       } catch (e) {
         // basic error handling. Needs to be improved
         // https://magic.link/docs/api-reference/client-side-sdks/web#rpcerror

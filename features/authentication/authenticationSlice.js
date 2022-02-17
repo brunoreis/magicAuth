@@ -43,8 +43,9 @@ export const checkIsLoggedInStarted = createAction('authentication/checkIsLogged
 export const checkIsLoggedInLoginReceived = createAction('authentication/checkIsLoggedInLoginReceived')
 export const preloadMagicLinkIFrame = createAction('authentication/preloadMagicLinkIFrame')
 export const preloadMagicLinkIFrameStarted = createAction('authentication/preloadMagicLinkIFrameStarted')
+export const isLoggedIn = createAction('authentication/isLoggedIn')
 //selectors
-export const isLoggedIn = (state) => !!state.issuer;
+export const getIsLoggedIn = (state) => !!state.issuer;
 export const getIssuer = (state) => state.issuer;
 export const getRememberMe = (state) => state.rememberMe
 //reducer
