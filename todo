@@ -1,10 +1,5 @@
-[] do not logout a "non remember me" user in an open browser (cookie session lifespan)
-- create a authentication/isLoggedIn action and trigger that after the signIn AND after the checkIsLoggedIn
-- capture that in a saga and register a simple "isLoggedIn" session cookie (use js-cookie)
-- do not clear browser data inside checkIsLoggedIn if that cookie is set
-[] check the user info and if the user is already logged in in the bg. Do not show the loader if we have auth info in the store
-
-[] if remember me is not set, how can we log out the user when leaving?
+[] Do not show the loader if we have auth info in the store? (is this a security issue?)
+[] if remember me is not set, how can we log out the user (from magic) when leaving?
 
 
 [] refactor: merge appSlice into loadingSlice
