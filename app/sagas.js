@@ -1,5 +1,6 @@
 import { all, call, fork, take } from 'redux-saga/effects';
-import authenticationSagas, { checkIsLoggedIn } from '../features/authentication/authenticationSagas';
+import authenticationSagas from '../features/authentication/sagas/authenticationSagas';
+import checkIsLoggedIn from "../features/authentication/sagas/checkIsLoggedIn";
 import { redirects, navigationWatcher } from '../features/navigation/navigationSagas';
 import userSagas from '../features/users/usersSagas';
 

@@ -1,13 +1,14 @@
 import { call, put, select, all, takeEvery } from 'redux-saga/effects';
-import { getSearch } from '../../app/router'
+import { getSearch } from '../../../app/router';
 
-import authenticationSagas, {
-  preload,
-  checkIsLoggedIn,
-  handleSignIn,
-  handleLogOut,
-  getRememberMe,
-} from './authenticationSagas';
+import authenticationSagas from './authenticationSagas';
+import { getRememberMe } from './authenticationSagas';
+
+import preload from './preload';
+import checkIsLoggedIn from './checkIsLoggedIn';
+import handleSignIn from './handleSignIn';
+import handleLogOut from './handleLogOut';
+
 import {
   signIn,
   logOut,
@@ -17,18 +18,18 @@ import {
   checkIsLoggedInReceived,
   signInSuccess,
   preloadMagicLinkIFrame,
-  preloadMagicLinkIFrameStarted
-} from './authenticationSlice';
+  preloadMagicLinkIFrameStarted,
+} from '../authenticationSlice';
 
-import { requestNavigation } from '../navigation/navigationSlice';
-import { go } from '../navigation/navigationSagas';
+import { requestNavigation } from '../../navigation/navigationSlice';
+import { go } from '../../navigation/navigationSagas';
 
-import magic from '../shared/magic';
+import magic from '../../shared/magic';
 
-import { getUsername } from '../../app/selectors';
+import { getUsername } from '../../../app/selectors';
 
-let mockedQuerySearch = '' // I'm not sure about this strategy. It smells like it can cause concurrency issues 
-jest.mock('../../app/router', () => ({
+let mockedQuerySearch = ''; // I'm not sure about this strategy. It smells like it can cause concurrency issues
+jest.mock('../../../app/router', () => ({
   getSearch: () => mockedQuerySearch,
 }));
 
@@ -45,7 +46,6 @@ it('watch and call sagas', () => {
   expect(g.next().done).toBe(true);
 });
 
-
 describe('preload', () => {
   it('preloads magic', () => {
     const g = preload();
@@ -59,13 +59,15 @@ describe('checkIsLoggedIn', () => {
   it('Given that remember me is true, it will check if the user is logged in and grab metadata, dispatching auth/checkIsLoggedIn before, and auth/checkIsLoggedInReived on success', () => {
     const g = checkIsLoggedIn();
     expect(g.next(true).value).toEqual(select(getRememberMe));
-    mockedQuerySearch = ''
+    mockedQuerySearch = '';
     expect(g.next(true).value).toEqual(
       put(checkIsLoggedInStarted({ rememberMe: true, magicCredential: null }))
     );
     expect(g.next().value).toEqual(call([magic.user, magic.user.isLoggedIn]));
     expect(g.next(true).value).toEqual(
-      put(checkIsLoggedInLoginReceived({ isLoggedIn: true, method: 'isLoggedIn' }))
+      put(
+        checkIsLoggedInLoginReceived({ isLoggedIn: true, method: 'isLoggedIn' })
+      )
     );
     expect(g.next().value).toEqual(call([magic.user, magic.user.getMetadata]));
     const payload = {
@@ -78,17 +80,25 @@ describe('checkIsLoggedIn', () => {
     expect(g.next().done).toBe(true);
   });
 
-  
   it('Uses magic credential if they are in the location query', () => {
     const g = checkIsLoggedIn();
     expect(g.next(true).value).toEqual(select(getRememberMe));
-    mockedQuerySearch = '?magic_credential=cred123'
+    mockedQuerySearch = '?magic_credential=cred123';
     expect(g.next(true).value).toEqual(
-      put(checkIsLoggedInStarted({ rememberMe: true, magicCredential: 'cred123' }))
+      put(
+        checkIsLoggedInStarted({ rememberMe: true, magicCredential: 'cred123' })
+      )
     );
-    expect(g.next().value).toEqual(call([magic.auth, magic.auth.loginWithCredential]));
+    expect(g.next().value).toEqual(
+      call([magic.auth, magic.auth.loginWithCredential])
+    );
     expect(g.next(true).value).toEqual(
-      put(checkIsLoggedInLoginReceived({ isLoggedIn: true, method: 'loginWithCredential' }))
+      put(
+        checkIsLoggedInLoginReceived({
+          isLoggedIn: true,
+          method: 'loginWithCredential',
+        })
+      )
     );
     expect(g.next().value).toEqual(call([magic.user, magic.user.getMetadata]));
     const payload = {
@@ -104,7 +114,7 @@ describe('checkIsLoggedIn', () => {
   it('Given that remember me is false, it will skip the check and dispatch auth/checkIsLoggedInReived on success', () => {
     const g = checkIsLoggedIn();
     expect(g.next(true).value).toEqual(select(getRememberMe));
-    mockedQuerySearch = ''
+    mockedQuerySearch = '';
     expect(g.next(false).value).toEqual(
       put(checkIsLoggedInStarted({ rememberMe: false, magicCredential: null }))
     );
@@ -171,7 +181,7 @@ describe('signIn', () => {
       expect(g.next().done).toBe(true);
     });
   });
-})
+});
 
 describe('logOut', () => {
   it('it will log out and dispatches auth/logOutEnd', () => {

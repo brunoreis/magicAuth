@@ -1,8 +1,8 @@
-[] check the user info and if the user is already logged in in the bg. Do not show the loader if we have auth info in the store
 [] do not logout a "non remember me" user in an open browser (cookie session lifespan)
 - create a authentication/isLoggedIn action and trigger that after the signIn AND after the checkIsLoggedIn
 - capture that in a saga and register a simple "isLoggedIn" session cookie (use js-cookie)
 - do not clear browser data inside checkIsLoggedIn if that cookie is set
+[] check the user info and if the user is already logged in in the bg. Do not show the loader if we have auth info in the store
 
 [] refactor: merge appSlice into loadingSlice
 [] study runSagas and other resources and make the saga tests easier to write and readable
