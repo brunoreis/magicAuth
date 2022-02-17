@@ -2,7 +2,8 @@ import { call, put, select } from 'redux-saga/effects';
 import magic from '../../shared/magic';
 import {
   signInSuccess,
-  signInFailure
+  signInFailure,
+  isLoggedIn
 } from '../authenticationSlice';
 import { requestNavigation } from '../../navigation/navigationSlice';
 import { getUsername } from '../../../app/selectors';
@@ -20,6 +21,7 @@ export default function* handleSignIn(action) {
     );
     const metadata = yield call([magic.user, magic.user.getMetadata]);
     yield put(signInSuccess(metadata));
+    yield put(isLoggedIn());
     const username = yield select(getUsername);
     if (username) {
       yield put(requestNavigation('/'));

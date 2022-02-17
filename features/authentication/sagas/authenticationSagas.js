@@ -4,15 +4,18 @@ import {
   signIn,
   logOut,
   logOutSuccess,
-  preloadMagicLinkIFrame} from '../authenticationSlice';
+  preloadMagicLinkIFrame,
+  isLoggedIn,
+} from '../authenticationSlice';
 import { go } from '../../navigation/navigationSagas';
 
-export const isLoggedIn = (state) => state.authentication.isLoggedIn;
+export const getIsLoggedIn = (state) => state.authentication.isLoggedIn;
 export const getRememberMe = (state) => state.authentication.rememberMe;
 
 import preload from './preload';
 import handleSignIn from './handleSignIn';
 import handleLogOut from './handleLogOut';
+import registerIsLoggedInCookie from './registerIsLoggedInCookie';
 
 export default function* authenticationSagas() {
   yield all([
@@ -21,6 +24,10 @@ export default function* authenticationSagas() {
     takeEvery(logOutSuccess().type, go, '/signIn'),
     takeEvery(preloadMagicLinkIFrame().type, preload),
   ]);
+}
+
+export function* watchIsLoggedIn() {
+  yield takeEvery(isLoggedIn().type, registerIsLoggedInCookie)
 }
 
 

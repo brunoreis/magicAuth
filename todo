@@ -4,6 +4,9 @@
 - do not clear browser data inside checkIsLoggedIn if that cookie is set
 [] check the user info and if the user is already logged in in the bg. Do not show the loader if we have auth info in the store
 
+[] if remember me is not set, how can we log out the user when leaving?
+
+
 [] refactor: merge appSlice into loadingSlice
 [] study runSagas and other resources and make the saga tests easier to write and readable
 [] find a better way to organize the selectors, study best practices on the theme
