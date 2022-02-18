@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Toggle from '../components/Toggle';
 import { ToggleLabelContainer, ErrorMessage } from './SignInPage.styles';
 import { FieldContainer, FieldLabel } from '../components/styles';
+import buildOnEnterKeyDown from '../components/buildOnEnterKeyDown';
 
 export default function SignInPage({ 
   email, 
@@ -16,6 +17,7 @@ export default function SignInPage({
   loading,
   errorMessage,
 }) {
+  
   return (
     <Layout title="Sign In">
       <HeaderContainer>
@@ -24,9 +26,21 @@ export default function SignInPage({
       <FormContainer>
         <FieldLabel htmlFor="email">Your Email</FieldLabel>
         <FieldContainer>
-          <TextField testId="emailInput" id="email" value={email} onChange={onEmailChange} />
+          <TextField 
+            testId="emailInput" 
+            id="email" 
+            value={email} 
+            onChange={onEmailChange} 
+            onKeyDown={buildOnEnterKeyDown(enterKeyWasPressed => {
+              enterKeyWasPressed && onButtonClick()}
+            )}
+          />
         </FieldContainer>
-        <Button onClick={onButtonClick} disabled={!canSubmit} loading={loading}>Sign In / Sign Up</Button>
+        <Button 
+          onClick={onButtonClick} 
+          disabled={!canSubmit} 
+          loading={loading}
+        >Sign In / Sign Up</Button>
         <ErrorMessage>{errorMessage}</ErrorMessage>
       </FormContainer>
       <FooterContainer>

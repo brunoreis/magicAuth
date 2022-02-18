@@ -1,12 +1,9 @@
 
-[] submit login and username on enter
-
 [] find a better way to organize the selectors, study best practices on the theme
 [] study runSagas and other resources and make the saga tests easier to write and readable
 
 [] refactor redirects tests
 
-[] add a test to check the taken/available indicator on the SignUp page
 [] test the LoadingBranch component
 [] run tests in the deploy
 
@@ -14,6 +11,9 @@
 
 [] move magic.link public key to Vercel
 [] review the layout when the page reduce height
+
+--- 
+
 
 [] if remember me is not set, how can we log out the user (from magic) when closing the browser?
 

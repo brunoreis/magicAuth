@@ -40,6 +40,15 @@ it('Calls onButtonClick when the button is clicked', () => {
   expect(onButtonClick).toHaveBeenCalled();
 });
 
+it('Calls onButtonClick when enter is pressed', () => {
+  const onButtonClick = jest.fn();
+  render(<SignInPage onButtonClick={onButtonClick} canSubmit={true} />);
+  userEvent.type(screen.getByLabelText('Your Email'), "44");
+  expect(onButtonClick).not.toHaveBeenCalled();
+  userEvent.type(screen.getByLabelText('Your Email'), "44{enter}");
+  expect(onButtonClick).toHaveBeenCalled();
+});
+
 it('Do not calls onButtonClick if canSubmit is false', () => {
   const onButtonClick = jest.fn();
   render(<SignInPage onButtonClick={onButtonClick} canSubmit={false} />);

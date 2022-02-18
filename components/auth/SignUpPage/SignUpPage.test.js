@@ -46,6 +46,7 @@ describe('Sign Up', () => {
     expect(onChange).toHaveBeenCalledWith('dude')
   })
 
+  
   it("Given available is not set, shows no message", ()=>{
     render(<SignUpPage />)
     const message = screen.getByTestId('message')
@@ -70,4 +71,14 @@ describe('Sign Up', () => {
     userEvent.click(screen.getByRole('button'))
     expect(onButtonClick).toHaveBeenCalled()
   })
+
+  it('Calls onButtonClick when enter is pressed', () => {
+    const onButtonClick = jest.fn();
+    render(<SignUpPage onButtonClick={onButtonClick} canSubmit={true}/>)
+    userEvent.type(screen.getByLabelText('Pick a username'), "44");
+    expect(onButtonClick).not.toHaveBeenCalled();
+    userEvent.type(screen.getByLabelText('Pick a username'), "44{enter}");
+    expect(onButtonClick).toHaveBeenCalled();
+  });
+
 })
