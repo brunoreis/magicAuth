@@ -1,10 +1,10 @@
-[] if remember me is not set, how can we log out the user (from magic) when closing the browser?
-[] when two windows are opened with the /signUp, the user is able to register a username again on the second window. Block that. 
 
-[] study runSagas and other resources and make the saga tests easier to write and readable
-[] find a better way to organize the selectors, study best practices on the theme
-[] refactor redirectsAccordingToLogin tests
 [] submit login and username on enter
+
+[] find a better way to organize the selectors, study best practices on the theme
+[] study runSagas and other resources and make the saga tests easier to write and readable
+
+[] refactor redirects tests
 
 [] add a test to check the taken/available indicator on the SignUp page
 [] test the LoadingBranch component
@@ -14,3 +14,11 @@
 
 [] move magic.link public key to Vercel
 [] review the layout when the page reduce height
+
+[] if remember me is not set, how can we log out the user (from magic) when closing the browser?
+
+known issues
+
+when two windows are opened with the /signUp, the user is able to register a username again on the second window. 
+Since the usernames are in the store, there will be a conflict between open stores persising. 
+
