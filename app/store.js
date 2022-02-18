@@ -13,7 +13,6 @@ import storage from 'redux-persist/lib/storage';
 import loadingReducer from '../features/loading/loadingSlice';
 import authenticationReducer from '../features/authentication/authenticationSlice';
 import usersReducer from '../features/users/usersSlice';
-import appReducer from '../features/app/appSlice';
 
 import createSagaMiddleware from 'redux-saga';
 import sagas from './sagas';
@@ -27,7 +26,6 @@ export const createStore = () => {
   const rootReducer = combineReducers({
     authentication: authenticationReducer,
     users: usersReducer,
-    app: appReducer, //todo: merge app and loading into one. 
     loading: loadingReducer, 
   });
   const persistConfig = {

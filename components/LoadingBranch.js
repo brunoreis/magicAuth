@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { getIsLoading } from '../app/selectors';
+import { getLoading } from '../app/selectors';
 import Image from 'next/image'
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ export const LoadingContainer = styled.div`
 
 //@todo: test this component
 export default function LoadingBranch({ children }) {
-    const loading = useSelector(getIsLoading);
+    const loading = useSelector(getLoading('app'));
     return loading ? (
         <LoadingContainer>
                 <Image src="/loader.gif" width="160px" height="120px"/>

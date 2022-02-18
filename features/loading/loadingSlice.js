@@ -2,7 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { signIn, signInSuccess, signInFailure } from '../authentication/authenticationSlice';
 const initialState = {
   authentication: false,
+  app: true,
 };
+import {
+  redirectsCompleted,
+} from '../navigation/navigationSlice';
+
 export const loadingSlice = createSlice({
   name: 'loading',
   initialState,
@@ -16,6 +21,9 @@ export const loadingSlice = createSlice({
       })
       .addCase(signInFailure().type, (state) => {
         state.authentication = false
+      })
+      .addCase(redirectsCompleted().type, (state) => {
+        state.app = false
       })
   },
 });

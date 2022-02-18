@@ -16,10 +16,12 @@ describe('getUsernameIsAvaliable', ()=> {
 it('getLoading', () => {
     const state = { 
         loading: { 
-            authentication: false
+            authentication: false,
+            app: true
         }
     }
     expect(getLoading('authentication')(state)).toBe(false)
     state.loading.authentication = true
     expect(getLoading('authentication')(state)).toBe(true)
+    expect(getLoading('app')(state)).toBe(true)
   })

@@ -8,10 +8,9 @@ export const getUsername = (state) => {
   return user?.username || null
 }
 
-export const getIsLoading = (state) => state.app.loading
-
 export const getUsernameIsAvailable = (username) => (state) => {
   const found = !!state.users.users.find( (user)=> user.username === username )
   return !found
 }
+
 export const getLoading = (key) => (state) => state.loading[key]
