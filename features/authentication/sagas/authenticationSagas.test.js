@@ -1,6 +1,6 @@
 import { all, takeEvery } from 'redux-saga/effects';
 
-import authenticationSagas, { watchIsLoggedIn } from './authenticationSagas';
+import authenticationSagas, { watchIsSignedIn } from './authenticationSagas';
 
 import preload from './preload';
 import handleSignIn from './handleSignIn';
@@ -30,9 +30,9 @@ it('watch and call sagas', () => {
   expect(g.next().done).toBe(true);
 });
 
-describe('watchIsLoggedIn', () => {
+describe('watchIsSignedIn', () => {
   it('call registerIsLoggedInCookie', ()=>{
-    const g = watchIsLoggedIn()
+    const g = watchIsSignedIn()
     expect(g.next().value).toEqual(
       takeEvery(isLoggedIn().type, registerIsLoggedInCookie)
     )

@@ -4,13 +4,15 @@ const initialState = {
   authentication: false,
   app: true,
 };
-import {
-  redirectsCompleted,
-} from '../navigation/navigationSlice';
 
 export const loadingSlice = createSlice({
   name: 'loading',
   initialState,
+  reducers: {
+    applicationLoaded(state) {
+      state.app = false
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signIn().type, (state) => {
@@ -22,10 +24,9 @@ export const loadingSlice = createSlice({
       .addCase(signInFailure().type, (state) => {
         state.authentication = false
       })
-      .addCase(redirectsCompleted().type, (state) => {
-        state.app = false
-      })
   },
 });
 
+
+export const { applicationLoaded } = loadingSlice.actions
 export default loadingSlice.reducer;

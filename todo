@@ -1,13 +1,14 @@
-[] Do not show the loader if we have auth info in the store? (is this a security issue?)
-[] if remember me is not set, how can we log out the user (from magic) when leaving?
+[] if remember me is not set, how can we log out the user (from magic) when closing the browser?
 [] when two windows are opened with the /signUp, the user is able to register a username again on the second window. Block that. 
 
 [] study runSagas and other resources and make the saga tests easier to write and readable
 [] find a better way to organize the selectors, study best practices on the theme
 [] refactor redirectsAccordingToLogin tests
+[] submit login and username on enter
 
 [] add a test to check the taken/available indicator on the SignUp page
 [] test the LoadingBranch component
+[] run tests in the deploy
 
 [] add e2e tests (testCafe? Would that have to open my email client?)
 

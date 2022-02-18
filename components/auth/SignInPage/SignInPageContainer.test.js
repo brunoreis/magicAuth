@@ -1,7 +1,7 @@
 import { render as tlRender, screen, waitFor } from '@testing-library/react'
 import SignInPageContainer from './SignInPageContainer'
 import { addTheme, addReduxProvider } from '../../../util/testHelpers'
-import { store } from '../../../app/store'
+import store from '../../../app/store'
 import { getRememberMe } from '../../../features/authentication/authenticationSlice'
 import * as R from 'ramda'
 import userEvent from '@testing-library/user-event'

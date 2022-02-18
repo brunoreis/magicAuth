@@ -30,9 +30,9 @@ export function* navigate(action) {
 
 export function* redirects() {
   const actualPath = yield path()
-  const actualPathWithoutQuery = removeQuery(actualPath)//?
-  const isLogged = yield select(isLoggedIn);//?
-  const username = yield select(getUsername);//?
+  const actualPathWithoutQuery = removeQuery(actualPath)
+  const isLogged = yield select(isLoggedIn);
+  const username = yield select(getUsername);
   const infoPayload = { actualPath: actualPathWithoutQuery, isLogged, username }
   yield put(redirectsStarted(infoPayload));
   if (!username && isLogged) {

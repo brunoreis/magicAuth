@@ -26,7 +26,7 @@ export default function* authenticationSagas() {
   ]);
 }
 
-export function* watchIsLoggedIn() {
+export function* watchIsSignedIn() {
   yield takeEvery(isLoggedIn().type, registerIsLoggedInCookie)
 }
 

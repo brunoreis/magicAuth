@@ -26,15 +26,15 @@ describe('authentication reducer', () => {
     });
   });
   describe('checkIsLoggedInReceived', () => {
-    it('set the issuer', () => {
+    it('set issuer and isLoggedIn', () => {
       const payload = { issuer: 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'}
       const state = authenticationReducer(undefined, checkIsLoggedInReceived(payload))
       expect(getIsLoggedIn(state)).toBe(true)
       expect(getIssuer(state)).toBe('did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7')
     })
-    it('do not set if not logged in', () => {
+    it('set issuer and isLoggedIn to null if not logged in', () => {
       const payload = { issuer: null }
-      const state = authenticationReducer(undefined, checkIsLoggedInReceived(payload))
+      const state = authenticationReducer({ isLoggedIn: true, issuer: "xpto"}, checkIsLoggedInReceived(payload))
       expect(getIsLoggedIn(state)).toBe(false)
       expect(getIssuer(state)).toBe(null)
     })
@@ -45,6 +45,14 @@ describe('authentication reducer', () => {
       expect(getRememberMe(state)).toBe(false)
       state = authenticationReducer(undefined, signIn({ rememberMe: true }))
       expect(getRememberMe(state)).toBe(true)
+    })
+    
+  })
+  describe('logOutSuccess', () => {
+    it('sets rememberMe and issuer to false', () => {
+      let state = authenticationReducer({ rememberMe: true, issuer: 'xpto'}, logOutSuccess())
+      expect(getRememberMe(state)).toBe(false)
+      expect(getIssuer(state)).toBe(null)
     })
     
   })

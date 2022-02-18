@@ -1,12 +1,10 @@
-import loadingReducer from './loadingSlice';
+import loadingReducer, { applicationLoaded } from './loadingSlice';
 import {
   signIn,
   signInFailure,
   signInSuccess,
 } from '../authentication/authenticationSlice';
-import {
-  redirectsCompleted,
-} from '../navigation/navigationSlice';
+
 
 describe('loading reducer', () => {
   describe('authentication', () => {
@@ -32,9 +30,9 @@ describe('loading reducer', () => {
       let state = loadingReducer(undefined, {});
       expect(state.app).toBe(true);
     })
-    describe('redirectsCompleted', ()=> {
+    describe('applicationLoaded', ()=> {
       it('set loading to false on redirectsCompleted', () => {
-        let state = loadingReducer(undefined, redirectsCompleted());
+        let state = loadingReducer({ app: true }, applicationLoaded());
         expect(state.app).toBe(false)
       });
     })
