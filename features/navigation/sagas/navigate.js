@@ -1,5 +1,5 @@
 import { call } from 'redux-saga/effects';
-import { push } from '../../../app/router';
+import { push } from 'app/router';
 
 
 export default function* navigate(action) {

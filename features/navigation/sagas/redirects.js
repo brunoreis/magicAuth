@@ -5,7 +5,12 @@ import {
   redirectsStarted,
   redirectsCompleted
 } from '../navigationSlice';
-import { removeQuery, isLoggedIn, getUsername } from './navigationSagas';
+
+const issuer = (state) => state.authentication.issuer
+const findUser = (state, issuer) => state.users.users.find((user) => user.issuer == issuer)
+export const isLoggedIn = (state) => !!issuer(state) 
+export const getUsername = (state) => isLoggedIn(state) ? findUser(state, issuer(state)).username : null;
+export const removeQuery = (path) => path.split("?")[0]
 
 
 export default function* redirects() {

@@ -5,11 +5,11 @@ import {
   redirectsStarted,
   redirectsCompleted,
 } from '../navigationSlice';
-import {
+
+import redirects, {
   isLoggedIn,
   getUsername,
-} from './navigationSagas';
-import redirects from './redirects'
+} from './redirects'
 
 //@todo: as visible, these can be refactored to use some kind of helper. 
 // or the main redirect logic can be extracted from the saga and unit tested

@@ -4,7 +4,7 @@ import authenticationSagas, { watchIsSignedIn } from '../features/authentication
 import checkIsLoggedIn from "../features/authentication/sagas/checkIsLoggedIn";
 
 
-import { navigationWatcher } from '../features/navigation/sagas/navigationSagas';
+import navigationWatcher from "../features/navigation/sagas/navigationWatcher";
 
 import usersWatcher from '../features/users/sagas/usersWatcher';
 
