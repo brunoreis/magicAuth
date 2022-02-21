@@ -1,10 +1,12 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
-import { signInSuccess, checkIsLoggedInReceived } from '../authentication/authenticationSlice';
+
+import { signInSuccess, checkIsLoggedInReceived } from 'features/authentication/authenticationSlice';
 
 const initialState = {
   users: [],// todo: normalize ? 
 };
 
+// check if some of these are displaced selectors 
 const findUserIndex = (state, issuer) => state.users.findIndex( u => u.issuer === issuer)
 const findUser = (state, issuer) => state.users.find( u => u.issuer === issuer)
 const hasUser = (state, issuer) => !!findUser(state, issuer)

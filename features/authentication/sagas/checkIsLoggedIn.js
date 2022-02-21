@@ -1,18 +1,18 @@
 import { call, put, select } from 'redux-saga/effects';
-import magic from '../../shared/magic';
-import { getSearch } from '../../../app/router';
+import Cookie from 'js-cookie';
+
+import magic from '../../shared/magic'; //?
+import { getSearch } from 'app/router';
+import { applicationLoaded } from 'features/loading/loadingSlice';
+import redirects from 'features/navigation/sagas/redirects'
+
 import {
   checkIsLoggedInStarted,
   checkIsLoggedInLoginReceived,
   checkIsLoggedInReceived,
   isLoggedIn,
 } from '../authenticationSlice';
-import { applicationLoaded } from '../../loading/loadingSlice';
 import { getRememberMe } from './authenticationSagas';
-import redirects from '../../navigation/sagas/redirects'
-
-import Cookie from 'js-cookie';
-
 
 export default function* checkIsLoggedIn() {
   const rememberMe = yield select(getRememberMe);

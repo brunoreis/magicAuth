@@ -1,5 +1,7 @@
 import { all, takeEvery } from 'redux-saga/effects';
 
+import go from 'features/navigation/sagas/go';
+
 import {
   signIn,
   logOut,
@@ -7,15 +9,14 @@ import {
   preloadMagicLinkIFrame,
   isLoggedIn,
 } from '../authenticationSlice';
-import go from '../../navigation/sagas/go';
-
-export const getIsLoggedIn = (state) => state.authentication.isLoggedIn;
-export const getRememberMe = (state) => state.authentication.rememberMe;
-
-import preload from './preload';
 import handleSignIn from './handleSignIn';
 import handleLogOut from './handleLogOut';
 import registerIsLoggedInCookie from './registerIsLoggedInCookie';
+import preload from './preload';
+
+// displaced selectors
+export const getIsLoggedIn = (state) => state.authentication.isLoggedIn;
+export const getRememberMe = (state) => state.authentication.rememberMe;
 
 export default function* authenticationSagas() {
   yield all([

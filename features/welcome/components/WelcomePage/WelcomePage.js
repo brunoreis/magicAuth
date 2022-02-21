@@ -1,8 +1,10 @@
+import { useDispatch } from 'react-redux';
+
 import Layout, { HeaderContainer, FooterContainer } from 'components/Layout';
 import Header from 'components/Header'
-import { WelcomeIconContainer } from './WelcomePage.styles'
 import Button from 'components/Button';
-import { useDispatch } from 'react-redux';
+
+import { WelcomeIconContainer } from './WelcomePage.styles'
 
 import {
   logOut,

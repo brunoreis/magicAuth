@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { getLoading } from 'app/selectors';
 import Image from 'next/image'
 import styled from 'styled-components';
+
+import { getLoading } from 'app/selectors';
 
 export const LoadingContainer = styled.div`
     width: 100%;

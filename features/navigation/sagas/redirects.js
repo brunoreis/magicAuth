@@ -1,5 +1,7 @@
 import { put, select } from 'redux-saga/effects';
-import { path } from '../../../app/router';
+
+import { path } from 'app/router';
+
 import {
   requestNavigation,
   redirectsStarted,

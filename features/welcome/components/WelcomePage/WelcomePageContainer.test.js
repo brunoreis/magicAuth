@@ -1,10 +1,13 @@
-import { render as tlRender, screen, fireEvent } from '@testing-library/react'
-import WelcomePageContainer from './WelcomePageContainer'
-import { addTheme, addReduxProvider } from 'util/testHelpers'
+import { render as tlRender, screen } from '@testing-library/react'
 import * as R from 'ramda'
+
+import { addTheme, addReduxProvider } from 'util/testHelpers'
 import store from 'app/store'
+// this should not depend on these events to be tested:
 import { receiveUsernameStart } from 'features/users/usersSlice'
 import { checkIsLoggedInReceived } from 'features/authentication/authenticationSlice'
+
+import WelcomePageContainer from './WelcomePageContainer'
 
 const render = R.compose(tlRender, addTheme, addReduxProvider)
 

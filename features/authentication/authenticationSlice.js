@@ -34,6 +34,9 @@ export const authenticationSlice = createSlice({
   },
 });
 
+//reducer
+export default authenticationSlice.reducer;
+
 //actions
 export const {
   signIn,
@@ -48,9 +51,10 @@ export const checkIsLoggedInLoginReceived = createAction('authentication/checkIs
 export const preloadMagicLinkIFrame = createAction('authentication/preloadMagicLinkIFrame')
 export const preloadMagicLinkIFrameStarted = createAction('authentication/preloadMagicLinkIFrameStarted')
 export const isLoggedIn = createAction('authentication/isLoggedIn')
+
 //selectors
 export const getIsLoggedIn = (state) => !!state.issuer;
 export const getIssuer = (state) => state.issuer;
 export const getRememberMe = (state) => state.rememberMe
-//reducer
-export default authenticationSlice.reducer;
+
+

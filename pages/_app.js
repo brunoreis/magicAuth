@@ -1,8 +1,9 @@
+import { ThemeProvider } from 'styled-components';
+import { Provider } from 'react-redux';
+
 import GlobalStyle from 'styles/GlobalStyle';
 import theme from 'styles/theme';
-import { ThemeProvider } from 'styled-components';
 import store from 'app/store';
-import { Provider } from 'react-redux';
 import LoadingBranch from 'components/LoadingBranch'
 
 function MyApp({ Component, pageProps }) {

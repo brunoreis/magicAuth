@@ -1,11 +1,6 @@
 import { all, takeEvery } from 'redux-saga/effects';
 
-import authenticationSagas, { watchIsSignedIn } from './authenticationSagas';
-
-import preload from './preload';
-import handleSignIn from './handleSignIn';
-import handleLogOut from './handleLogOut';
-import registerIsLoggedInCookie from './registerIsLoggedInCookie';
+import go from 'features/navigation/sagas/go';
 
 import {
   signIn,
@@ -14,8 +9,11 @@ import {
   preloadMagicLinkIFrame,
   isLoggedIn
 } from '../authenticationSlice';
-
-import go from '../../navigation/sagas/go';
+import authenticationSagas, { watchIsSignedIn } from './authenticationSagas';
+import preload from './preload';
+import handleSignIn from './handleSignIn';
+import handleLogOut from './handleLogOut';
+import registerIsLoggedInCookie from './registerIsLoggedInCookie';
 
 it('watch and call sagas', () => {
   const g = authenticationSagas();

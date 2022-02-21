@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import { signIn, signInSuccess, signInFailure } from '../authentication/authenticationSlice';
+
 const initialState = {
   authentication: false,
   app: true,

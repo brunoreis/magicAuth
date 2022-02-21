@@ -1,7 +1,9 @@
-import { render as tlRender, screen } from '@testing-library/react'
-import WelcomePage from './WelcomePage'
-import { addTheme, addReduxProvider } from 'util/testHelpers'
 import * as R from 'ramda'
+import { render as tlRender, screen } from '@testing-library/react'
+
+import { addTheme, addReduxProvider } from 'util/testHelpers'
+
+import WelcomePage from './WelcomePage'
 
 const render = R.compose(tlRender, addTheme, addReduxProvider)
 
