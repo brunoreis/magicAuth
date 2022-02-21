@@ -1,6 +1,8 @@
 
 [] find a better way to organize the selectors, study best practices on the theme
-[] study runSagas and other resources and make the saga tests easier to write and readable
+[] study runSagas and other resources and make the saga tests easier to write and readable.
+[] extract sagas in individual files
+[] create a naming pattern to name actions, storeProps, selectors and sagas. Review code. 
 
 [] refactor redirects tests
 

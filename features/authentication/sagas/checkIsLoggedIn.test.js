@@ -11,7 +11,7 @@ import {
 import magic from '../../shared/magic';
 import Cookie from 'js-cookie';
 import { applicationLoaded } from '../../loading/loadingSlice';
-import { redirects } from '../../navigation/navigationSagas'
+import redirects from '../../navigation/sagas/redirects'
 
 export let mockedQuerySearch = ''; // I'm not sure about this strategy. It smells like it can cause concurrency issues
 jest.mock('../../../app/router', () => ({

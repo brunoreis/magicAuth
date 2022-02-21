@@ -1,10 +1,10 @@
-import Layout, { HeaderContainer, FormContainer } from '../components/Layout';
-import Header from '../components/Header';
-import { FieldContainer, FieldLabel } from '../components/styles';
-import TextField from '../components/TextField';
-import Button from '../components/Button';
+import Layout, { HeaderContainer, FormContainer } from 'components/Layout';
+import Header from 'components/Header';
+import { FieldContainer, FieldLabel } from 'components/styles';
+import TextField from 'components/TextField';
+import Button from 'components/Button';
 import { MessageContainer } from './SignUpPage.styles.js';
-import buildOnEnterKeyDown from '../components/buildOnEnterKeyDown';
+import buildOnEnterKeyDown from 'components/buildOnEnterKeyDown';
 
 export default function SignUpPage({
   username,

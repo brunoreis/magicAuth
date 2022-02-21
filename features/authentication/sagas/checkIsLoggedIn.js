@@ -9,7 +9,7 @@ import {
 } from '../authenticationSlice';
 import { applicationLoaded } from '../../loading/loadingSlice';
 import { getRememberMe } from './authenticationSagas';
-import { redirects } from '../../navigation/navigationSagas'
+import redirects from '../../navigation/sagas/redirects'
 
 import Cookie from 'js-cookie';
 

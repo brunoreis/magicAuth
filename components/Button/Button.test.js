@@ -1,5 +1,5 @@
 import { render as tlRender , screen } from '@testing-library/react'
-import { addTheme } from '../../../../util/testHelpers'
+import { addTheme } from 'util/testHelpers'
 import Button from './Button'
 import * as R from 'ramda'
 

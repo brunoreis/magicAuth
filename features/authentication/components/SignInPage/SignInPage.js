@@ -1,11 +1,11 @@
-import Layout, { HeaderContainer, FormContainer, FooterContainer } from '../components/Layout';
-import Header from '../components/Header';
-import TextField from '../components/TextField';
-import Button from '../components/Button';
-import Toggle from '../components/Toggle';
+import Layout, { HeaderContainer, FormContainer, FooterContainer } from 'components/Layout';
+import Header from 'components/Header';
+import TextField from 'components/TextField';
+import Button from 'components/Button';
+import Toggle from 'components/Toggle';
+import { FieldContainer, FieldLabel } from 'components/styles';
 import { ToggleLabelContainer, ErrorMessage } from './SignInPage.styles';
-import { FieldContainer, FieldLabel } from '../components/styles';
-import buildOnEnterKeyDown from '../components/buildOnEnterKeyDown';
+import buildOnEnterKeyDown from 'components/buildOnEnterKeyDown';
 
 export default function SignInPage({ 
   email, 

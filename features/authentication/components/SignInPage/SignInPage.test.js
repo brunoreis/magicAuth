@@ -1,7 +1,7 @@
 import { render as tlRender, screen, fireEvent } from '@testing-library/react';
 import SignInPage from './SignInPage';
 import { within } from '@testing-library/dom';
-import { addTheme } from '../../../util/testHelpers';
+import { addTheme } from 'util/testHelpers';
 import * as R from 'ramda';
 import userEvent from '@testing-library/user-event';
 

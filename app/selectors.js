@@ -1,6 +1,8 @@
+import * as authenticationSlice from '../features/authentication/authenticationSlice';
+
 const findUser = (store, issuer) => store.users.users.find((user)=> user.issuer === issuer)
 
-export const getIssuer = (state) => state.authentication.issuer;
+export const getIssuer = (state) => authenticationSlice.getIssuer(state.authentication)
 
 export const getUsername = (state) => {
   const loggedUserIssuer = getIssuer(state)

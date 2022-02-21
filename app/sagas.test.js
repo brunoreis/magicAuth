@@ -2,8 +2,8 @@ import { all, call, fork, take } from 'redux-saga/effects';
 import sagas from './sagas';
 import authenticationSagas, { watchIsSignedIn } from '../features/authentication/sagas/authenticationSagas';
 import checkIsLoggedIn from "../features/authentication/sagas/checkIsLoggedIn";
-import { navigationWatcher } from '../features/navigation/navigationSagas';
-import userSagas from '../features/users/usersSagas';
+import { navigationWatcher } from '../features/navigation/sagas/navigationSagas';
+import usersWatcher from '../features/users/sagas/usersWatcher';
 
 it('preload, check log in, redirects and start other sagas', () => {
   const g = sagas();
@@ -18,7 +18,7 @@ it('preload, check log in, redirects and start other sagas', () => {
   expect(g.next().value).toEqual(call(checkIsLoggedIn));
   expect(g.next().value).toEqual(
     all([
-      userSagas(),
+      usersWatcher(),
       authenticationSagas(),
     ])
   );

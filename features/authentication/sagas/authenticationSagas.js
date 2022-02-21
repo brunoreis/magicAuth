@@ -7,7 +7,7 @@ import {
   preloadMagicLinkIFrame,
   isLoggedIn,
 } from '../authenticationSlice';
-import { go } from '../../navigation/navigationSagas';
+import go from '../../navigation/sagas/go';
 
 export const getIsLoggedIn = (state) => state.authentication.isLoggedIn;
 export const getRememberMe = (state) => state.authentication.rememberMe;

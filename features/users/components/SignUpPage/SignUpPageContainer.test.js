@@ -1,10 +1,10 @@
 import { render as tlRender, screen, fireEvent } from '@testing-library/react'
 import SignUpPageContainer from './SignUpPageContainer'
-import { addTheme, addReduxProvider } from '../../../util/testHelpers'
+import { addTheme, addReduxProvider } from 'util/testHelpers'
 import * as R from 'ramda'
-import store from '../../../app/store'
-import { getUsername } from '../../../app/selectors'
-import { checkIsLoggedInReceived } from '../../../features/authentication/authenticationSlice'
+import store from 'app/store'
+import { getUsername } from 'app/selectors'
+import { checkIsLoggedInReceived } from 'features/authentication/authenticationSlice'
 import userEvent from '@testing-library/user-event'
 
 const render = R.compose(tlRender, addTheme, addReduxProvider)

@@ -1,5 +1,5 @@
 
-import SignInPageContainer from '../components/auth/SignInPage/SignInPageContainer'
+import SignInPageContainer from 'features/authentication/components/SignInPage/SignInPageContainer'
 
 export default function SignIn() {
   return (

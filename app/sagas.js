@@ -4,9 +4,9 @@ import authenticationSagas, { watchIsSignedIn } from '../features/authentication
 import checkIsLoggedIn from "../features/authentication/sagas/checkIsLoggedIn";
 
 
-import { redirects, navigationWatcher } from '../features/navigation/navigationSagas';
+import { navigationWatcher } from '../features/navigation/sagas/navigationSagas';
 
-import userSagas from '../features/users/usersSagas';
+import usersWatcher from '../features/users/sagas/usersWatcher';
 
 export default function* sagas() {
   yield fork(navigationWatcher);
@@ -17,7 +17,7 @@ export default function* sagas() {
   ])
   yield call(checkIsLoggedIn);
   yield all([
-    userSagas(),
+    usersWatcher(),
     authenticationSagas(),
   ]);
 }

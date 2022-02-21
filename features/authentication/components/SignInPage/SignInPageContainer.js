@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   signIn,
   preloadMagicLinkIFrame,
-} from '../../../features/authentication/authenticationSlice';
-import { getLoading } from '../../../app/selectors';
+} from '../../authenticationSlice';
+import { getLoading } from 'app/selectors';
 import useDebouncedValidEmailErrorMessage from './useDebouncedValidEmailErrorMessage';
 
 const SignInPageContainer = () => {

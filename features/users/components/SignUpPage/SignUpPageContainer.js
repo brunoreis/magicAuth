@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import SignUpPage from './SignUpPage';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsernameIsAvailable } from '../../../app/selectors';
-import { receiveUsernameStart } from '../../../features/users/usersSlice'; // maybe I should use a saga here
+import { getUsernameIsAvailable } from 'app/selectors';
+import { receiveUsernameStart } from '../../usersSlice'; //????
 
 export default function SignUpPageContainer() {
   const dispatch = useDispatch();

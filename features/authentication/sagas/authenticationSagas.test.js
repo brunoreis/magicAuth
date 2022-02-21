@@ -15,7 +15,7 @@ import {
   isLoggedIn
 } from '../authenticationSlice';
 
-import { go } from '../../navigation/navigationSagas';
+import go from '../../navigation/sagas/go';
 
 it('watch and call sagas', () => {
   const g = authenticationSagas();
