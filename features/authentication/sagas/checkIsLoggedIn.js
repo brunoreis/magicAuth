@@ -2,11 +2,12 @@ import { call, put, select } from 'redux-saga/effects';
 import Cookie from 'js-cookie';
 
 import { getSearch } from 'app/router';
+import { getRememberMe } from 'app/selectors'
 import { applicationLoaded } from 'features/loading/loadingSlice';
 import redirects from 'features/navigation/sagas/redirects'
-import { getRememberMe } from 'app/selectors'
 
-import magic from '../../shared/magic'; //?
+import magic from '../util/magic';
+
 import {
   checkIsLoggedInStarted,
   checkIsLoggedInLoginReceived,

@@ -6,7 +6,7 @@ import { getRememberMe } from 'app/selectors';
 import { applicationLoaded } from 'features/loading/loadingSlice';
 import redirects from 'features/navigation/sagas/redirects'
 
-import magic from '../../shared/magic';
+import magic from '../util/magic';
 import {
   checkIsLoggedInStarted,
   checkIsLoggedInLoginReceived,

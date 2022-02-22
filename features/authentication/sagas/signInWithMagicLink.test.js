@@ -2,7 +2,7 @@ import { call, put, select } from 'redux-saga/effects';
 import handleSignIn from './signInWithMagicLink';
 import { signInSuccess } from '../authenticationSlice';
 import { requestNavigation } from '../../navigation/navigationSlice';
-import magic from '../../shared/magic';
+import magic from '../util/magic';
 import { isLoggedIn } from '../authenticationSlice';
 import { getUsername } from '../../../app/selectors';
 

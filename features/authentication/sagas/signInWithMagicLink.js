@@ -1,12 +1,14 @@
 import { call, put, select } from 'redux-saga/effects';
-import magic from '../../shared/magic';
+
+import { getUsername } from 'app/selectors';
+import { requestNavigation } from 'features/navigation/navigationSlice';
+
+import magic from '../util/magic';
 import {
   signInSuccess,
   signInFailure,
   isLoggedIn
 } from '../authenticationSlice';
-import { requestNavigation } from '../../navigation/navigationSlice';
-import { getUsername } from '../../../app/selectors';
 
 
 export default function* signInWithMagicLink(action) {

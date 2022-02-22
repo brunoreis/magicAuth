@@ -3,15 +3,19 @@ import { createSlice, createAction } from '@reduxjs/toolkit';
 import { signInSuccess, checkIsLoggedInReceived } from 'features/authentication/authenticationSlice';
 
 const initialState = {
-  users: [],// todo: normalize ? 
+  users: [],
 };
 
-// check if some of these are displaced selectors 
 const findUserIndex = (state, issuer) => state.users.findIndex( u => u.issuer === issuer)
 const findUser = (state, issuer) => state.users.find( u => u.issuer === issuer)
 const hasUser = (state, issuer) => !!findUser(state, issuer)
 const addUser = (state, { issuer, email }) => state.users.push({ issuer, email })
-
+const addNonExistentUser = (state, { payload }) => {
+  const { issuer, email }  = payload
+  if(!hasUser(state, issuer)) {
+    addUser(state, { issuer, email })
+  }
+}
 
 export const usersSlice = createSlice({
   name: 'users',
@@ -24,18 +28,8 @@ export const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(checkIsLoggedInReceived().type, (state, { payload }) => {
-        const { issuer, email }  = payload
-        if(!hasUser(state, issuer)) {
-          addUser(state, { issuer, email })
-        }
-      })
-      .addCase(signInSuccess().type, (state, { payload }) => {
-        const { issuer, email }  = payload
-        if(!hasUser(state, issuer)) {
-          addUser(state, { issuer, email })
-        }
-      })
+      .addCase(checkIsLoggedInReceived().type, addNonExistentUser)
+      .addCase(signInSuccess().type, addNonExistentUser)
   },
 });
 

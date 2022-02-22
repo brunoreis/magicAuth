@@ -1,8 +1,8 @@
-import usersReducer, { receiveUsername, receiveUsernameStart, getUsernameIsAvailable } from './usersSlice';
 import {
   signInSuccess,
   checkIsLoggedInReceived,
 } from '../authentication/authenticationSlice';
+import usersReducer, { receiveUsername, receiveUsernameStart } from './usersSlice';
 
 const metadata = {
   email: 'testemail@a.com',

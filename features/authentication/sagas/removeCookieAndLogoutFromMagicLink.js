@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import Cookie from 'js-cookie'
 
-import magic from '../../shared/magic';
+import magic from '../util/magic';
 import { logOutSuccess } from '../authenticationSlice';
 
 export default function* removeCookieAndLogoutFromMagicLink() {

@@ -1,8 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 
-import magic from '../../shared/magic';
+import magic from '../util/magic';
 import { preloadMagicLinkIFrameStarted } from '../authenticationSlice';
-
 
 export default function* preloadIFrame() {
   if (typeof window !== 'undefined') {
