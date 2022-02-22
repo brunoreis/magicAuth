@@ -9,7 +9,7 @@ import { requestNavigation } from '../../navigation/navigationSlice';
 import { getUsername } from '../../../app/selectors';
 
 
-export default function* handleSignIn(action) {
+export default function* signInWithMagicLink(action) {
   try {
     yield call(
       [magic.auth, magic.auth.loginWithMagicLink],

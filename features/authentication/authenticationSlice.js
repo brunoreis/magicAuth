@@ -1,5 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 
+let mainStoreKey;
+
 const initialState = {
   issuer: null,
   rememberMe: false,
@@ -35,7 +37,10 @@ export const authenticationSlice = createSlice({
 });
 
 //reducer
-export default authenticationSlice.reducer;
+export default (mainKey) => {
+  mainStoreKey = mainKey
+  return authenticationSlice.reducer;
+}
 
 //actions
 export const {
@@ -54,7 +59,6 @@ export const isLoggedIn = createAction('authentication/isLoggedIn')
 
 //selectors
 export const getIsLoggedIn = (state) => !!state.issuer;
+export const getSignInLoading = (state) => state.loading;
 export const getIssuer = (state) => state.issuer;
 export const getRememberMe = (state) => state.rememberMe
-
-

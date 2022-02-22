@@ -1,17 +1,19 @@
+import Cookie from 'js-cookie';
 import { call, put, select } from 'redux-saga/effects';
-import { path } from '../../../app/router';
-import { getRememberMe } from './authenticationSagas';
-import checkIsLoggedIn from './checkIsLoggedIn';
+
+import { path } from 'app/router';
+import { getRememberMe } from 'app/selectors';
+import { applicationLoaded } from 'features/loading/loadingSlice';
+import redirects from 'features/navigation/sagas/redirects'
+
+import magic from '../../shared/magic';
 import {
   checkIsLoggedInStarted,
   checkIsLoggedInLoginReceived,
   checkIsLoggedInReceived,
   isLoggedIn,
 } from '../authenticationSlice';
-import magic from '../../shared/magic';
-import Cookie from 'js-cookie';
-import { applicationLoaded } from '../../loading/loadingSlice';
-import redirects from '../../navigation/sagas/redirects'
+import checkIsLoggedIn from './checkIsLoggedIn';
 
 export let mockedQuerySearch = ''; // I'm not sure about this strategy. It smells like it can cause concurrency issues
 jest.mock('../../../app/router', () => ({

@@ -4,7 +4,7 @@ import authenticationReducer from '../features/authentication/authenticationSlic
 import usersReducer from '../features/users/usersSlice';
 
 const rootReducer = combineReducers({
-  authentication: authenticationReducer,
+  authentication: authenticationReducer('authentication'),
   users: usersReducer,
   loading: loadingReducer,
 });

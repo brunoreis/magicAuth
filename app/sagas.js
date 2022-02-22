@@ -1,12 +1,9 @@
 import { all, call, fork, take } from 'redux-saga/effects';
 
-import authenticationSagas, { watchIsSignedIn } from '../features/authentication/sagas/authenticationSagas';
-import checkIsLoggedIn from "../features/authentication/sagas/checkIsLoggedIn";
-
-
-import navigationWatcher from "../features/navigation/sagas/navigationWatcher";
-
-import usersWatcher from '../features/users/sagas/usersWatcher';
+import authenticationWatchers, { watchIsSignedIn } from 'features/authentication/sagas/authenticationWatchers';
+import checkIsLoggedIn from "features/authentication/sagas/checkIsLoggedIn";
+import navigationWatcher from "features/navigation/sagas/navigationWatcher";
+import usersWatcher from 'features/users/sagas/usersWatcher';
 
 export default function* sagas() {
   yield fork(navigationWatcher);
@@ -18,6 +15,6 @@ export default function* sagas() {
   yield call(checkIsLoggedIn);
   yield all([
     usersWatcher(),
-    authenticationSagas(),
+    authenticationWatchers(),
   ]);
 }

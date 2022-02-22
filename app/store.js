@@ -20,7 +20,6 @@ const checkRouter = (cb) => {
   window ? setTimeout(() => (Router.router ? cb() : checkRouter()), 100) : cb();
 };
 
-
 const persistConfig = {
   key: 'root',
   version: 1,

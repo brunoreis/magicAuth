@@ -4,8 +4,9 @@ import TextField from 'components/TextField';
 import Button from 'components/Button';
 import Toggle from 'components/Toggle';
 import { FieldContainer, FieldLabel } from 'components/styles';
-import { ToggleLabelContainer, ErrorMessage } from './SignInPage.styles';
 import buildOnEnterKeyDown from 'components/buildOnEnterKeyDown';
+
+import { ToggleLabelContainer, ErrorMessage } from './SignInPage.styles';
 
 export default function SignInPage({ 
   email, 

@@ -9,6 +9,7 @@ import authenticationReducer, {
   getIsLoggedIn,
   getIssuer,
   getRememberMe,
+  getSignInLoading,
   preloadMagicLinkIFrame,
   preloadMagicLinkIFrameStarted
 } from './authenticationSlice';
@@ -17,54 +18,37 @@ import authenticationReducer, {
 const exist = (actionCreator) => {
   actionCreator()
 }
-describe('authentication reducer', () => {
-  it('should handle initial state', () => {
-    expect(authenticationReducer(undefined, { type: 'unknown' })).toEqual({
-      issuer: null,
-      rememberMe: false,
-      loading: false
-    });
+
+const reducer = authenticationReducer('authentication')
+
+it('should handle initial state', () => {
+  expect(reducer(undefined, {})).toEqual({
+    issuer: null,
+    rememberMe: false,
+    loading: false
   });
-  describe('checkIsLoggedInReceived', () => {
-    it('set issuer and isLoggedIn', () => {
-      const payload = { issuer: 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'}
-      const state = authenticationReducer(undefined, checkIsLoggedInReceived(payload))
-      expect(getIsLoggedIn(state)).toBe(true)
-      expect(getIssuer(state)).toBe('did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7')
-    })
-    it('set issuer and isLoggedIn to null if not logged in', () => {
-      const payload = { issuer: null }
-      const state = authenticationReducer({ isLoggedIn: true, issuer: "xpto"}, checkIsLoggedInReceived(payload))
-      expect(getIsLoggedIn(state)).toBe(false)
-      expect(getIssuer(state)).toBe(null)
-    })
-  })
-  describe('signIn', () => {
-    it('sets rememberMe', () => {
-      let state = authenticationReducer(undefined, signIn({ rememberMe: false }))
-      expect(getRememberMe(state)).toBe(false)
-      state = authenticationReducer(undefined, signIn({ rememberMe: true }))
-      expect(getRememberMe(state)).toBe(true)
-    })
-    
-  })
-  describe('logOutSuccess', () => {
-    it('sets rememberMe and issuer to false', () => {
-      let state = authenticationReducer({ rememberMe: true, issuer: 'xpto'}, logOutSuccess())
-      expect(getRememberMe(state)).toBe(false)
-      expect(getIssuer(state)).toBe(null)
-    })
-    
-  })
-  describe('signInSuccess', () => {
-    it('sets issuer if logged in', () => {
-      const payload = { email: 'testemail@a.com', issuer: 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'}
-      const state = authenticationReducer(undefined, signInSuccess(payload))
-      expect(getIsLoggedIn(state)).toBe(true)
-      expect(getIssuer(state)).toBe('did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7')
-    })
-  })
 });
+
+describe('selectors', () => {
+  it('getIsLoggedIn', () => {
+    const state = reducer(undefined, {})
+    expect(getIsLoggedIn(state)).toBe(false)
+  })
+  it('getSignInLoading', () => {
+    const state = reducer(undefined, {})
+    expect(getSignInLoading(state)).toBe(false)
+  })
+  it('getIssuer', () => {
+    const issuer = 'dude'
+    const state = reducer({ issuer }, {})
+    expect(getIssuer(state)).toBe(issuer)
+  })
+  it('getRememberMe', () => {
+    const state = reducer({ rememberMe: true }, {})
+    expect(getRememberMe(state)).toBe(true)
+  })
+})
+
 describe('existent actionCreators', () => {
   it('signInSuccess', () => exist(signInSuccess))
   it('checkIsLoggedInReceived', () => exist(checkIsLoggedInReceived))
@@ -76,9 +60,59 @@ describe('existent actionCreators', () => {
   it('preloadMagicLinkIFrame', () => exist(preloadMagicLinkIFrame))
   it('preloadMagicLinkIFrameStarted', () => exist(preloadMagicLinkIFrameStarted))
 })
-describe('selectors', () => {
-  it('isLoggedIn', () => {
-    const initialState = authenticationReducer(undefined, {})
-    expect(getIsLoggedIn(initialState)).toBe(false)
+
+describe('signIn', () => {
+  it('sets rememberMe', () => {
+    let state = reducer(undefined, signIn({}))
+    state = reducer(undefined, signIn({ rememberMe: true }))
+    expect(getRememberMe(state)).toBe(true)
+  })
+  it('sets loading to true', () => {
+    let state = reducer(undefined, signIn({}))
+    expect(getSignInLoading(state)).toBe(true)
   })
 })
+
+describe('signInSuccess', () => {
+  it('sets the issuer', () => {
+    const issuer = 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'
+    const state = reducer(undefined, signInSuccess({ issuer }))
+    expect(getIssuer(state)).toBe(issuer)
+  })
+  it('Given there is an issuer, sets loggedIn to true', () => {
+    const issuer = 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'
+    const state = reducer(undefined, signInSuccess({ issuer }))
+    expect(getIsLoggedIn(state)).toBe(true)
+  })
+  it('sets isLoading to false', () => {
+    const issuer = 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'
+    const state = reducer(undefined, signInSuccess({ issuer }))
+    expect(getSignInLoading(state)).toBe(false)
+  })
+})
+
+describe('checkIsLoggedInReceived', () => {
+  it('set issuer and isLoggedIn', () => {
+    const issuer = 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'
+    const payload = { issuer }
+    const state = reducer(undefined, checkIsLoggedInReceived(payload))
+    expect(getIsLoggedIn(state)).toBe(true)
+    expect(getIssuer(state)).toBe(issuer)
+  })
+  it('set issuer and isLoggedIn to null if not logged in', () => {
+    const payload = { issuer: null }
+    const state = reducer({ isLoggedIn: true, issuer: "xpto"}, checkIsLoggedInReceived(payload))
+    expect(getIsLoggedIn(state)).toBe(false)
+    expect(getIssuer(state)).toBe(null)
+  })
+})
+
+describe('logOutSuccess', () => {
+  it('sets rememberMe and issuer to false', () => {
+    let state = reducer({ rememberMe: true, issuer: 'xpto'}, logOutSuccess())
+    expect(getRememberMe(state)).toBe(false)
+    expect(getIssuer(state)).toBe(null)
+  })
+  
+})
+

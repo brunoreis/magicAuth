@@ -1,7 +1,8 @@
 import { call, put } from 'redux-saga/effects';
-import preload from './preload';
-import { preloadMagicLinkIFrameStarted } from '../authenticationSlice';
+
 import magic from '../../shared/magic';
+import { preloadMagicLinkIFrameStarted } from '../authenticationSlice';
+import preload from './preloadIFrame';
 
 describe('preload', () => {
   it('preloads magic', () => {

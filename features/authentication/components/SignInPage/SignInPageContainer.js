@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react';
-import SignInPage from './SignInPage';
 import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  getSignInLoading,
+} from 'app/selectors';
+
 import {
   signIn,
   preloadMagicLinkIFrame,
 } from '../../authenticationSlice';
-import { getLoading } from 'app/selectors';
+
+import SignInPage from './SignInPage';
 import useDebouncedValidEmailErrorMessage from './useDebouncedValidEmailErrorMessage';
+
 
 const SignInPageContainer = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(getLoading('authentication'));
+  const loading = useSelector(getSignInLoading);
   const [email, setEmail] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 

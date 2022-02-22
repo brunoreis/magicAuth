@@ -9,20 +9,20 @@ import {
   preloadMagicLinkIFrame,
   isLoggedIn
 } from '../authenticationSlice';
-import authenticationSagas, { watchIsSignedIn } from './authenticationSagas';
-import preload from './preload';
-import handleSignIn from './handleSignIn';
-import handleLogOut from './handleLogOut';
+import authenticationSagas, { watchIsSignedIn } from './authenticationWatchers';
+import preloadIFrame from './preloadIFrame';
+import signInWithMagicLink from './signInWithMagicLink';
+import removeCookieAndLogoutFromMagicLink from './removeCookieAndLogoutFromMagicLink';
 import registerIsLoggedInCookie from './registerIsLoggedInCookie';
 
 it('watch and call sagas', () => {
   const g = authenticationSagas();
   expect(g.next().value).toEqual(
     all([
-      takeEvery(signIn().type, handleSignIn),
-      takeEvery(logOut().type, handleLogOut),
+      takeEvery(signIn().type, signInWithMagicLink),
+      takeEvery(logOut().type, removeCookieAndLogoutFromMagicLink),
       takeEvery(logOutSuccess().type, go, '/signIn'),
-      takeEvery(preloadMagicLinkIFrame().type, preload),
+      takeEvery(preloadMagicLinkIFrame().type, preloadIFrame),
     ])
   );
   expect(g.next().done).toBe(true);
