@@ -1,4 +1,6 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 let mainStoreKey;
 
@@ -21,6 +23,9 @@ export const authenticationSlice = createSlice({
       state.isLoggedIn = true
       state.loading = false
     },
+    signInFailure: (state, action) => {
+      state.loading = false
+    },
     checkIsLoggedInReceived: (state, action) => {
       const issuer = action.payload.issuer
       if(issuer) {
@@ -33,13 +38,18 @@ export const authenticationSlice = createSlice({
       state.issuer = null
       state.rememberMe = false
     }
-  },
+  }
 });
 
 //reducer
 export default (mainKey) => {
   mainStoreKey = mainKey
-  return authenticationSlice.reducer;
+  const persistConfig = { 
+    key: mainKey,
+    storage,
+    blacklist: ['loading']
+  }
+  return persistReducer(persistConfig, authenticationSlice.reducer);
 }
 
 //actions

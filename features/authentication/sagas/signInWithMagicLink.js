@@ -1,7 +1,7 @@
 import { call, put, select } from 'redux-saga/effects';
 
 import { getUsername } from 'app/selectors';
-import { requestNavigation } from 'features/navigation/navigationSlice';
+import go from 'features/navigation/sagas/go';
 
 import magic from '../util/magic';
 import {
@@ -26,9 +26,9 @@ export default function* signInWithMagicLink(action) {
     yield put(isLoggedIn());
     const username = yield select(getUsername);
     if (username) {
-      yield put(requestNavigation('/'));
+      yield call(go,'/');
     } else {
-      yield put(requestNavigation('/signUp'));
+      yield call(go,'/signUp');
     }
   } catch (e) {
     yield put(signInFailure());

@@ -3,12 +3,10 @@ import sagas from './sagas';
 import authenticationWatchers from '../features/authentication/sagas/authenticationWatchers';
 import isSignedInWatcher from '../features/authentication/sagas/isSignedInWatcher';
 import checkIsLoggedIn from "../features/authentication/sagas/checkIsLoggedIn";
-import navigationWatcher from "../features/navigation/sagas/navigationWatcher";
 import usersWatcher from '../features/users/sagas/usersWatcher';
 
 it('preload, check log in, redirects and start other sagas', () => {
   const g = sagas();
-  expect(g.next().value).toEqual(fork(navigationWatcher));
   expect(g.next().value).toEqual(fork(isSignedInWatcher));
   expect(g.next().value).toEqual(
     all([

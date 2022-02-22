@@ -1,9 +1,10 @@
-import { put, select } from 'redux-saga/effects';
+import { put, select, call } from 'redux-saga/effects';
 
 import { path } from 'app/router';
 
+import go from './go';
+
 import {
-  requestNavigation,
   redirectsStarted,
   redirectsCompleted
 } from '../navigationSlice';
@@ -23,22 +24,22 @@ export default function* redirects() {
   const infoPayload = { actualPath: actualPathWithoutQuery, isLogged, username };
   yield put(redirectsStarted(infoPayload));
   if (!username && isLogged) {
-    yield put(requestNavigation('/signUp'));
+    yield call(go,'/signUp');
   } else {
     if (isLogged) {
       switch (actualPathWithoutQuery) {
         case '/signIn':
-          yield put(requestNavigation('/'));
+          yield call(go,'/');
           break;
         case '/signUp':
-          yield put(requestNavigation('/'));
+          yield call(go,'/');
           break;
       }
     } else {
       switch (actualPathWithoutQuery) {
         case '/signUp':
         case '/':
-          yield put(requestNavigation('/signIn'));
+          yield call(go,'/signIn');
           break;
       }
     }

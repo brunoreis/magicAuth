@@ -91,6 +91,14 @@ describe('signInSuccess', () => {
   })
 })
 
+describe('signInFailure', () => {
+  it('sets isLoading to false', () => {
+    const issuer = 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'
+    const state = reducer(undefined, signInFailure({ issuer }))
+    expect(getSignInLoading(state)).toBe(false)
+  })
+})
+
 describe('checkIsLoggedInReceived', () => {
   it('set issuer and isLoggedIn', () => {
     const issuer = 'did:ethr:0x4B60eF2694ffB466a7eDB66519dD2167448486B7'

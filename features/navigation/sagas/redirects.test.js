@@ -1,12 +1,14 @@
-import { put, select } from 'redux-saga/effects';
+import { put, select, call } from 'redux-saga/effects';
 
 import { path } from 'app/router';
 
+
+
 import {
-  requestNavigation,
   redirectsStarted,
   redirectsCompleted,
 } from '../navigationSlice';
+import go from './go'
 import redirects, {
   isLoggedIn,
   getUsername,
@@ -30,7 +32,7 @@ describe('redirects', () => {
           })
         )
       );
-      expect(g.next(null).value).toEqual(put(requestNavigation('/signUp')));
+      expect(g.next(null).value).toEqual(call(go,'/signUp'));
       expect(g.next().value).toEqual(put(redirectsCompleted()));
       expect(g.next().done).toBe(true);
     });
@@ -68,7 +70,7 @@ describe('redirects', () => {
             })
           )
         );
-        expect(g.next(isLogged).value).toEqual(put(requestNavigation('/')));
+        expect(g.next(isLogged).value).toEqual(call(go,'/'));
         expect(g.next().value).toEqual(put(redirectsCompleted()));
         expect(g.next().done).toBe(true);
       });
@@ -87,7 +89,7 @@ describe('redirects', () => {
             })
           )
         );
-        expect(g.next(isLogged).value).toEqual(put(requestNavigation('/')));
+        expect(g.next(isLogged).value).toEqual(call(go,'/'));
         expect(g.next().value).toEqual(put(redirectsCompleted()));
         expect(g.next().done).toBe(true);
       });
@@ -109,7 +111,7 @@ describe('redirects', () => {
             })
           )
         );
-        expect(g.next().value).toEqual(put(requestNavigation('/signIn')));
+        expect(g.next().value).toEqual(call(go,'/signIn'));
         expect(g.next().value).toEqual(put(redirectsCompleted()));
         expect(g.next().done).toBe(true);
       });
@@ -128,7 +130,7 @@ describe('redirects', () => {
             })
           )
         );
-        expect(g.next().value).toEqual(put(requestNavigation('/signIn')));
+        expect(g.next().value).toEqual(call(go,'/signIn'));
         expect(g.next().value).toEqual(put(redirectsCompleted()));
         expect(g.next().done).toBe(true);
       });
@@ -165,7 +167,7 @@ describe('redirects', () => {
             })
           )
         );
-        expect(g.next().value).toEqual(put(requestNavigation('/signIn')));
+        expect(g.next().value).toEqual(call(go,'/signIn'));
         expect(g.next().value).toEqual(put(redirectsCompleted()));
         expect(g.next().done).toBe(true);
       });

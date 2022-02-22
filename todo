@@ -1,7 +1,8 @@
-[] simplify navigation (too much indirection in the sagas)
 [] check if we really need the loading slice. Think about a better strategy to redirect according to auth state. 
 [] remove dependencies between users and authentication (by connecting the events with app/sagas)
 [] remove dependencies between authentication and loading
+[] add fallback to handle the case when we persist with authentication.loading === true and come back later
+- https://blog.reactnativecoach.com/the-definitive-guide-to-redux-persist-84738167975 > Customizing what’s Persisted
 
 [] find a better way to organize the selectors, study best practices on the theme
 [] decouple modules

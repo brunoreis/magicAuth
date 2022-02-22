@@ -1,7 +1,9 @@
-import { put } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
+import { push } from 'app/router';
 
-import { requestNavigation } from '../navigationSlice';
+import { nav } from '../navigationSlice';
 
 export default function* go(path) {
-  yield put(requestNavigation(path));
+  yield call(push, path);
+  yield put(nav(path));
 }

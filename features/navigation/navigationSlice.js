@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const requestNavigation = (path) => ({
+export const nav = (path) => ({
   type: 'nav' + path,
 });
 export const redirectsStarted = createAction('navigation/redirectsStarted');

@@ -1,7 +1,6 @@
 import Cookie from 'js-cookie';
 import { call, put, select } from 'redux-saga/effects';
 
-import { path } from 'app/router';
 import { getRememberMe } from 'app/selectors';
 import { applicationLoaded } from 'features/loading/loadingSlice';
 import redirects from 'features/navigation/sagas/redirects'

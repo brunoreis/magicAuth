@@ -1,10 +1,12 @@
 import { call, put, select } from 'redux-saga/effects';
-import handleSignIn from './signInWithMagicLink';
-import { signInSuccess } from '../authenticationSlice';
-import { requestNavigation } from '../../navigation/navigationSlice';
+
+import { getUsername } from 'app/selectors';
+import go from 'features/navigation/sagas/go';
+
 import magic from '../util/magic';
+import { signInSuccess } from '../authenticationSlice';
 import { isLoggedIn } from '../authenticationSlice';
-import { getUsername } from '../../../app/selectors';
+import handleSignIn from './signInWithMagicLink';
 
 //@todo: test the exception flow
 describe('signIn with the email, dispaches auth/signInSucces and', () => {
@@ -28,7 +30,7 @@ describe('signIn with the email, dispaches auth/signInSucces and', () => {
     expect(g.next(metadata).value).toEqual(put(signInSuccess(metadata)));
     expect(g.next().value).toEqual(put(isLoggedIn()));
     expect(g.next().value).toEqual(select(getUsername));
-    expect(g.next('mockedUsername').value).toEqual(put(requestNavigation('/')));
+    expect(g.next('mockedUsername').value).toEqual(call(go,'/'));
     expect(g.next().done).toBe(true);
   });
 
@@ -52,7 +54,7 @@ describe('signIn with the email, dispaches auth/signInSucces and', () => {
     expect(g.next(metadata).value).toEqual(put(signInSuccess(metadata)));
     expect(g.next().value).toEqual(put(isLoggedIn()));
     expect(g.next().value).toEqual(select(getUsername));
-    expect(g.next().value).toEqual(put(requestNavigation('/signUp')));
+    expect(g.next().value).toEqual(call(go,'/signUp'));
     expect(g.next().done).toBe(true);
   });
 });
