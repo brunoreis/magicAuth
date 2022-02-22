@@ -1,3 +1,8 @@
+[] simplify navigation
+[] check if we really need the loading slice. Think about a better strategy to redirect according to auth state. 
+[] remove dependencies between users and authentication (by connecting the events with app/sagas)
+[] remove dependencies between authentication and loading
+
 [] find a better way to organize the selectors, study best practices on the theme
 [] decouple modules
 [] create a naming pattern to name actions, storeProps, selectors and sagas. Review code. 
