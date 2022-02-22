@@ -7,11 +7,9 @@ import {
   logOut,
   logOutSuccess,
   preloadMagicLinkIFrame,
-  isLoggedIn,
 } from '../authenticationSlice';
 import signInWithMagicLink from './signInWithMagicLink';
 import removeCookieAndLogoutFromMagicLink from './removeCookieAndLogoutFromMagicLink';
-import registerIsLoggedInCookie from './registerIsLoggedInCookie';
 import preloadIFrame from './preloadIFrame';
 
 export default function* authenticationWatchers() {
@@ -22,9 +20,3 @@ export default function* authenticationWatchers() {
     takeEvery(preloadMagicLinkIFrame().type, preloadIFrame),
   ]);
 }
-
-export function* watchIsSignedIn() {
-  yield takeEvery(isLoggedIn().type, registerIsLoggedInCookie)
-}
-
-

@@ -7,13 +7,11 @@ import {
   logOut,
   logOutSuccess,
   preloadMagicLinkIFrame,
-  isLoggedIn
 } from '../authenticationSlice';
-import authenticationSagas, { watchIsSignedIn } from './authenticationWatchers';
+import authenticationSagas from './authenticationWatchers';
 import preloadIFrame from './preloadIFrame';
 import signInWithMagicLink from './signInWithMagicLink';
 import removeCookieAndLogoutFromMagicLink from './removeCookieAndLogoutFromMagicLink';
-import registerIsLoggedInCookie from './registerIsLoggedInCookie';
 
 it('watch and call sagas', () => {
   const g = authenticationSagas();
@@ -28,14 +26,7 @@ it('watch and call sagas', () => {
   expect(g.next().done).toBe(true);
 });
 
-describe('watchIsSignedIn', () => {
-  it('call registerIsLoggedInCookie', ()=>{
-    const g = watchIsSignedIn()
-    expect(g.next().value).toEqual(
-      takeEvery(isLoggedIn().type, registerIsLoggedInCookie)
-    )
-  })
-})
+
 
 
 
