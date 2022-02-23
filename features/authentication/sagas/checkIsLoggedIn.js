@@ -3,7 +3,7 @@ import Cookie from 'js-cookie';
 
 import { getSearch } from 'app/router';
 import { getRememberMe } from 'app/selectors'
-import { applicationLoaded } from 'features/loading/loadingSlice';
+import { hideLoader } from '../authenticationSlice';
 import redirects from 'features/navigation/sagas/redirects'
 
 import magic from '../util/magic';
@@ -36,13 +36,13 @@ export default function* checkIsLoggedIn() {
     const metadata = yield call([magic.user, magic.user.getMetadata]);
     yield put(checkIsLoggedInReceived(metadata));
     yield put(isLoggedIn());
-    yield put(applicationLoaded());
+    yield put(hideLoader());
     yield call(redirects)
   } else {
     if (rememberMe || isLoggedInCookie) {
       try {
         yield call(redirects)
-        yield put(applicationLoaded())
+        yield put(hideLoader())
         const loggedIn = yield call([magic.user, magic.user.isLoggedIn]);
         yield put(
           checkIsLoggedInLoginReceived({
@@ -58,7 +58,7 @@ export default function* checkIsLoggedIn() {
         // basic error handling. Needs to be improved
         // https://magic.link/docs/api-reference/client-side-sdks/web#rpcerror
         yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
-        yield put(applicationLoaded());
+        yield put(hideLoader());
       }
     } else {
       // we may enforce a logOut here in case the user was loggedIn, but remember me was not true
@@ -66,7 +66,7 @@ export default function* checkIsLoggedIn() {
         checkIsLoggedInReceived({ issuer: null, note: 'Remember me disabled' })
       );
       yield call(redirects)
-      yield put(applicationLoaded());
+      yield put(hideLoader());
     }
   }
 }

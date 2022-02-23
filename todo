@@ -1,11 +1,9 @@
-[] check if we really need the loading slice. Think about a better strategy to redirect according to auth state. 
+[] decouple modules
+[] find a way to inject the LoadingBranch only if the module is included
 [] remove dependencies between users and authentication (by connecting the events with app/sagas)
 [] remove dependencies between authentication and loading
-[] add fallback to handle the case when we persist with authentication.loading === true and come back later
-- https://blog.reactnativecoach.com/the-definitive-guide-to-redux-persist-84738167975 > Customizing what’s Persisted
 
-[] find a better way to organize the selectors, study best practices on the theme
-[] decouple modules
+[] create all global selectors in the same way as the authentication one (by passing the key)
 [] create a naming pattern to name actions, storeProps, selectors and sagas. Review code. 
 
 [] study runSagas and other resources and make the saga tests easier to write and readable.

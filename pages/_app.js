@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import GlobalStyle from 'styles/GlobalStyle';
 import theme from 'styles/theme';
 import store from 'app/store';
-import LoadingBranch from 'components/LoadingBranch'
+import LoadingBranch from 'features/authentication/components/LoadingBranch'
 
 function MyApp({ Component, pageProps }) {
   return (

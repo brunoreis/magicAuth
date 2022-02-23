@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Image from 'next/image'
 import styled from 'styled-components';
 
-import { getLoading } from 'app/selectors';
+import { getShowLoader } from 'app/selectors';
 
 export const LoadingContainer = styled.div`
     width: 100%;
@@ -16,8 +16,9 @@ export const LoadingContainer = styled.div`
 
 //@todo: test this component
 export default function LoadingBranch({ children }) {
-    const loading = useSelector(getLoading('app'));
-    return loading ? (
+    const showLoader = useSelector(getShowLoader);
+
+    return showLoader ? (
         <LoadingContainer>
                 <Image src="/loader.gif" width="160px" height="120px"/>
                 checking user info..

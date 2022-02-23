@@ -7,7 +7,8 @@ let mainStoreKey;
 const initialState = {
   issuer: null,
   rememberMe: false,
-  loading: false
+  signInLoading: false, 
+  showLoader: true,
 };
 
 export const authenticationSlice = createSlice({
@@ -16,15 +17,15 @@ export const authenticationSlice = createSlice({
   reducers: { 
     signIn: (state, action) => {
       state.rememberMe = action.payload.rememberMe
-      state.loading = true
+      state.signInLoading = true
     },
     signInSuccess: (state, action) => {
       state.issuer = action.payload.issuer
       state.isLoggedIn = true
-      state.loading = false
+      state.signInLoading = false
     },
     signInFailure: (state, action) => {
-      state.loading = false
+      state.signInLoading = false
     },
     checkIsLoggedInReceived: (state, action) => {
       const issuer = action.payload.issuer
@@ -37,6 +38,9 @@ export const authenticationSlice = createSlice({
     logOutSuccess: (state) => {
       state.issuer = null
       state.rememberMe = false
+    },
+    hideLoader: (state) => {
+      state.showLoader = false
     }
   }
 });
@@ -47,7 +51,7 @@ export default (mainKey) => {
   const persistConfig = { 
     key: mainKey,
     storage,
-    blacklist: ['loading']
+    blacklist: ['signInLoading', 'showLoader']
   }
   return persistReducer(persistConfig, authenticationSlice.reducer);
 }
@@ -57,7 +61,8 @@ export const {
   signIn,
   signInSuccess,
   checkIsLoggedInReceived,
-  logOutSuccess
+  logOutSuccess,
+  hideLoader,
 } = authenticationSlice.actions;
 export const signInFailure = createAction('authentication/signInFailure')
 export const logOut = createAction('authentication/logOut')
@@ -69,6 +74,7 @@ export const isLoggedIn = createAction('authentication/isLoggedIn')
 
 //selectors
 export const getIsLoggedIn = (state) => !!state.issuer;
-export const getSignInLoading = (state) => state.loading;
+export const getSignInLoading = (state) => state.signInLoading;
 export const getIssuer = (state) => state.issuer;
 export const getRememberMe = (state) => state.rememberMe
+export const getShowLoader = (state) => state.showLoader

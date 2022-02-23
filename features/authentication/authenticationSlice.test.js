@@ -6,10 +6,12 @@ import authenticationReducer, {
   logOut,
   logOutSuccess,
   checkIsLoggedInStarted,
+  hideLoader,
   getIsLoggedIn,
   getIssuer,
   getRememberMe,
   getSignInLoading,
+  getShowLoader,
   preloadMagicLinkIFrame,
   preloadMagicLinkIFrameStarted
 } from './authenticationSlice';
@@ -25,7 +27,8 @@ it('should handle initial state', () => {
   expect(reducer(undefined, {})).toEqual({
     issuer: null,
     rememberMe: false,
-    loading: false
+    signInLoading: false,
+    showLoader: true,
   });
 });
 
@@ -122,5 +125,12 @@ describe('logOutSuccess', () => {
     expect(getIssuer(state)).toBe(null)
   })
   
+})
+
+describe('hideLoader', () => {
+  it('sets showLoader false', () => {
+    let state = reducer({ showLoader: true }, hideLoader())
+    expect(getShowLoader(state)).toBe(false)
+  })
 })
 

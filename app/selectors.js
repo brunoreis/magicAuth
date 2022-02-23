@@ -6,6 +6,7 @@ const key = 'authentication'
 export const getSignInLoading = (state) => authenticationSlice.getSignInLoading(state[key]);
 export const getIssuer = (state) => authenticationSlice.getIssuer(state[key]);
 export const getRememberMe = (state) => authenticationSlice.getRememberMe(state[key]);
+export const getShowLoader = (state) => authenticationSlice.getShowLoader(state[key])
 
 
 
@@ -20,4 +21,3 @@ export const getUsernameIsAvailable = (username) => (state) => {
   return !found
 }
 
-export const getLoading = (key) => (state) => state.loading[key]

@@ -2,7 +2,7 @@ import Cookie from 'js-cookie';
 import { call, put, select } from 'redux-saga/effects';
 
 import { getRememberMe } from 'app/selectors';
-import { applicationLoaded } from 'features/loading/loadingSlice';
+import { hideLoader } from '../authenticationSlice';
 import redirects from 'features/navigation/sagas/redirects'
 
 import magic from '../util/magic';
@@ -29,7 +29,7 @@ it('Given that remember me is true, it will check if the user is logged in and g
     put(checkIsLoggedInStarted({ rememberMe: true, magicCredential: null, isLoggedInCookie: false }))
   );
   expect(g.next().value).toEqual(call(redirects));
-  expect(g.next().value).toEqual(put(applicationLoaded()));
+  expect(g.next().value).toEqual(put(hideLoader()));
   expect(g.next().value).toEqual(call([magic.user, magic.user.isLoggedIn]));
   expect(g.next(true).value).toEqual(
     put(
@@ -58,7 +58,7 @@ it('Given that remember me is false, but the isLoggedInCookie is true it will ch
     put(checkIsLoggedInStarted({ rememberMe: false, magicCredential: null, isLoggedInCookie: true }))
   );
   expect(g.next().value).toEqual(call(redirects));
-  expect(g.next().value).toEqual(put(applicationLoaded()));
+  expect(g.next().value).toEqual(put(hideLoader()));
   expect(g.next().value).toEqual(call([magic.user, magic.user.isLoggedIn]));
   expect(g.next(true).value).toEqual(
     put(
@@ -108,7 +108,7 @@ it('Uses magic credential if it is in the location query', () => {
     put(checkIsLoggedInReceived(payload))
   );
   expect(g.next().value).toEqual(put(isLoggedIn()));
-  expect(g.next().value).toEqual(put(applicationLoaded()));
+  expect(g.next().value).toEqual(put(hideLoader()));
   expect(g.next().value).toEqual(call(redirects));
   expect(g.next().done).toBe(true);
 });
@@ -127,6 +127,6 @@ it('Given that remember and isLoggedInCookie are false, it will skip the check a
     )
   );
   expect(g.next().value).toEqual(call(redirects));
-  expect(g.next().value).toEqual(put(applicationLoaded()));
+  expect(g.next().value).toEqual(put(hideLoader()));
   expect(g.next().done).toBe(true);
 });

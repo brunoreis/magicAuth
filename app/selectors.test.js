@@ -1,36 +1,37 @@
-import { getUsernameIsAvailable, getLoading, getSignInLoading } from './selectors'
+import {
+  getUsernameIsAvailable,
+  getSignInLoading,
+  getShowLoader,
+} from './selectors';
 
+describe('getUsernameIsAvaliable', () => {
+  it('getUsernameIsAvailable', () => {
+    const state = {
+      users: {
+        users: [{ username: 'dude' }],
+      },
+    };
+    expect(getUsernameIsAvailable('dude')(state)).toBe(false);
+    expect(getUsernameIsAvailable('person')(state)).toBe(true);
+  });
+});
 
-describe('getUsernameIsAvaliable', ()=> {
-    it('getUsernameIsAvailable', () => {
-        const state = { 
-            users: {
-                users: [{ username: 'dude'}]
-            }
-        }
-        expect(getUsernameIsAvailable('dude')(state)).toBe(false)
-        expect(getUsernameIsAvailable('person')(state)).toBe(true)
-    })
-})
+it('getShowLoader', () => {
+  const state = {
+    authentication: {
+      showLoader: true,
+    },
+  };
+  expect(getShowLoader(state)).toBe(true);
+  state.authentication.showLoader = false;
+  expect(getShowLoader(state)).toBe(false);
+});
 
-it('getLoading', () => {
-    const state = { 
-        loading: { 
-            authentication: false,
-            app: true
-        }
-    }
-    expect(getLoading('authentication')(state)).toBe(false)
-    state.loading.authentication = true
-    expect(getLoading('authentication')(state)).toBe(true)
-    expect(getLoading('app')(state)).toBe(true)
-  })
-
-  it('getSignInLoading', () => {
-    const state = { 
-        authentication: {
-            loading: true
-        }
-    }
-    expect(getSignInLoading(state)).toBe(true)
-  })
+it('getSignInLoading', () => {
+  const state = {
+    authentication: {
+      signInLoading: true,
+    },
+  };
+  expect(getSignInLoading(state)).toBe(true);
+});
