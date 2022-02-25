@@ -32,20 +32,22 @@ const storeWithTwoUsers = {
 const exist = (actionCreator) => { // this should go in some kind of testHelpers file/folder
   actionCreator()
 }
+const reducer = usersReducer('users')
 describe('users reducer', () => {
   describe('signInSuccess', () => {
+    
     it('Given auth user data is not in the store, should create one', () => {
-      let state = usersReducer(undefined, signInSuccess(metadata));
+      let state = reducer(undefined, signInSuccess(metadata));
       expect(state).toEqual(storeWithMetadataUser);
-      state = usersReducer(state, signInSuccess(metadata));
+      state = reducer(state, signInSuccess(metadata));
       expect(state.users.length).toBe(1);
     });
   });
   describe('checkIsLoggedInReceived', () => {
     it('Given auth user data is not in the store, should create one', () => {
-      let state = usersReducer(undefined, checkIsLoggedInReceived(metadata));
+      let state = reducer(undefined, checkIsLoggedInReceived(metadata));
       expect(state).toEqual(storeWithMetadataUser);
-      state = usersReducer(state, signInSuccess(metadata));
+      state = reducer(state, signInSuccess(metadata));
       expect(state.users.length).toBe(1);
     });
   });

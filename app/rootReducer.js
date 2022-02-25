@@ -4,7 +4,7 @@ import usersReducer from '../features/users/usersSlice';
 
 const rootReducer = combineReducers({
   authentication: authenticationReducer('authentication'),
-  users: usersReducer,
+  users: usersReducer('users'),
 });
 
 export default rootReducer;

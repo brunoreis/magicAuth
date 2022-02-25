@@ -1,6 +1,6 @@
-[] decouple modules
-[] remove most dependencies between users and authentication (by connecting the events with app/sagas)
-[] test the LoaderAndRedirects component
+[] test the authentication/LoaderAndRedirects and users/Redirects component
+
+[] show signIn failure messages
 
 [] create all global selectors in the same way as the authentication one (by passing the key)
 [] move global selectors to features/module directory
@@ -19,7 +19,6 @@
 [] review the layout when the page reduce height
 
 --- 
-
 
 [] if remember me is not set, how can we log out the user (from magic) when closing the browser?
 

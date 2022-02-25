@@ -5,12 +5,16 @@ import GlobalStyle from 'styles/GlobalStyle';
 import theme from 'styles/theme';
 import store from 'app/store';
 
-import authenticationaPageWrappers from 'features/authentication/authenticationaPageWrappers';
+import authenticationPageWrappers from 'features/authentication/authenticationPageWrappers';
+import usersPageWrappers from 'features/users/usersPageWrappers';
+
 // All the feature specific wrappers that will be put around the inner page component. You can add more by pushing into this array. 
-const wrappers = authenticationaPageWrappers;
+const wrappers = [].concat(usersPageWrappers, authenticationPageWrappers)
 
 const FeatureWrappers = ({ children, pageProps }) => wrappers.reduce(
-  (previous, Current) => <Current {...pageProps}>{previous}</Current>,
+  (previous, Current) => {
+    return (<Current {...pageProps}>{previous}</Current>)
+  },
   children
 )
 

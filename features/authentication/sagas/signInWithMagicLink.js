@@ -1,7 +1,4 @@
-import { call, put, select } from 'redux-saga/effects';
-
-import { getUsername } from 'app/selectors';
-import go from 'features/navigation/sagas/go';
+import { call, put } from 'redux-saga/effects';
 
 import magic from '../util/magic';
 import {
@@ -9,7 +6,6 @@ import {
   signInFailure,
   isLoggedIn
 } from '../authenticationSlice';
-
 
 export default function* signInWithMagicLink(action) {
   try {
@@ -24,12 +20,6 @@ export default function* signInWithMagicLink(action) {
     const metadata = yield call([magic.user, magic.user.getMetadata]);
     yield put(signInSuccess(metadata));
     yield put(isLoggedIn());
-    const username = yield select(getUsername);
-    if (username) {
-      yield call(go,'/');
-    } else {
-      yield call(go,'/signUp');
-    }
   } catch (e) {
     yield put(signInFailure());
   }

@@ -3,8 +3,6 @@ import Cookie from 'js-cookie';
 
 import { getSearch } from 'app/router';
 import { getRememberMe } from 'app/selectors'
-import redirects from 'features/navigation/sagas/redirects'
-
 import magic from '../util/magic';
 
 import {
@@ -12,8 +10,6 @@ import {
   checkIsLoggedInReceived,
   isLoggedIn,
 } from '../authenticationSlice';
-
-
 
 export default function* checkIsLoggedIn() {
   const rememberMe = yield select(getRememberMe);

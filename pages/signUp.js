@@ -5,3 +5,13 @@ export default function SignUp() {
     <SignUpPageContainer onButtonClick={(v) => console.log(v)}/>
   )
 }
+
+export async function getStaticProps(context) {
+  return {
+    props: {
+      authentication: {
+        requiresAuthentication: true,
+      }
+    }, 
+  }
+}
