@@ -1,15 +1,18 @@
 ## Next + Redux + Redux-Saga + Styled Components app that implements a login using https://magic.link
 
-We are keeping a user logged in during a (browser open) session. 
+This is an exercise on using Next, Redux and Redux-Sagas. It still in progress. 
 
-The "remember me" behaviour will keep that user logged in across multiple sessions. 
+The proposal here is to have different modules, as decoupled as possible from one another, in such a way that we can remove each of the modules and the other ones will keep working. When dependencies need to exist, we will keep them acyclic. 
+
+We decided to dispach and call navigation through redux and sagas, so that we can have a nice history and also that we can test navigation as a saga side effect. The navigation module is not removable, we consider it as a core module. We may create other core modules in the future, like a notification one. When we need links on the pages, we will probably Override Next/Link to dispatch events and use this navigation approach.
+
+All the magic link login is isolated in the authentication module. We also have a "local" user database, where we "keep" the registered users, just for the sake of the exercise. 
+
+As said, it still in progress and there are some ux/code issues to be tackled. You can check them in the /todo file. 
 
 ### dependencies:
 
 navigation > app (router??? - would it be possible to be moved into navigation)
 welcome > components, app (selector???)
-loading > 
 authentication > app, components, navigation, loading (to notify applicationLoaded)
 users > authentication 
-    - signInSuccess and checkIsLoggedInReceived to add new users. These seem to be better documented into a saga)
-    - receiveUsername and receiveUsernameStart to save username of the auth user

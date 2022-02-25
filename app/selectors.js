@@ -9,8 +9,6 @@ export const getIsLoggedIn = (state) => !!authenticationSlice.getIssuer(state[ke
 export const getRememberMe = (state) => authenticationSlice.getRememberMe(state[key]);
 export const getCheckIsLoggedInLoading = (state) => authenticationSlice.getCheckIsLoggedInLoading(state[key])
 
-
-
 export const getUsername = (state) => {
   const loggedUserIssuer = getIssuer(state)
   const user = findUser(state, loggedUserIssuer)

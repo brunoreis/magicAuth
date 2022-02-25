@@ -1,4 +1,8 @@
+
+[] transform the page wrappers into hook and inject auth information into the users Redirects component to decouple user from auth
+[] test all flows on boths screens (when loggin via magic link)
 [] test the authentication/LoaderAndRedirects and users/Redirects component
+[] close the first screen after the signIn request?
 
 [] show signIn failure messages
 
