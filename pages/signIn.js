@@ -6,3 +6,13 @@ export default function SignIn() {
     <SignInPageContainer/>
   )
 }
+
+export async function getStaticProps(context) {
+  return {
+    props: {
+      authentication: {
+        requiresAuthentication: false,
+      }
+    }, 
+  }
+}

@@ -6,12 +6,11 @@ import authenticationReducer, {
   logOut,
   logOutSuccess,
   checkIsLoggedInStarted,
-  hideLoader,
   getIsLoggedIn,
   getIssuer,
   getRememberMe,
   getSignInLoading,
-  getShowLoader,
+  getCheckIsLoggedInLoading,
   preloadMagicLinkIFrame,
   preloadMagicLinkIFrameStarted
 } from './authenticationSlice';
@@ -25,10 +24,10 @@ const reducer = authenticationReducer('authentication')
 
 it('should handle initial state', () => {
   expect(reducer(undefined, {})).toEqual({
+    checkIsLoggedInLoading: false,
     issuer: null,
     rememberMe: false,
     signInLoading: false,
-    showLoader: true,
   });
 });
 
@@ -54,6 +53,7 @@ describe('selectors', () => {
 
 describe('existent actionCreators', () => {
   it('signInSuccess', () => exist(signInSuccess))
+  it('checkIsLoggedInStarted', () => exist(checkIsLoggedInStarted))
   it('checkIsLoggedInReceived', () => exist(checkIsLoggedInReceived))
   it('signIn', () => exist(signIn))
   it('signInFailure', () => exist(signInFailure))
@@ -116,6 +116,11 @@ describe('checkIsLoggedInReceived', () => {
     expect(getIsLoggedIn(state)).toBe(false)
     expect(getIssuer(state)).toBe(null)
   })
+
+  it('set checkIsLoggedInLoading to false', () => {
+    const state = reducer({ checkIsLoggedInLoading: true}, checkIsLoggedInReceived({}))
+    expect(getCheckIsLoggedInLoading(state)).toBe(false)
+  })
 })
 
 describe('logOutSuccess', () => {
@@ -127,10 +132,4 @@ describe('logOutSuccess', () => {
   
 })
 
-describe('hideLoader', () => {
-  it('sets showLoader false', () => {
-    let state = reducer({ showLoader: true }, hideLoader())
-    expect(getShowLoader(state)).toBe(false)
-  })
-})
 

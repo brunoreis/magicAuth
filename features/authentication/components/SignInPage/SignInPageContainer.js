@@ -1,18 +1,28 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getIsLoggedIn } from 'app/selectors';
+import { navigate } from 'features/navigation/navigationSlice';
 
-import {
-  getSignInLoading,
-} from 'app/selectors';
+import { getSignInLoading } from 'app/selectors';
 
-import {
-  signIn,
-  preloadMagicLinkIFrame,
-} from '../../authenticationSlice';
+import { signIn, preloadMagicLinkIFrame } from '../../authenticationSlice';
 
 import SignInPage from './SignInPage';
 import useDebouncedValidEmailErrorMessage from './useDebouncedValidEmailErrorMessage';
 
+const WELCOME_ROUTE = '/';
+
+const useNavigateToWelcomeIfLoggedInEffect = ({ dispatch }) => {
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  useEffect(
+    () => isLoggedIn && dispatch(navigate({ path: WELCOME_ROUTE })),
+    [isLoggedIn]
+  );
+};
+
+const usePreloadMagicLinkIFrameEffect = ({ dispatch }) => {
+  useEffect(() => dispatch(preloadMagicLinkIFrame()), []);
+};
 
 const SignInPageContainer = () => {
   const dispatch = useDispatch();
@@ -20,7 +30,8 @@ const SignInPageContainer = () => {
   const [email, setEmail] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-  useEffect(() => dispatch(preloadMagicLinkIFrame()),[]);
+  useNavigateToWelcomeIfLoggedInEffect({ dispatch });
+  usePreloadMagicLinkIFrameEffect({ dispatch });
 
   const errorMessage = useDebouncedValidEmailErrorMessage(email);
 

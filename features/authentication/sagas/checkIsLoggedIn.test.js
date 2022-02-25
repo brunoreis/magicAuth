@@ -2,13 +2,10 @@ import Cookie from 'js-cookie';
 import { call, put, select } from 'redux-saga/effects';
 
 import { getRememberMe } from 'app/selectors';
-import { hideLoader } from '../authenticationSlice';
-import redirects from 'features/navigation/sagas/redirects'
 
 import magic from '../util/magic';
 import {
   checkIsLoggedInStarted,
-  checkIsLoggedInLoginReceived,
   checkIsLoggedInReceived,
   isLoggedIn,
 } from '../authenticationSlice';
@@ -28,14 +25,7 @@ it('Given that remember me is true, it will check if the user is logged in and g
   expect(g.next(false).value).toEqual(
     put(checkIsLoggedInStarted({ rememberMe: true, magicCredential: null, isLoggedInCookie: false }))
   );
-  expect(g.next().value).toEqual(call(redirects));
-  expect(g.next().value).toEqual(put(hideLoader()));
   expect(g.next().value).toEqual(call([magic.user, magic.user.isLoggedIn]));
-  expect(g.next(true).value).toEqual(
-    put(
-      checkIsLoggedInLoginReceived({ isLoggedIn: true, method: 'isLoggedIn' })
-    )
-  );
   expect(g.next().value).toEqual(call([magic.user, magic.user.getMetadata]));
   const payload = {
     email: 'testemail@a.com',
@@ -45,7 +35,6 @@ it('Given that remember me is true, it will check if the user is logged in and g
     put(checkIsLoggedInReceived(payload))
   );
   expect(g.next().value).toEqual(put(isLoggedIn()));
-  expect(g.next().value).toEqual(call(redirects));
   expect(g.next().done).toBe(true);
 });
 
@@ -57,14 +46,7 @@ it('Given that remember me is false, but the isLoggedInCookie is true it will ch
   expect(g.next(true).value).toEqual(
     put(checkIsLoggedInStarted({ rememberMe: false, magicCredential: null, isLoggedInCookie: true }))
   );
-  expect(g.next().value).toEqual(call(redirects));
-  expect(g.next().value).toEqual(put(hideLoader()));
   expect(g.next().value).toEqual(call([magic.user, magic.user.isLoggedIn]));
-  expect(g.next(true).value).toEqual(
-    put(
-      checkIsLoggedInLoginReceived({ isLoggedIn: true, method: 'isLoggedIn' })
-    )
-  );
   expect(g.next().value).toEqual(call([magic.user, magic.user.getMetadata]));
   const payload = {
     email: 'testemail@a.com',
@@ -74,7 +56,6 @@ it('Given that remember me is false, but the isLoggedInCookie is true it will ch
     put(checkIsLoggedInReceived(payload))
   );
   expect(g.next().value).toEqual(put(isLoggedIn()));
-  expect(g.next().value).toEqual(call(redirects));
   expect(g.next().done).toBe(true);
 });
 
@@ -91,14 +72,6 @@ it('Uses magic credential if it is in the location query', () => {
   expect(g.next().value).toEqual(
     call([magic.auth, magic.auth.loginWithCredential])
   );
-  expect(g.next(true).value).toEqual(
-    put(
-      checkIsLoggedInLoginReceived({
-        isLoggedIn: true,
-        method: 'loginWithCredential',
-      })
-    )
-  );
   expect(g.next().value).toEqual(call([magic.user, magic.user.getMetadata]));
   const payload = {
     email: 'testemail@a.com',
@@ -108,8 +81,6 @@ it('Uses magic credential if it is in the location query', () => {
     put(checkIsLoggedInReceived(payload))
   );
   expect(g.next().value).toEqual(put(isLoggedIn()));
-  expect(g.next().value).toEqual(put(hideLoader()));
-  expect(g.next().value).toEqual(call(redirects));
   expect(g.next().done).toBe(true);
 });
 
@@ -126,7 +97,5 @@ it('Given that remember and isLoggedInCookie are false, it will skip the check a
       checkIsLoggedInReceived({ issuer: null, note: 'Remember me disabled' })
     )
   );
-  expect(g.next().value).toEqual(call(redirects));
-  expect(g.next().value).toEqual(put(hideLoader()));
   expect(g.next().done).toBe(true);
 });

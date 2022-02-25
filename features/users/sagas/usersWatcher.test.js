@@ -8,7 +8,7 @@ it('usersWatcher', () => {
     const g = usersWatcher();
     expect(g.next().value).toEqual(all([
       takeEvery(receiveUsernameStart().type, receiveUsernameWithTheLoggedUserIssuer),
-      takeEvery(receiveUsername().type, go, "/"),
+      takeEvery(receiveUsername().type, go, {payload: { path: "/"}}),
     ]));
     expect(g.next().done).toEqual(true);
 });

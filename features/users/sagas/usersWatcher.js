@@ -6,7 +6,7 @@ import go from '../../navigation/sagas/go';
 export default function* usersWatcher() {
   yield all([
     takeEvery(receiveUsernameStart().type, receiveUsernameWithTheLoggedUserIssuer),
-    takeEvery(receiveUsername().type, go, "/"),
+    takeEvery(receiveUsername().type, go, {payload: { path: "/"}}),
   ])
 }
 

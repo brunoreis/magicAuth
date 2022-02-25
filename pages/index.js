@@ -5,3 +5,13 @@ export default function Welcome() {
     <WelcomePageContainer/>
   )
 }
+
+export async function getStaticProps(context) {
+  return {
+    props: {
+      authentication: {
+        requiresAuthentication: true,
+      }
+    }, 
+  }
+}

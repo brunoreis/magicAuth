@@ -1,7 +1,7 @@
 import {
   getUsernameIsAvailable,
   getSignInLoading,
-  getShowLoader,
+  getCheckIsLoggedInLoading,
 } from './selectors';
 
 describe('getUsernameIsAvaliable', () => {
@@ -19,12 +19,12 @@ describe('getUsernameIsAvaliable', () => {
 it('getShowLoader', () => {
   const state = {
     authentication: {
-      showLoader: true,
+      checkIsLoggedInLoading: true,
     },
   };
-  expect(getShowLoader(state)).toBe(true);
-  state.authentication.showLoader = false;
-  expect(getShowLoader(state)).toBe(false);
+  expect(getCheckIsLoggedInLoading(state)).toBe(true);
+  state.authentication.checkIsLoggedInLoading = false;
+  expect(getCheckIsLoggedInLoading(state)).toBe(false);
 });
 
 it('getSignInLoading', () => {

@@ -1,15 +1,14 @@
 [] decouple modules
-[] find a way to inject the LoadingBranch only if the module is included
-[] remove dependencies between users and authentication (by connecting the events with app/sagas)
-[] remove dependencies between authentication and loading
+[] remove most dependencies between users and authentication (by connecting the events with app/sagas)
+[] test the LoaderAndRedirects component
 
 [] create all global selectors in the same way as the authentication one (by passing the key)
+[] move global selectors to features/module directory
 [] create a naming pattern to name actions, storeProps, selectors and sagas. Review code. 
 
 [] study runSagas and other resources and make the saga tests easier to write and readable.
 
 [] test the pages
-[] test the LoadingBranch component
 [] run tests in the deploy
 
 [] refactor redirects tests

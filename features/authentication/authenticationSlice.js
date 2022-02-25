@@ -8,7 +8,7 @@ const initialState = {
   issuer: null,
   rememberMe: false,
   signInLoading: false, 
-  showLoader: true,
+  checkIsLoggedInLoading: false,
 };
 
 export const authenticationSlice = createSlice({
@@ -27,8 +27,12 @@ export const authenticationSlice = createSlice({
     signInFailure: (state, action) => {
       state.signInLoading = false
     },
+    checkIsLoggedInStarted: (state) => {
+      state.checkIsLoggedInLoading = true
+    },
     checkIsLoggedInReceived: (state, action) => {
       const issuer = action.payload.issuer
+      state.checkIsLoggedInLoading = false
       if(issuer) {
         state.issuer = issuer
       } else {
@@ -39,9 +43,7 @@ export const authenticationSlice = createSlice({
       state.issuer = null
       state.rememberMe = false
     },
-    hideLoader: (state) => {
-      state.showLoader = false
-    }
+  
   }
 });
 
@@ -60,14 +62,13 @@ export default (mainKey) => {
 export const {
   signIn,
   signInSuccess,
+  checkIsLoggedInStarted,
   checkIsLoggedInReceived,
   logOutSuccess,
   hideLoader,
 } = authenticationSlice.actions;
 export const signInFailure = createAction('authentication/signInFailure')
 export const logOut = createAction('authentication/logOut')
-export const checkIsLoggedInStarted = createAction('authentication/checkIsLoggedInStarted')
-export const checkIsLoggedInLoginReceived = createAction('authentication/checkIsLoggedInLoginReceived')
 export const preloadMagicLinkIFrame = createAction('authentication/preloadMagicLinkIFrame')
 export const preloadMagicLinkIFrameStarted = createAction('authentication/preloadMagicLinkIFrameStarted')
 export const isLoggedIn = createAction('authentication/isLoggedIn')
@@ -77,4 +78,4 @@ export const getIsLoggedIn = (state) => !!state.issuer;
 export const getSignInLoading = (state) => state.signInLoading;
 export const getIssuer = (state) => state.issuer;
 export const getRememberMe = (state) => state.rememberMe
-export const getShowLoader = (state) => state.showLoader
+export const getCheckIsLoggedInLoading = (state) => state.checkIsLoggedInLoading

@@ -3,17 +3,17 @@ import Cookie from 'js-cookie';
 
 import { getSearch } from 'app/router';
 import { getRememberMe } from 'app/selectors'
-import { hideLoader } from '../authenticationSlice';
 import redirects from 'features/navigation/sagas/redirects'
 
 import magic from '../util/magic';
 
 import {
   checkIsLoggedInStarted,
-  checkIsLoggedInLoginReceived,
   checkIsLoggedInReceived,
   isLoggedIn,
 } from '../authenticationSlice';
+
+
 
 export default function* checkIsLoggedIn() {
   const rememberMe = yield select(getRememberMe);
@@ -24,49 +24,31 @@ export default function* checkIsLoggedIn() {
   yield put(
     checkIsLoggedInStarted({ rememberMe, magicCredential, isLoggedInCookie })
   );
-
-  if (magicCredential) {
+  if (magicCredential) { // loading signin info, no issuer, show loader
     const loggedIn = yield call([magic.auth, magic.auth.loginWithCredential]);
-    yield put(
-      checkIsLoggedInLoginReceived({
-        isLoggedIn: loggedIn,
-        method: 'loginWithCredential',
-      })
-    );
     const metadata = yield call([magic.user, magic.user.getMetadata]);
     yield put(checkIsLoggedInReceived(metadata));
     yield put(isLoggedIn());
-    yield put(hideLoader());
-    yield call(redirects)
   } else {
     if (rememberMe || isLoggedInCookie) {
       try {
-        yield call(redirects)
-        yield put(hideLoader())
+        // loading signin info, has issuer, do not show loader, redirect if needed
         const loggedIn = yield call([magic.user, magic.user.isLoggedIn]);
-        yield put(
-          checkIsLoggedInLoginReceived({
-            isLoggedIn: loggedIn,
-            method: 'isLoggedIn',
-          })
-        );
+        // ? 
         const metadata = yield call([magic.user, magic.user.getMetadata]);
         yield put(checkIsLoggedInReceived(metadata));
         yield put(isLoggedIn());
-        yield call(redirects)
       } catch (e) {
         // basic error handling. Needs to be improved
         // https://magic.link/docs/api-reference/client-side-sdks/web#rpcerror
         yield put(checkIsLoggedInReceived({ issuer: null, error: e.message }));
-        yield put(hideLoader());
       }
     } else {
       // we may enforce a logOut here in case the user was loggedIn, but remember me was not true
+      // stop "loading" very soon because there is no reason (rememberMe or cookie) to check if the user is auth. 
       yield put(
         checkIsLoggedInReceived({ issuer: null, note: 'Remember me disabled' })
       );
-      yield call(redirects)
-      yield put(hideLoader());
     }
   }
 }
