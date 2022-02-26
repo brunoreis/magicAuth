@@ -1,20 +1,22 @@
+[] decouple loaders from the auth selectors (use injected params)
+[] move remaining global selectors (if any) into their files
+[] find a better way (helper method) to globalize and test global selectors 
+[] move global selectors to features/module directory
+
+[] find a way so that each module can register itself
+
 [] write tests for the "redirect" components
 
-[] show signIn failure messages
-
-[] create all global selectors in the same way as the authentication one (by passing the key)
-[] move global selectors to features/module directory
 [] create a naming pattern to name actions, storeProps, selectors and sagas. Review code. 
 
 [] study runSagas and other resources and make the saga tests easier to write and readable.
 
 [] test the pages
+[] add e2e testCafe tests 
 [] run tests in the deploy
 
-[] refactor redirects tests
+[] show signIn failure messages
 [] show message suggesting to close the first screen after the authentication/signInSuccess
-
-[] add e2e tests (testCafe? Would that have to open my email client?)
 
 [] move magic.link public key to Vercel
 [] review the layout when the page reduce height
