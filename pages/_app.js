@@ -11,23 +11,22 @@ import usersPageWrappers from 'features/users/usersPageWrappers';
 // All the feature specific wrappers that will be put around the inner page component. You can add more by pushing into this array. 
 const wrappers = [].concat(usersPageWrappers, authenticationPageWrappers)
 
-const FeatureWrappers = ({ children, pageProps }) => wrappers.reduce(
-  (previous, Current) => {
-    return (<Current {...pageProps}>{previous}</Current>)
+const FeatureWrappers = (Component) => wrappers.reduce(
+  (previous, FeatureHoc) => {
+    return FeatureHoc(previous)
   },
-  children
+  Component
 )
 
 
 function MyApp({ Component, pageProps }) {
+  const WrappedComponent = FeatureWrappers(Component, pageProps)
   return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <FeatureWrappers pageProps={pageProps}>
-              <Component {...pageProps} />
-            </FeatureWrappers>
+              <WrappedComponent {...pageProps} />
           </Provider> 
       </ThemeProvider>
     </>

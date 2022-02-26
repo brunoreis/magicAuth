@@ -9,7 +9,7 @@ export default function SignUp() {
 export async function getStaticProps(context) {
   return {
     props: {
-      authentication: {
+      authenticationSettings: {
         requiresAuthentication: true,
       }
     }, 

@@ -1,3 +1,3 @@
-import Redirects from './components/Redirects'
+import UsersRedirectsHoc from './components/UsersRedirectsHoc'
 
-export default [Redirects];
+export default [UsersRedirectsHoc];

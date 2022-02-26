@@ -1,15 +1,15 @@
 import WelcomePageContainer from 'features/welcome/components/WelcomePage/WelcomePageContainer'
 
-export default function Welcome() {
+export default function Welcome(props) {
   return (
-    <WelcomePageContainer/>
+    <WelcomePageContainer {...props}/>
   )
 }
 
 export async function getStaticProps(context) {
   return {
     props: {
-      authentication: {
+      authenticationSettings: {
         requiresAuthentication: true,
       }
     }, 

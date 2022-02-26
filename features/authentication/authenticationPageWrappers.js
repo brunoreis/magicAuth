@@ -1,3 +1,3 @@
-import LoaderAndRedirects from 'features/authentication/components/LoaderAndRedirects'
+import AuthenticationLoaderAndRedirectsHoc from 'features/authentication/components/AuthenticationLoaderAndRedirectsHoc'
 
-export default [LoaderAndRedirects];
+export default [AuthenticationLoaderAndRedirectsHoc];

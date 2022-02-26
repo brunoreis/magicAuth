@@ -29,9 +29,18 @@ const redirectIfRequiresUsernameEffect = ({ isLoggedIn, hasUsername }) => {
     )
 }
 
-export default function Redirects(props) {
-    const isLoggedIn = useSelector(getIsLoggedIn);
-    const hasUsername = !!useSelector(getUsername);
-    redirectIfRequiresUsernameEffect({ isLoggedIn, hasUsername })
-    return props.children
+export default function UsersRedirectsHoc(Component) {
+    return (props) => {
+        const isLoggedIn = useSelector(getIsLoggedIn);// this is now comming with the props
+        const username = useSelector(getUsername); // we don't need this selector, but one that receives the issuer (decouple)
+        const hasUsername = !!username;
+        const passedProps = {
+            ...props,
+            users: {
+                username
+            }
+        }
+        redirectIfRequiresUsernameEffect({ isLoggedIn, hasUsername });
+        return <Component {...passedProps}/>
+    }
 }

@@ -10,7 +10,7 @@ export default function SignIn() {
 export async function getStaticProps(context) {
   return {
     props: {
-      authentication: {
+      authenticationSettings: {
         requiresAuthentication: false,
       }
     }, 

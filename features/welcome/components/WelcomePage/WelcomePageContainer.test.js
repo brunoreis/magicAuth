@@ -20,7 +20,7 @@ describe('WelcomePageContainer', () => {
     store.dispatch({ type: 'app/routerReady'})
     store.dispatch(checkIsLoggedInReceived({ issuer: issuerId }))
     store.dispatch(receiveUsernameStart(username))
-    render(<WelcomePageContainer />)
+    render(<WelcomePageContainer users={{username}} />)
     const text = screen.getByText(`Welcome, ${username}`)
     expect(text).not.toBeNull()
   })
