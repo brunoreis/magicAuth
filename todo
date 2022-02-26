@@ -1,6 +1,4 @@
-[] test all flows on boths screens (when loggin via magic link)
 [] write tests for the "redirect" components
-[] close the first screen after the signIn request?
 
 [] show signIn failure messages
 
@@ -14,6 +12,7 @@
 [] run tests in the deploy
 
 [] refactor redirects tests
+[] show message suggesting to close the first screen after the authentication/signInSuccess
 
 [] add e2e tests (testCafe? Would that have to open my email client?)
 
