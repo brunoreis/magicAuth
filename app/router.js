@@ -1,7 +1,7 @@
 import Router from 'next/router';
 
 export const path = () => {
-    if(Router.router) {
+    if(typeof window !== 'undefined') {
         return Router.router.asPath
     } else {
         return "/routerNotInstantiated"
@@ -9,7 +9,7 @@ export const path = () => {
 }
 
 export const push = (path) => {
-    if(Router.router) {
+    if(typeof window !== 'undefined') {
         return Router.router.push(path)
     } else {
         return "**routerNotInstantiated**"
@@ -17,9 +17,17 @@ export const push = (path) => {
 }
 
 export const getSearch = () => {
-    if(Router.router) {
+    if(typeof window !== 'undefined') {
         return window.location.search
     } else {
         return "?nowindowdefined"
+    }
+}
+
+export const getPathname = () => {
+    if(typeof window !== 'undefined') {
+        return Router.pathname
+    } else {
+        return "no Router"
     }
 }

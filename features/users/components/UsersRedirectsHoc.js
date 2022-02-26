@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-
+import { getPathname } from 'app/router';
 import { navigate } from 'features/navigation/navigationSlice';
 import { getUsername, getIsLoggedIn } from 'app/selectors';
 
@@ -16,16 +16,21 @@ export const LoadingContainer = styled.div`
 `
 
 const SIGNUP_ROUTE = '/signUp'
+const ROOT_ROUTE = '/'
 
 const redirectIfRequiresUsernameEffect = ({ isLoggedIn, hasUsername }) => {
     const dispatch = useDispatch();
+    const pathname = getPathname();
     useEffect(
         () => {
-            if(isLoggedIn && !hasUsername) {
+            if(isLoggedIn && !hasUsername && pathname !== SIGNUP_ROUTE) {
                 dispatch(navigate({ path: SIGNUP_ROUTE }))
             }
+            if(isLoggedIn && hasUsername && pathname === SIGNUP_ROUTE) {
+                dispatch(navigate({ path: ROOT_ROUTE }))
+            }
         },
-        [isLoggedIn, hasUsername]
+        [isLoggedIn, hasUsername, pathname]
     )
 }
 
