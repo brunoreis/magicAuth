@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { getPathname } from 'app/router';
 import { navigate } from 'features/navigation/navigationSlice';
-import { getUsername, getIsLoggedIn } from 'app/selectors';
+import { getUsername } from 'app/selectors';
+import getIsLoggedIn from 'features/authentication/selectors/global/getIsLoggedIn'
 
 export const LoadingContainer = styled.div`
     width: 100%;

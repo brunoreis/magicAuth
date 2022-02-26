@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { navigate } from 'features/navigation/navigationSlice';
 
-import { getCheckIsLoggedInLoading, getIsLoggedIn, getIssuer } from 'app/selectors';
+import getCheckIsLoggedInLoading from 'features/authentication/selectors/global/getCheckIsLoggedInLoading'
+import getIsLoggedIn from 'features/authentication/selectors/global/getIsLoggedIn'
+import getIssuer from 'features/authentication/selectors/global/getIssuer';
 
 export const LoadingContainer = styled.div`
   width: 100%;
@@ -38,7 +40,7 @@ const AuthenticationLoaderAndRedirectsHoc = (Component) => {
     const isLoggedIn = useSelector(getIsLoggedIn);
     const issuer = useSelector(getIssuer);
     const requiresAuthentication =
-      props.authenticationSettings.requiresAuthentication;
+      props?.authenticationSettings?.requiresAuthentication || false;
     redirectIfRequiresAuthenticationEffect({
       checkIsLoggedInLoading,
       requiresAuthentication,

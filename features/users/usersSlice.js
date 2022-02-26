@@ -2,7 +2,7 @@ import { createSlice, createAction } from '@reduxjs/toolkit';
 
 import { signInSuccess, checkIsLoggedInReceived } from 'features/authentication/authenticationSlice';
 
-let mainStoreKey;
+let mainStoreKey = 'users';
 
 const initialState = {
   users: [],
@@ -36,10 +36,7 @@ export const usersSlice = createSlice({
 });
 
 //reducer
-export default (mainKey) => {
-  mainStoreKey = mainKey
-  return usersSlice.reducer;
-}
+export default usersSlice.reducer;
 
 // actions
 export const {

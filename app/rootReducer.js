@@ -3,8 +3,8 @@ import authenticationReducer from '../features/authentication/authenticationSlic
 import usersReducer from '../features/users/usersSlice';
 
 const rootReducer = combineReducers({
-  authentication: authenticationReducer('authentication'),
-  users: usersReducer('users'),
+  authentication: authenticationReducer,
+  users: usersReducer,
 });
 
 export default rootReducer;

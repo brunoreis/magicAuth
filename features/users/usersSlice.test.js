@@ -32,7 +32,7 @@ const storeWithTwoUsers = {
 const exist = (actionCreator) => { // this should go in some kind of testHelpers file/folder
   actionCreator()
 }
-const reducer = usersReducer('users')
+const reducer = usersReducer
 describe('users reducer', () => {
   describe('signInSuccess', () => {
     

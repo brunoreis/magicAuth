@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie';
 import { call, put, select } from 'redux-saga/effects';
 
-import { getRememberMe } from 'app/selectors';
+import getRememberMe from 'features/authentication/selectors/global/getRememberMe'
 
 import magic from '../util/magic';
 import {

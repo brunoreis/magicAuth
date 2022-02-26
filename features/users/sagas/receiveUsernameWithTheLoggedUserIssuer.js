@@ -1,6 +1,7 @@
 import { put, select, call } from 'redux-saga/effects';
 import { receiveUsername } from '../usersSlice';
-import { getUsernameIsAvailable, getIssuer } from '../../../app/selectors';
+import { getUsernameIsAvailable } from 'app/selectors';
+import getIssuer from 'features/authentication/selectors/global/getIssuer';
 
 export default function* receiveUsernameWithTheLoggedUserIssuer({ payload }) {
   const username = payload;

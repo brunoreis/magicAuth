@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsLoggedIn } from 'app/selectors';
-import { navigate } from 'features/navigation/navigationSlice';
 
-import { getSignInLoading } from 'app/selectors';
+import getSignInLoading from 'features/authentication/selectors/global/getSignInLoading';
+import getIsLoggedIn from  'features/authentication/selectors/global/getIsLoggedIn';
+import { navigate } from 'features/navigation/navigationSlice';
 
 import { signIn, preloadMagicLinkIFrame } from '../../authenticationSlice';
 
@@ -24,7 +24,7 @@ const usePreloadMagicLinkIFrameEffect = ({ dispatch }) => {
   useEffect(() => dispatch(preloadMagicLinkIFrame()), []);
 };
 
-const SignInPageContainer = () => {
+const SignInPageContainer = (props) => {
   const dispatch = useDispatch();
   const loading = useSelector(getSignInLoading);
   const [email, setEmail] = useState('');

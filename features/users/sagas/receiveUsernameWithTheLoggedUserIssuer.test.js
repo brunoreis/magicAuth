@@ -1,5 +1,8 @@
 import { put, select, call } from 'redux-saga/effects';
-import { getUsernameIsAvailable, getIssuer } from '../../../app/selectors';
+
+import { getUsernameIsAvailable } from 'app/selectors';
+import getIssuer from 'features/authentication/selectors/global/getIssuer';
+
 import receiveUsernameWithTheLoggedUserIssuer from './receiveUsernameWithTheLoggedUserIssuer'
 import { receiveUsername } from '../usersSlice';
 

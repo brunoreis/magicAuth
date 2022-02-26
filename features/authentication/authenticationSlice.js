@@ -2,7 +2,7 @@ import { createAction, createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-let mainStoreKey;
+export const mainStoreKey = 'authentication';
 
 const initialState = {
   issuer: null,
@@ -47,16 +47,14 @@ export const authenticationSlice = createSlice({
   }
 });
 
-//reducer
-export default (mainKey) => {
-  mainStoreKey = mainKey
-  const persistConfig = { 
-    key: mainKey,
-    storage,
-    blacklist: ['signInLoading', 'showLoader']
-  }
-  return persistReducer(persistConfig, authenticationSlice.reducer);
+//reducer  
+const persistConfig = { 
+  key: mainStoreKey,
+  storage,
+  blacklist: ['signInLoading', 'showLoader']
 }
+export default persistReducer(persistConfig, authenticationSlice.reducer);
+
 
 //actions
 export const {
@@ -72,10 +70,3 @@ export const logOut = createAction('authentication/logOut')
 export const preloadMagicLinkIFrame = createAction('authentication/preloadMagicLinkIFrame')
 export const preloadMagicLinkIFrameStarted = createAction('authentication/preloadMagicLinkIFrameStarted')
 export const isLoggedIn = createAction('authentication/isLoggedIn')
-
-//selectors
-export const getIsLoggedIn = (state) => !!state.issuer;
-export const getSignInLoading = (state) => state.signInLoading;
-export const getIssuer = (state) => state.issuer;
-export const getRememberMe = (state) => state.rememberMe
-export const getCheckIsLoggedInLoading = (state) => state.checkIsLoggedInLoading

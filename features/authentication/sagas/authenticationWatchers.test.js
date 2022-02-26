@@ -4,7 +4,6 @@ import go from 'features/navigation/sagas/go';
 import {
   signIn,
   logOut,
-  logOutSuccess,
   preloadMagicLinkIFrame,
 } from '../authenticationSlice';
 import authenticationSagas from './authenticationWatchers';
