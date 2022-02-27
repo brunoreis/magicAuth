@@ -9,6 +9,7 @@ import { navigate } from 'features/navigation/navigationSlice';
 import getCheckIsLoggedInLoading from '../selectors/global/getCheckIsLoggedInLoading'
 import getIsLoggedIn from '../selectors/global/getIsLoggedIn'
 import getIssuer from '../selectors/global/getIssuer';
+import getAuthUserEmail from '../selectors/global/getAuthUserEmail';
 
 export const LoadingContainer = styled.div`
   width: 100%;
@@ -39,6 +40,7 @@ const AuthenticationLoaderAndRedirectsHoc = (Component) => {
     const checkIsLoggedInLoading = useSelector(getCheckIsLoggedInLoading);
     const isLoggedIn = useSelector(getIsLoggedIn);
     const issuer = useSelector(getIssuer);
+    const email = useSelector(getAuthUserEmail);
     const requiresAuthentication =
       props?.authenticationSettings?.requiresAuthentication || false;
     redirectIfRequiresAuthenticationEffect({
@@ -51,6 +53,7 @@ const AuthenticationLoaderAndRedirectsHoc = (Component) => {
       authentication: {
         isLoggedIn,
         issuer,
+        email,
       },
     };
     delete passedProps.authenticationSettings;

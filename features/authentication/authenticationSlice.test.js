@@ -20,6 +20,7 @@ const reducer = authenticationReducer
 it('should handle initial state', () => {
   expect(reducer(undefined, {})).toEqual({
     checkIsLoggedInLoading: false,
+    email: null,
     issuer: null,
     rememberMe: false,
     signInLoading: false,
@@ -83,6 +84,13 @@ describe('checkIsLoggedInReceived', () => {
     const state = reducer(undefined, checkIsLoggedInReceived(payload))
     expect(state.issuer).toBe(issuer)
   })
+  it('set email', () => {
+    const email = 'e@mail.com'
+    const issuer = 'xpto'
+    const payload = { issuer, email }
+    const state = reducer(undefined, checkIsLoggedInReceived(payload))
+    expect(state.email).toBe(email)
+  })
   it('set issuer to null if not logged in', () => {
     const payload = { issuer: null }
     const state = reducer({ isLoggedIn: true, issuer: "xpto"}, checkIsLoggedInReceived(payload))
@@ -96,10 +104,17 @@ describe('checkIsLoggedInReceived', () => {
 })
 
 describe('logOutSuccess', () => {
-  it('sets rememberMe and issuer to false', () => {
+  it('sets rememberMe to false', () => {
     let state = reducer({ rememberMe: true, issuer: 'xpto'}, logOutSuccess())
     expect(state.rememberMe).toBe(false)
+  })
+  it('sets  issuer to null', () => {
+    let state = reducer({ rememberMe: true, issuer: 'xpto'}, logOutSuccess())
     expect(state.issuer).toBe(null)
+  })
+  it('sets  email to null', () => {
+    let state = reducer({ rememberMe: true, issuer: 'xpto', email: 'x@pto.com'}, logOutSuccess())
+    expect(state.email).toBe(null)
   })
 })
 

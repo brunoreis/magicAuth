@@ -1,8 +1,5 @@
-import {
-  signInSuccess,
-  checkIsLoggedInReceived,
-} from '../authentication/authenticationSlice';
-import usersReducer, { receiveUsername } from './usersSlice';
+
+import usersReducer, { receiveUsername, addUser } from './usersSlice';
 
 const metadata = {
   email: 'testemail@a.com',
@@ -56,23 +53,12 @@ describe('users reducer', () => {
     });
   })
 
-  describe('signInSuccess', () => {
-    it('Given auth user data is not in the store, should create one', () => {
-      let state = reducer(undefined, signInSuccess(metadata));
-      expect(state).toEqual(storeWithMetadataUser);
-      state = reducer(state, signInSuccess(metadata));
-      expect(state.users.length).toBe(1);
-    });
-  });
-
-  describe('checkIsLoggedInReceived', () => {
-    it('Given auth user data is not in the store, should create one', () => {
-      let state = reducer(undefined, checkIsLoggedInReceived(metadata));
-      expect(state).toEqual(storeWithMetadataUser);
-      state = reducer(state, signInSuccess(metadata));
-      expect(state.users.length).toBe(1);
-    });
-  });
+  describe('addUser', () => {
+    it('adds a new user if it does not exist', () => {
+      let state = reducer({ users: [] }, addUser({ issuer: 'dude', email: 'dude@gmail.com'}))
+      // console.log(state)//?
+    })
+  })
 });
 
 describe('actionCreators', () => {

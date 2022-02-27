@@ -6,6 +6,7 @@ export const mainStoreKey = 'authentication';
 
 const initialState = {
   issuer: null,
+  email: null,
   rememberMe: false,
   signInLoading: false, 
   checkIsLoggedInLoading: false,
@@ -35,12 +36,14 @@ export const authenticationSlice = createSlice({
       state.checkIsLoggedInLoading = false
       if(issuer) {
         state.issuer = issuer
+        state.email = action.payload.email
       } else {
         state.issuer = null
       }
     },
     logOutSuccess: (state) => {
       state.issuer = null
+      state.email = null
       state.rememberMe = false
     },
   
