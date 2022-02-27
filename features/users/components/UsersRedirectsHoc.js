@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+
 import { getPathname } from 'app/router';
 import { navigate } from 'features/navigation/navigationSlice';
-import { getUsername } from 'app/selectors';
-import getIsLoggedIn from 'features/authentication/selectors/global/getIsLoggedIn'
+
+import getUser from '../selectors/global/getUser';
 
 export const LoadingContainer = styled.div`
     width: 100%;
@@ -37,16 +37,19 @@ const redirectIfRequiresUsernameEffect = ({ isLoggedIn, hasUsername }) => {
 
 export default function UsersRedirectsHoc(Component) {
     return (props) => {
-        const isLoggedIn = useSelector(getIsLoggedIn);// this is now comming with the props
-        const username = useSelector(getUsername); // we don't need this selector, but one that receives the issuer (decouple)
+        const { authentication } = props
+        const issuer = authentication.issuer
+        const isLoggedIn = authentication.isLoggedIn;
+        const user = useSelector(getUser(issuer));
+        const username = user?.username || null; 
         const hasUsername = !!username;
+        redirectIfRequiresUsernameEffect({ isLoggedIn, hasUsername });
         const passedProps = {
             ...props,
             users: {
                 username
             }
         }
-        redirectIfRequiresUsernameEffect({ isLoggedIn, hasUsername });
         return <Component {...passedProps}/>
     }
 }

@@ -4,7 +4,7 @@ import * as R from 'ramda'
 import { addTheme, addReduxProvider } from 'util/testHelpers'
 import store from 'app/store'
 // this should not depend on these events to be tested:
-import { receiveUsernameStart } from 'features/users/usersSlice'
+import { receiveUsername } from 'features/users/usersSlice'
 import { checkIsLoggedInReceived } from 'features/authentication/authenticationSlice'
 
 import WelcomePageContainer from './WelcomePageContainer'
@@ -18,8 +18,10 @@ describe('WelcomePageContainer', () => {
     const username = "dude"
     store.dispatch({ type: 'persist/REHYDRATE'})
     store.dispatch({ type: 'app/routerReady'})
+    
+    // remove this: 
     store.dispatch(checkIsLoggedInReceived({ issuer: issuerId }))
-    store.dispatch(receiveUsernameStart(username))
+    store.dispatch(receiveUsername({ username, issuer: issuerId }))
     render(<WelcomePageContainer users={{username}} />)
     const text = screen.getByText(`Welcome, ${username}`)
     expect(text).not.toBeNull()

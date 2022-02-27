@@ -6,7 +6,6 @@ import getIsLoggedIn from  'features/authentication/selectors/global/getIsLogged
 import { navigate } from 'features/navigation/navigationSlice';
 
 import { signIn, preloadMagicLinkIFrame } from '../../authenticationSlice';
-
 import SignInPage from './SignInPage';
 import useDebouncedValidEmailErrorMessage from './useDebouncedValidEmailErrorMessage';
 

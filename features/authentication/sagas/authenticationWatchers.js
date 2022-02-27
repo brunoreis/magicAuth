@@ -1,11 +1,9 @@
 import { all, takeEvery, call, fork, take } from 'redux-saga/effects';
 
-import go from 'features/navigation/sagas/go';
 
 import {
   signIn,
   logOut,
-  logOutSuccess,
   preloadMagicLinkIFrame,
 } from '../authenticationSlice';
 import isSignedInWatcher from './isSignedInWatcher';

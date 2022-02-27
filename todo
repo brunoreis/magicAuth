@@ -1,4 +1,6 @@
 [] decouple loaders from the auth selectors (use injected params)
+[] do the same as addNonExistentUser through the hoc (users slice extra reducers)
+
 [] move remaining global selectors (if any) into their files
 [] find a better way (helper method) to globalize and test global selectors 
 [] move global selectors to features/module directory

@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+
 import { navigate } from 'features/navigation/navigationSlice';
 
-import getCheckIsLoggedInLoading from 'features/authentication/selectors/global/getCheckIsLoggedInLoading'
-import getIsLoggedIn from 'features/authentication/selectors/global/getIsLoggedIn'
-import getIssuer from 'features/authentication/selectors/global/getIssuer';
+import getCheckIsLoggedInLoading from '../selectors/global/getCheckIsLoggedInLoading'
+import getIsLoggedIn from '../selectors/global/getIsLoggedIn'
+import getIssuer from '../selectors/global/getIssuer';
 
 export const LoadingContainer = styled.div`
   width: 100%;
@@ -35,7 +36,6 @@ const redirectIfRequiresAuthenticationEffect = ({
 
 const AuthenticationLoaderAndRedirectsHoc = (Component) => {
   return (props) => {
-    console.log('AuthenticationLoaderAndRedirectsHoc', { props });
     const checkIsLoggedInLoading = useSelector(getCheckIsLoggedInLoading);
     const isLoggedIn = useSelector(getIsLoggedIn);
     const issuer = useSelector(getIssuer);
@@ -55,7 +55,7 @@ const AuthenticationLoaderAndRedirectsHoc = (Component) => {
     };
     delete passedProps.authenticationSettings;
 
-    const showLoader = checkIsLoggedInLoading && !isLoggedIn; //isLoggedIn may be true due to cached data
+    const showLoader = checkIsLoggedInLoading && !isLoggedIn;
     return showLoader ? (
       <LoadingContainer>
         <Image src="/loader.gif" width="160px" height="120px" />

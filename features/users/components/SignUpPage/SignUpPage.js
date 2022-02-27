@@ -3,8 +3,9 @@ import Header from 'components/Header';
 import { FieldContainer, FieldLabel } from 'components/styles';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
-import { MessageContainer } from './SignUpPage.styles.js';
 import buildOnEnterKeyDown from 'components/buildOnEnterKeyDown';
+
+import { MessageContainer } from './SignUpPage.styles.js';
 
 export default function SignUpPage({
   username,

@@ -1,8 +1,8 @@
-import { createSlice, createAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { signInSuccess, checkIsLoggedInReceived } from 'features/authentication/authenticationSlice';
 
-let mainStoreKey = 'users';
+export const mainStoreKey = 'users';
 
 const initialState = {
   users: [],
@@ -23,14 +23,14 @@ export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: { 
-    receiveUsername: (state, {payload: { loggedUserIssuer, username }}) => {
-      const index = findUserIndex(state, loggedUserIssuer)
+    receiveUsername: (state, {payload: { issuer, username }}) => {
+      const index = findUserIndex(state, issuer)
       state.users[index].username = username
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(checkIsLoggedInReceived().type, addNonExistentUser)
+      .addCase(checkIsLoggedInReceived().type, addNonExistentUser) // maybe we can also do these through the wrappers
       .addCase(signInSuccess().type, addNonExistentUser)
   },
 });
@@ -42,6 +42,4 @@ export default usersSlice.reducer;
 export const {
   receiveUsername,
 } = usersSlice.actions;
-
-export const receiveUsernameStart = createAction("users/receiveUsernameStart")
 

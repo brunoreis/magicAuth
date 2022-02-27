@@ -1,8 +1,8 @@
 import SignUpPageContainer from 'features/users/components/SignUpPage/SignUpPageContainer'
 
-export default function SignUp() {
+export default function SignUp(props) {
   return (
-    <SignUpPageContainer onButtonClick={(v) => console.log(v)}/>
+    <SignUpPageContainer {...props}/>
   )
 }
 

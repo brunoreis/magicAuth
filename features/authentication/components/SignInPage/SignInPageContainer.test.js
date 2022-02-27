@@ -1,10 +1,12 @@
 import { render as tlRender, screen } from '@testing-library/react'
-import SignInPageContainer from './SignInPageContainer'
-import { addTheme, addReduxProvider } from 'util/testHelpers'
-import store from 'app/store'
-import getRememberMe from 'features/authentication/selectors/global/getRememberMe'
-import * as R from 'ramda'
 import userEvent from '@testing-library/user-event'
+import * as R from 'ramda'
+
+import store from 'app/store'
+import { addTheme, addReduxProvider } from 'util/testHelpers'
+import getRememberMe from 'features/authentication/selectors/global/getRememberMe'
+
+import SignInPageContainer from './SignInPageContainer'
 
 const render = R.compose(tlRender, addTheme, addReduxProvider)
 

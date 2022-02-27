@@ -16,6 +16,9 @@ import sagas from './sagas';
 import Router from 'next/router';
 import rootReducer from './rootReducer';
 
+const initialState = null;
+export const setInitialState = (state) => initialState = state
+
 const checkRouter = (cb) => {
   window ? setTimeout(() => (Router.router ? cb() : checkRouter()), 100) : cb();
 };

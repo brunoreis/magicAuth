@@ -1,22 +1,31 @@
 import { useState } from 'react';
-import SignUpPage from './SignUpPage';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsernameIsAvailable } from 'app/selectors';
-import { receiveUsernameStart } from '../../usersSlice'; 
 
-export default function SignUpPageContainer() {
+import { navigate } from 'features/navigation/navigationSlice';
+
+import getUsernameIsAvailable from '../../selectors/global/getUsernameIsAvailable';
+import { receiveUsername } from '../../usersSlice';
+import SignUpPage from './SignUpPage';
+
+const WELCOME_URL = '/'
+
+export default function SignUpPageContainer(props) {
+  const issuer = props.authentication.issuer;
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
-  const isAvailable = useSelector(getUsernameIsAvailable(username))
+  const [saving, setSaving] = useState(false);
+  const isAvailable = useSelector(getUsernameIsAvailable(username));
   const canSubmit = isAvailable && !!username;
   return (
     <SignUpPage
       username={username}
-      available={username ? isAvailable : null}
+      available={(username && !saving) ? isAvailable : null}
       onUsernameChange={setUsername}
       canSubmit={canSubmit}
       onButtonClick={() => {
-        dispatch(receiveUsernameStart(username));
+        setSaving(true)
+        dispatch(receiveUsername({ issuer, username }));
+        dispatch(navigate(WELCOME_URL));
       }}
     />
   );
