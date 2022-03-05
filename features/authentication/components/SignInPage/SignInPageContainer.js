@@ -23,7 +23,7 @@ const usePreloadMagicLinkIFrameEffect = ({ dispatch }) => {
   useEffect(() => dispatch(preloadMagicLinkIFrame()), []);
 };
 
-const SignInPageContainer = (props) => {
+const SignInPageContainer = () => {
   const dispatch = useDispatch();
   const loading = useSelector(getSignInLoading);
   const [email, setEmail] = useState('');

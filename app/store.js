@@ -29,21 +29,26 @@ const persistConfig = {
   storage,
   whitelist: ['users'],
 };
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const sagaMiddleware = createSagaMiddleware();
-const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }).concat(sagaMiddleware),
-});
-sagaMiddleware.run(sagas);
-export const persistor = persistStore(store);
-sagaMiddleware.setContext({ persistor })
+export const buildStore = () => {
+  const persistedReducer = persistReducer(persistConfig, rootReducer);
+  const sagaMiddleware = createSagaMiddleware();
+  const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(sagaMiddleware),
+  });
+  sagaMiddleware.run(sagas);
+  const persistor = persistStore(store);
+  sagaMiddleware.setContext({ persistor })
+  return store;
+}
+const store = buildStore();
 export default store;
-checkRouter(() => store.dispatch({ type: 'app/routerReady' }));
+
+checkRouter(() => store.dispatch({ type: 'app/routerReady' })); // maybe we should move this to an app sage. This cause cyclic dependenci if inside the buildStore method
 

@@ -42,7 +42,7 @@ const AuthenticationLoaderAndRedirectsHoc = (Component) => {
     const issuer = useSelector(getIssuer);
     const email = useSelector(getAuthUserEmail);
     const requiresAuthentication =
-      props?.authenticationSettings?.requiresAuthentication || false;
+    props?.authenticationSettings?.requiresAuthentication || false;
     redirectIfRequiresAuthenticationEffect({
       checkIsLoggedInLoading,
       requiresAuthentication,
@@ -56,13 +56,12 @@ const AuthenticationLoaderAndRedirectsHoc = (Component) => {
         email,
       },
     };
-    delete passedProps.authenticationSettings;
-
+    delete passedProps.authenticationSettings;    
     const showLoader = checkIsLoggedInLoading && !isLoggedIn;
     return showLoader ? (
       <LoadingContainer>
         <Image src="/loader.gif" width="160px" height="120px" />
-        checking user info..
+        <span>checking user info..</span>
       </LoadingContainer>
     ) : (
       <Component {...passedProps} />

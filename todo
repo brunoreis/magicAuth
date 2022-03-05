@@ -1,13 +1,11 @@
-[] organize selectors
-[] find a better way (helper method) to globalize and test global selectors 
-
-[] find a way so that each module can register itself
-
 [] write tests for the "redirect" components
 
+[] find a way so that each module can register itself
 [] test the decoupling of the modules
 
 [] create a naming pattern to name actions, storeProps, selectors and sagas. Review code. 
+
+[] move router to authentication?
 
 [] study runSagas and other resources and make the saga tests easier to write and readable.
 

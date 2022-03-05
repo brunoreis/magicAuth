@@ -5,6 +5,8 @@ import GlobalStyle from 'styles/GlobalStyle';
 import theme from 'styles/theme';
 import store from 'app/store';
 
+console.log({ store })
+
 import authenticationPageWrappers from 'features/authentication/authenticationPageWrappers';
 import usersPageWrappers from 'features/users/usersPageWrappers';
 
