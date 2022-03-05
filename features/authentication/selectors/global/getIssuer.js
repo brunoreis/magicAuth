@@ -1,4 +1,3 @@
-import local from '../local/getIssuer';
-import { mainStoreKey } from '../../authenticationSlice';
-
-export default (state) => local(state[mainStoreKey])
+import getIssuer from '../local/getIssuer';
+import globalize from './globalize';
+export default globalize(getIssuer);

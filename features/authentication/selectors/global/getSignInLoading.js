@@ -1,4 +1,3 @@
-import local from '../local/getSignInLoading';
-import { mainStoreKey } from '../../authenticationSlice';
-
-export default (state) => local(state[mainStoreKey])
+import getSignInLoading from '../local/getSignInLoading';
+import globalize from './globalize';
+export default globalize(getSignInLoading);

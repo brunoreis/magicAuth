@@ -1,4 +1,3 @@
-import local from '../local/getCheckIsLoggedInLoading';
-import { mainStoreKey } from '../../authenticationSlice';
-
-export default (state) => local(state[mainStoreKey])
+import getCheckIsLoggedInLoading from '../local/getCheckIsLoggedInLoading';
+import globalize from './globalize';
+export default globalize(getCheckIsLoggedInLoading);
