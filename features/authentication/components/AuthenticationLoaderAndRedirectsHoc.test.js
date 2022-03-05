@@ -1,22 +1,22 @@
 import { render as tlRender, screen } from '@testing-library/react';
 import * as R from 'ramda';
 
-import { addTheme, addReduxProvider } from 'util/testHelpers';
+import { buildStore } from 'app/store';
+import { addTheme } from 'util/testHelpers';
+import addReduxProvider from "util/testHelpers/addReduxProvider";
 import { checkIsLoggedInStarted } from 'features/authentication/authenticationSlice';
-import addStoreBroadcasting from 'util/testHelpers/addStoreBroadcasting';
 
 import AuthenticationLoaderAndRedirectsHoc from './AuthenticationLoaderAndRedirectsHoc';
 
-const render = R.compose(tlRender, addTheme, addReduxProvider);
+const render = R.compose(tlRender, addTheme);
 
 const WrappedComponent = () => <span>WrappedComponent</span>;
-const Component = addStoreBroadcasting(
-  AuthenticationLoaderAndRedirectsHoc(WrappedComponent)
-);
+const Component = R.compose(addReduxProvider, AuthenticationLoaderAndRedirectsHoc)(WrappedComponent)
+
 
 it('Given the user is not logged in and checkIsLoggedInLoading is true, should show loader with "checking user info.." text and not show the wrapped component.', async () => {
-  let store = null;
-  render(<Component broadCastStore={(innerStore) => (store = innerStore)} />);
+  let store = buildStore();
+  render(<Component store={store} />);
   store.dispatch(checkIsLoggedInStarted({}));
   expect(screen.getByText('checking user info..')).toBeTruthy();
   expect(screen.queryByText('WrappedComponent')).toBe(null);
@@ -29,8 +29,8 @@ it('Given the user is not logged in and checkIsLoggedInLoading is false, should 
 })
 
 it('Given the page requires authentication, user is not logged and checkIsLoggedInLoading is false should redirect to sign in (dispatch a nav action).', async () => {
-  let store = null;
-  render(<Component authenticationSettings={{ requiresAuthentication: true }} broadCastStore={(innerStore) => (store = innerStore)}/>)
+  const store = buildStore();
+  render(<Component store={store} authenticationSettings={{ requiresAuthentication: true }} />)
   expect(screen.queryByText('checking user info..')).toBe(null)
   expect(screen.queryByText('WrappedComponent')).toBeTruthy()
   expect(store.getState().lastActionForTestingPurposes.type).toBe('nav/signIn')

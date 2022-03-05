@@ -48,10 +48,9 @@ export default function UsersRedirectsHoc(Component) {
         const username = user?.username || null; 
         const hasUsername = !!username;
         redirectIfRequiresUsernameEffect({ isLoggedIn, hasUsername });
-        if(!user) {
+        if(!user && issuer) {
             dispatch(addUser({ issuer, email }))
         }
-    
         const passedProps = {
             ...props,
             users: {
