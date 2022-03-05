@@ -1,12 +1,11 @@
-[] do the same as addNonExistentUser through the hoc (users slice extra reducers)
-
-[] move remaining global selectors (if any) into their files
+[] organize selectors
 [] find a better way (helper method) to globalize and test global selectors 
-[] move global selectors to features/module directory
 
 [] find a way so that each module can register itself
 
 [] write tests for the "redirect" components
+
+[] test the decoupling of the modules
 
 [] create a naming pattern to name actions, storeProps, selectors and sagas. Review code. 
 
@@ -22,6 +21,7 @@
 [] move magic.link public key to Vercel
 [] review the layout when the page reduce height
 
+[] create notification module
 --- 
 
 [] if remember me is not set, how can we log out the user (from magic) when closing the browser?
