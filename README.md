@@ -1,10 +1,10 @@
 ## Next + Redux + Redux-Saga + Styled Components app that implements a login using https://magic.link
 
-This is an exercise on using Next, Redux and Redux-Sagas. It still in progress. 
+This is an exercise on using Next, Redux and Redux-Sagas. It is a work in progress. 
 
-The proposal here is to have different modules, as decoupled as possible from one another, in such a way that we can remove each of the modules and the other ones will keep working. When dependencies need to exist, we will keep them acyclic. 
+The proposal is to have different modules, as decoupled as possible from one another, in such a way that we can remove each of the modules and the other ones will keep working. When dependencies need to exist, we will keep them acyclic. 
 
-We decided to dispach and call navigation through redux and sagas, so that we can have a nice history and also that we can test navigation as a saga side effect. The navigation module is not removable, we consider it as a core module. We may create other core modules in the future, like a notification one. When we need links on the pages, we will probably Override Next/Link to dispatch events and use this navigation approach.
+Navigation is dispatched through redux and sagas, so that we can have a nice history and also that we can test navigation as a saga side effect. The navigation module is not removable, we consider it as a core module. We may create other core modules in the future, like a notification one. When we need links on the pages, we will probably Override Next/Link to dispatch events and use this navigation approach.
 
 All the magic link login is isolated in the authentication module. We also have a "local" user database, where we "keep" the registered users, just for the sake of the exercise. 
 

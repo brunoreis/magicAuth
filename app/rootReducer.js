@@ -1,12 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import authenticationReducer from '../features/authentication/authenticationSlice';
-import usersReducer from '../features/users/usersSlice';
+import modules from './modules';
 
-const rootReducer = combineReducers({
-  authentication: authenticationReducer,
-  users: usersReducer,
+const reducers = {
+  ...modules.reducers,
   lastActionForTestingPurposes: (state = null, action) =>  action, // should only be used for testing purposes
-});
+}
+const rootReducer = combineReducers(reducers);
 
 export default rootReducer;
 

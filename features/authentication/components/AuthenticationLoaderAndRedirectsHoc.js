@@ -48,6 +48,7 @@ const AuthenticationLoaderAndRedirectsHoc = (Component) => {
       requiresAuthentication,
       isLoggedIn,
     });
+
     const passedProps = {
       ...props,
       authentication: {

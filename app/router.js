@@ -8,9 +8,9 @@ export const path = () => {
     }
 }
 
-export const push = (path) => {
+export const push = (path, callback) => {
     if(typeof window !== 'undefined' && Router.router) {
-        return Router.router.push(path)
+        return Router.router.push(path).then(callback)
     } else {
         return "**routerNotInstantiated**"
     }

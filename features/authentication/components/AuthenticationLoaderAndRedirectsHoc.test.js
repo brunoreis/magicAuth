@@ -5,6 +5,7 @@ import { buildStore } from 'app/store';
 import { addTheme } from 'util/testHelpers';
 import addReduxProvider from "util/testHelpers/addReduxProvider";
 import { checkIsLoggedInStarted } from 'features/authentication/authenticationSlice';
+import getNavigatingTo from 'features/navigation/selectors/global/getNavigatingTo';
 
 import AuthenticationLoaderAndRedirectsHoc from './AuthenticationLoaderAndRedirectsHoc';
 
@@ -33,6 +34,6 @@ it('Given the page requires authentication, user is not logged and checkIsLogged
   render(<Component store={store} authenticationSettings={{ requiresAuthentication: true }} />)
   expect(screen.queryByText('checking user info..')).toBe(null)
   expect(screen.queryByText('WrappedComponent')).toBeTruthy()
-  expect(store.getState().lastActionForTestingPurposes.type).toBe('nav/signIn')
+  expect(getNavigatingTo(store.getState())).toBe('/signIn')
 })
 

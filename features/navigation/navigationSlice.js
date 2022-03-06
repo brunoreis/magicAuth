@@ -1,6 +1,25 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-export const navigate = createAction('navigation/navigate');
+export const mainStoreKey = 'navigation';
+
+const initialState = {
+  navigatingTo: null
+}
+
+export const navigationSlice = createSlice({
+  name: 'navigation',
+  initialState,
+  reducers: { 
+    navigate: (state, action) => {
+      state.navigatingTo = action.payload.path
+    },
+  }
+});
+export default navigationSlice.reducer
+
+export const {
+  navigate
+} = navigationSlice.actions;
 export const nav = (path) => ({
   type: 'nav' + path,
 });

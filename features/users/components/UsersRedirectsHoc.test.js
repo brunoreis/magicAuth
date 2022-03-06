@@ -12,6 +12,7 @@ jest.mock('app/router', () => ({
     ... jest.requireActual('app/router'),
     getPathname: () => pathname
 }))
+import getNavigatingTo from 'features/navigation/selectors/global/getNavigatingTo';
 
 import UsersRedirectsHoc from './UsersRedirectsHoc';
 
@@ -23,7 +24,7 @@ it('Given isLogged in and not has username, redirects to signup (if not yet ther
   const thisStore = buildStore();
   pathname = '/otherThanSignup'
   render(<Component store={thisStore} authentication={{ isLoggedIn: true, issuer: null, email: null }}/>);
-  expect(thisStore.getState().lastActionForTestingPurposes.type).toBe('nav/signUp')
+  expect(getNavigatingTo(thisStore.getState())).toBe('/signUp')
 });
 
 it('Given isLogged, has username, and is in the signup page, redirects to root.', async () => {
@@ -33,7 +34,7 @@ it('Given isLogged, has username, and is in the signup page, redirects to root.'
     thisStore.dispatch(receiveUsername({ issuer: 'dude' , username: 'thedude' }))
     render(<Component store={thisStore} authentication={{ isLoggedIn: true, issuer: 'dude', email: null }} />);
     const lastAction = thisStore.getState().lastActionForTestingPurposes;
-    expect(lastAction.type).toBe('nav/')
+    expect(getNavigatingTo(thisStore.getState())).toBe('/')
   });
 
   it('Renders the passed component.', async () => {
