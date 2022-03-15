@@ -3,7 +3,7 @@ import * as R from 'ramda';
 
 import { buildStore } from 'app/store';
 import { addTheme } from 'util/testHelpers';
-import addReduxProvider from "util/testHelpers/addReduxProvider";
+import addReduxProvider from 'util/testHelpers/addReduxProvider';
 import { checkIsLoggedInStarted } from 'features/authentication/authenticationSlice';
 import getNavigatingTo from 'features/navigation/selectors/global/getNavigatingTo';
 
@@ -12,8 +12,10 @@ import AuthenticationLoaderAndRedirectsHoc from './AuthenticationLoaderAndRedire
 const render = R.compose(tlRender, addTheme);
 
 const WrappedComponent = () => <span>WrappedComponent</span>;
-const Component = R.compose(addReduxProvider, AuthenticationLoaderAndRedirectsHoc)(WrappedComponent)
-
+const Component = R.compose(
+  addReduxProvider,
+  AuthenticationLoaderAndRedirectsHoc
+)(WrappedComponent);
 
 it('Given the user is not logged in and checkIsLoggedInLoading is true, should show loader with "checking user info.." text and not show the wrapped component.', async () => {
   let store = buildStore();
@@ -24,16 +26,21 @@ it('Given the user is not logged in and checkIsLoggedInLoading is true, should s
 });
 
 it('Given the user is not logged in and checkIsLoggedInLoading is false, should show the wrapped component.', async () => {
-    render(<Component/>)
-    expect(screen.queryByText('checking user info..')).toBe(null)
-    expect(screen.queryByText('WrappedComponent')).toBeTruthy()
-})
+  let store = buildStore();
+  render(<Component store={store} />);
+  expect(screen.queryByText('checking user info..')).toBe(null);
+  expect(screen.queryByText('WrappedComponent')).toBeTruthy();
+});
 
 it('Given the page requires authentication, user is not logged and checkIsLoggedInLoading is false should redirect to sign in (dispatch a nav action).', async () => {
   const store = buildStore();
-  render(<Component store={store} authenticationSettings={{ requiresAuthentication: true }} />)
-  expect(screen.queryByText('checking user info..')).toBe(null)
-  expect(screen.queryByText('WrappedComponent')).toBeTruthy()
-  expect(getNavigatingTo(store.getState())).toBe('/signIn')
-})
-
+  render(
+    <Component
+      store={store}
+      authenticationSettings={{ requiresAuthentication: true }}
+    />
+  );
+  expect(screen.queryByText('checking user info..')).toBe(null);
+  expect(screen.queryByText('WrappedComponent')).toBeTruthy();
+  expect(getNavigatingTo(store.getState())).toBe('/signIn');
+});

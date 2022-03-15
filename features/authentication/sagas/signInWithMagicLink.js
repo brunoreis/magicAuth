@@ -17,9 +17,11 @@ export default function* signInWithMagicLink(action) {
       },
       true
     );
+
     const metadata = yield call([magic.user, magic.user.getMetadata]);
     yield put(signInSuccess(metadata));
     yield put(isLoggedIn());
+
   } catch (e) {
     yield put(signInFailure());
   }

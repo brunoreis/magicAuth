@@ -1,4 +1,4 @@
-import { render as tlRender, screen } from '@testing-library/react'
+import { render as tlRender, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import * as R from 'ramda'
 
@@ -11,10 +11,10 @@ import SignInPageContainer from './SignInPageContainer'
 
 const render = R.compose(tlRender, addTheme)
 const Component = R.compose(addReduxProvider)(SignInPageContainer)
-
-describe('SignInPageContainer', () => {
+jest.setTimeout(50000)
+describe.only('SignInPageContainer', () => {
   it('Given that the user filled the email and checked remember me, should set remember me to true in the store.', async () => {
-    const email = 'e@mail.com'
+    const email = 'bruno.p.reis@gmail.com'
     const store = buildStore();
     render(<Component store={store}/>)
     userEvent.type(screen.getByLabelText('Your Email'), email)
@@ -22,5 +22,6 @@ describe('SignInPageContainer', () => {
     userEvent.click(screen.getByRole('button'))
     const rememberMeStoreValue = getRememberMe(store.getState())
     expect(rememberMeStoreValue).toBe(true)
+    // await waitFor(() => expect(true).toBe(false), { timeout: 50000 })
   })
 })

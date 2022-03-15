@@ -40,7 +40,7 @@ const SignInPageContainer = () => {
       rememberMe,
       redirectURI: `${document.location.protocol}//${document.location.host}/`,
     };
-    dispatch(signIn(payload));
+    dispatch(signIn(payload)); 
   };
 
   const canSubmit = !!email;

@@ -1,13 +1,15 @@
-[] add flag on modules to enable/disable modules
+[] study runSagas and other resources and make the saga tests easier to write and read.
+[] test the pages
+
+
 [] test the decoupling of the modules
+[] review redundant key names and other stuff
 
 [] create a naming pattern to name actions, storeProps, selectors and sagas. Review code. 
 
 [] move router to navigation?
 
-[] study runSagas and other resources and make the saga tests easier to write and read.
 
-[] test the pages
 [] add e2e testCafe tests 
 [] run tests in the deploy
 

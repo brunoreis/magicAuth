@@ -8,9 +8,9 @@ it('preload, check log in, redirects and start other sagas', () => {
   const g = sagas();
   expect(g.next().value).toEqual(
     all([
-      usersWatcher,
-      authenticationWatchers,
-      navigationWatchers,
+      usersWatcher(),
+      authenticationWatchers(),
+      navigationWatchers(),
     ])
   );
 });
