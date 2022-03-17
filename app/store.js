@@ -15,7 +15,6 @@ import Router from 'next/router';
 
 import sagas from './sagas';
 import rootReducer from './rootReducer';
-// import createSagaMonitor from "@clarketm/saga-monitor";
 
 const initialState = null;
 export const setInitialState = (state) => (initialState = state);
@@ -45,31 +44,11 @@ const persistConfig = {
 };
 
 
-// const logger = (store) => (next) => (action) => {
-//   console.log('-------DISPATCH: ', action);
-//   return next(action);
-// };
-
-
-/*
-const createSagaMiddlewarePayload = {
-  sagaMonitor: createSagaMonitor({
-    level: "log",
-    effectTrigger: true,
-    effectResolve: true,
-    actionDispatch: true
-  })
-}*/
 
 export const buildStore = (preloadedState = {}) => {
   const persistedReducer = persistReducer(persistConfig, rootReducer);
-  // const effectMiddleware = next => effect => {
-  //   console.log('effect', effect);
-  //   return next(effect);
-  // }
-  const sagaMiddleware = createSagaMiddleware({
-    // effectMiddlewares: [effectMiddleware]
-  });
+
+  const sagaMiddleware = createSagaMiddleware({});
   const store = configureStore({
     reducer: persistedReducer,
     preloadedState,
@@ -80,7 +59,6 @@ export const buildStore = (preloadedState = {}) => {
         },
       })
         .concat(sagaMiddleware)
-        // .concat(logger),
   });
   sagaMiddleware.run(sagas);
   const persistor = persistStore(store);

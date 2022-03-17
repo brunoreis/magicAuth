@@ -1,6 +1,5 @@
 import { all, takeEvery, call, fork, take } from 'redux-saga/effects';
 
-
 import {
   signIn,
   logOut,
