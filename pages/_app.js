@@ -1,33 +1,3 @@
-import { ThemeProvider } from 'styled-components';
-import { Provider } from 'react-redux';
-
-import GlobalStyle from 'styles/GlobalStyle';
-import theme from 'styles/theme';
-import { buildStore } from 'app/store';
-import modules from 'app/modules'
-
-const wrappers = modules.wrappers
-
-const FeatureWrappers = (Component) => wrappers.reduce(
-  (previous, FeatureHoc) => {
-    return FeatureHoc(previous)
-  },
-  Component
-)
-
-
-function MyApp({ Component, pageProps }) {
-  const WrappedComponent = FeatureWrappers(Component, pageProps)
-  return (
-    <>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-          <Provider store={buildStore()}>
-              <WrappedComponent {...pageProps} />
-          </Provider> 
-      </ThemeProvider>
-    </>
-  );
-}
-
-export default MyApp;
+import AppWithModulesHocs from './AppWithModulesHocs';
+const App = (Component, pageProps) => <AppWithModulesHocs Component={Component} pageProps={pageProps}/>
+export default App

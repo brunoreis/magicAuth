@@ -1,7 +1,3 @@
-[] study runSagas and other resources and make the saga tests easier to write and read.
-[] test the pages
-
-
 [] test the decoupling of the modules
 [] review redundant key names and other stuff
 

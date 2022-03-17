@@ -12,9 +12,9 @@ it('should gather the reducers', () => {
 })
 
 it('should gather the wrappers', () => {
-    expect(modules.wrappers).toEqual([
-        ...users.wrappers,
-        ...authentication.wrappers,
+    expect(modules.hocs).toEqual([
+        users.hoc,
+        authentication.hoc,
     ])
 })
 

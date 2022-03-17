@@ -6,10 +6,10 @@ import { useDispatch } from 'react-redux';
 
 import { navigate } from 'features/navigation/navigationSlice';
 
-import getCheckIsLoggedInLoading from '../selectors/global/getCheckIsLoggedInLoading'
-import getIsLoggedIn from '../selectors/global/getIsLoggedIn'
-import getIssuer from '../selectors/global/getIssuer';
-import getAuthUserEmail from '../selectors/global/getAuthUserEmail';
+import getCheckIsLoggedInLoading from './selectors/global/getCheckIsLoggedInLoading'
+import getIsLoggedIn from './selectors/global/getIsLoggedIn'
+import getIssuer from './selectors/global/getIssuer';
+import getAuthUserEmail from './selectors/global/getAuthUserEmail';
 
 export const LoadingContainer = styled.div`
   width: 100%;

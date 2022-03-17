@@ -1,11 +1,11 @@
 import reducer from './authenticationSlice'
-import authenticationPageWrappers from './authenticationPageWrappers';
+import hoc from './hoc';
 import watcher from './sagas/authenticationWatchers';
 
 const config = {
   reducer,
   key: 'authentication',
-  wrappers: authenticationPageWrappers,
+  hoc,
   watcher
 }
 export default config;

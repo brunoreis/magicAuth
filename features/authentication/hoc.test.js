@@ -7,7 +7,7 @@ import addReduxProvider from 'util/testHelpers/addReduxProvider';
 import { checkIsLoggedInStarted } from 'features/authentication/authenticationSlice';
 import getNavigatingTo from 'features/navigation/selectors/global/getNavigatingTo';
 
-import AuthenticationLoaderAndRedirectsHoc from './AuthenticationLoaderAndRedirectsHoc';
+import AuthenticationLoaderAndRedirectsHoc from './hoc';
 
 const render = R.compose(tlRender, addTheme);
 

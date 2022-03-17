@@ -1,4 +1,4 @@
-import { render as tlRender, screen, fireEvent } from '@testing-library/react'
+import { render as tlRender, screen } from '@testing-library/react'
 import SignUpPage from './SignUpPage'
 import { addTheme } from 'util/testHelpers'
 import {within} from '@testing-library/dom'

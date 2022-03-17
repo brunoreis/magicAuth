@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { getPathname } from 'app/router';
 import { navigate } from 'features/navigation/navigationSlice';
 
-import getUser from '../selectors/global/getUser';
-import { addUser }  from '../usersSlice'
+import getUser from './selectors/global/getUser';
+import { addUser }  from './usersSlice'
 
 export const LoadingContainer = styled.div`
     width: 100%;

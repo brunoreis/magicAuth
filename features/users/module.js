@@ -1,11 +1,11 @@
 import reducer from './usersSlice'
-import usersPageWrappers from './usersPageWrappers';
+import hoc from './hoc';
 import watcher from './sagas/usersWatcher';
 
 const config = {
   reducer,
   key: 'users',
-  wrappers: usersPageWrappers,
+  hoc,
   watcher
 }
 export default config;

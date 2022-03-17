@@ -15,9 +15,9 @@ const config = {
       module.reducer ? { ...reducers, [module.key]: module.reducer } : reducers,
     {}
   ),
-  wrappers: modules.reduce(
-    (wrappers, module) =>
-      module.wrappers ? [...wrappers, ...module.wrappers] : wrappers,
+  hocs: modules.reduce(
+    (hocs, module) =>
+      module.hoc ? [...hocs, module.hoc] : hocs,
     []
   ),
   watchers: modules.reduce(

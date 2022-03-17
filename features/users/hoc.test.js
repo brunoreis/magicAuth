@@ -14,7 +14,7 @@ jest.mock('app/router', () => ({
 }));
 import getNavigatingTo from 'features/navigation/selectors/global/getNavigatingTo';
 
-import UsersRedirectsHoc from './UsersRedirectsHoc';
+import UsersRedirectsHoc from './hoc';
 
 const render = R.compose(tlRender, addTheme);
 const WrappedComponent = () => <span>WrappedComponent</span>;
