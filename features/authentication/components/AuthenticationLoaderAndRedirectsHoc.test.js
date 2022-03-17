@@ -26,14 +26,14 @@ it('Given the user is not logged in and checkIsLoggedInLoading is true, should s
 });
 
 it('Given the user is not logged in and checkIsLoggedInLoading is false, should show the wrapped component.', async () => {
-  let store = buildStore();
+  let store = buildStore({ authentication: {checkIsLoggedInLoading: false}});
   render(<Component store={store} />);
   expect(screen.queryByText('checking user info..')).toBe(null);
   expect(screen.queryByText('WrappedComponent')).toBeTruthy();
 });
 
 it('Given the page requires authentication, user is not logged and checkIsLoggedInLoading is false should redirect to sign in (dispatch a nav action).', async () => {
-  const store = buildStore();
+  const store = buildStore({ authentication: {checkIsLoggedInLoading: false}});
   render(
     <Component
       store={store}

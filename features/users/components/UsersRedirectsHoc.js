@@ -26,9 +26,11 @@ const redirectIfRequiresUsernameEffect = ({ isLoggedIn, hasUsername }) => {
     useEffect(
         () => {
             if(isLoggedIn && !hasUsername && pathname !== SIGNUP_ROUTE) {
+                // add some extra info to the action
                 dispatch(navigate({ path: SIGNUP_ROUTE }))
             }
             if(isLoggedIn && hasUsername && pathname === SIGNUP_ROUTE) {
+                // add some extra info to the action
                 dispatch(navigate({ path: ROOT_ROUTE }))
             }
         },
@@ -39,7 +41,7 @@ const redirectIfRequiresUsernameEffect = ({ isLoggedIn, hasUsername }) => {
 
 export default function UsersRedirectsHoc(Component) {
     return (props) => {
-        const { authentication } = props
+        const { authentication } = props //?
         const dispatch = useDispatch();
         const issuer = authentication.issuer
         const email = authentication.email

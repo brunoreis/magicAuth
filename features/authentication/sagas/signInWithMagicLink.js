@@ -9,16 +9,19 @@ import {
 
 export default function* signInWithMagicLink(action) {
   try {
+    const loginWithMagicLinkPayload = {
+      email: action.payload.email,
+      redirectURI: action.payload.redirectURI
+    }
+
     yield call(
       [magic.auth, magic.auth.loginWithMagicLink],
-      {
-        email: action.payload.email,
-        redirectURI: action.payload.redirectURI
-      },
+      loginWithMagicLinkPayload,
       true
     );
 
     const metadata = yield call([magic.user, magic.user.getMetadata]);
+    
     yield put(signInSuccess(metadata));
     yield put(isLoggedIn());
 

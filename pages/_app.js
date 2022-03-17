@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import GlobalStyle from 'styles/GlobalStyle';
 import theme from 'styles/theme';
-import store from 'app/store';
+import { buildStore } from 'app/store';
 import modules from 'app/modules'
 
 const wrappers = modules.wrappers
@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-          <Provider store={store}>
+          <Provider store={buildStore()}>
               <WrappedComponent {...pageProps} />
           </Provider> 
       </ThemeProvider>

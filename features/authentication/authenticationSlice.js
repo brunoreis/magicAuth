@@ -9,7 +9,7 @@ const initialState = {
   email: null,
   rememberMe: false,
   signInLoading: false, 
-  checkIsLoggedInLoading: false,
+  checkIsLoggedInLoading: true,
 };
 
 export const authenticationSlice = createSlice({
@@ -24,6 +24,7 @@ export const authenticationSlice = createSlice({
       state.issuer = action.payload.issuer
       state.isLoggedIn = true
       state.signInLoading = false
+      state.email = action.payload.email
     },
     signInFailure: (state, action) => {
       state.signInLoading = false
@@ -54,7 +55,7 @@ export const authenticationSlice = createSlice({
 const persistConfig = { 
   key: mainStoreKey,
   storage,
-  blacklist: ['signInLoading', 'showLoader']
+  whitelist: ['issuer', 'email', 'rememberMe']
 }
 export default persistReducer(persistConfig, authenticationSlice.reducer);
 

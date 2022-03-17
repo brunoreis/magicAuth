@@ -19,7 +19,7 @@ const reducer = authenticationReducer
 
 it('should handle initial state', () => {
   expect(reducer(undefined, {})).toEqual({
-    checkIsLoggedInLoading: false,
+    checkIsLoggedInLoading: true,
     email: null,
     issuer: null,
     rememberMe: false,

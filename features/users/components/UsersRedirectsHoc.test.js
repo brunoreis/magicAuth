@@ -36,17 +36,22 @@ it('Given isLogged in and not has username, redirects to signup (if not yet ther
 });
 
 it('Given isLogged, has username, and is in the signup page, redirects to root.', async () => {
-    pathname = '/signUp'
-    const store = buildStore();
-    store.dispatch(addUser({ issuer: 'dude' , email: 'dude@dude.com' }))
-    store.dispatch(receiveUsername({ issuer: 'dude' , username: 'thedude' }))
-    render(<Component store={store} authentication={{ isLoggedIn: true, issuer: 'dude', email: null }} />);
-    const lastAction = store.getState().lastActionForTestingPurposes;
-    expect(getNavigatingTo(store.getState())).toBe('/')
-  });
+  pathname = '/signUp';
+  const store = buildStore();
+  store.dispatch(addUser({ issuer: 'dude', email: 'dude@dude.com' }));
+  store.dispatch(receiveUsername({ issuer: 'dude', username: 'thedude' }));
+  render(
+    <Component
+      store={store}
+      authentication={{ isLoggedIn: true, issuer: 'dude', email: null }}
+    />
+  );
+  const lastAction = store.getState().lastActionForTestingPurposes;
+  expect(getNavigatingTo(store.getState())).toBe('/');
+});
 
-  it('Renders the passed component.', async () => {
-    const store = buildStore();
-    render(<Component store={store} authentication={{ issuer: null }} />);
-    expect(screen.queryByText('WrappedComponent')).toBeTruthy();
-  });
+it('Renders the passed component.', async () => {
+  const store = buildStore();
+  render(<Component store={store} authentication={{ issuer: null }} />);
+  expect(screen.queryByText('WrappedComponent')).toBeTruthy();
+});

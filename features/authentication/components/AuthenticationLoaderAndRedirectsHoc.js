@@ -30,6 +30,7 @@ const redirectIfRequiresAuthenticationEffect = ({
   const dispatch = useDispatch();
   useEffect(() => {
     if (!checkIsLoggedInLoading && requiresAuthentication && !isLoggedIn) {
+      console.log('go to sign in...')
       dispatch(navigate({ path: SIGNIN_ROUTE }));
     }
   }, [checkIsLoggedInLoading, requiresAuthentication, isLoggedIn]);
@@ -41,6 +42,7 @@ const AuthenticationLoaderAndRedirectsHoc = (Component) => {
     const isLoggedIn = useSelector(getIsLoggedIn);
     const issuer = useSelector(getIssuer);
     const email = useSelector(getAuthUserEmail);
+    
     const requiresAuthentication =
     props?.authenticationSettings?.requiresAuthentication || false;
     redirectIfRequiresAuthenticationEffect({
@@ -55,6 +57,7 @@ const AuthenticationLoaderAndRedirectsHoc = (Component) => {
         isLoggedIn,
         issuer,
         email,
+        checkIsLoggedInLoading,
       },
     };
     delete passedProps.authenticationSettings;    

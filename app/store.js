@@ -61,7 +61,7 @@ const createSagaMiddlewarePayload = {
   })
 }*/
 
-export const buildStore = () => {
+export const buildStore = (preloadedState = {}) => {
   const persistedReducer = persistReducer(persistConfig, rootReducer);
   // const effectMiddleware = next => effect => {
   //   console.log('effect', effect);
@@ -72,6 +72,7 @@ export const buildStore = () => {
   });
   const store = configureStore({
     reducer: persistedReducer,
+    preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
@@ -84,9 +85,6 @@ export const buildStore = () => {
   sagaMiddleware.run(sagas);
   const persistor = persistStore(store);
   sagaMiddleware.setContext({ persistor });
+  checkRouter(() => store.dispatch({ type: 'app/routerReady' }));
   return store;
 };
-const store = buildStore();
-export default store;
-
-checkRouter(() => store.dispatch({ type: 'app/routerReady' })); // maybe we should move this to an app sage. This cause cyclic dependenci if inside the buildStore method
