@@ -6,13 +6,14 @@ const createJestConfig = nextJest({ dir: './' })
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapper: {
-    '^components/(.*)$': '<rootDir>/components/$1',
+    '^modules/(.*)$': '<rootDir>/modules/$1',
     '^app/(.*)$': '<rootDir>/app/$1',
-    '^features/(.*)$': '<rootDir>/features/$1',
+    '^components/(.*)$': '<rootDir>/components/$1',
     '^util/(.*)$': '<rootDir>/util/$1',
     '^styles/(.*)$': '<rootDir>/styles/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
+  testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test|tst).[tj]s?(x)"]
 }
 
 module.exports = createJestConfig(customJestConfig)

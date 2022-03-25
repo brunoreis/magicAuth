@@ -1,7 +1,7 @@
 import modules from './modules'
-import authentication from 'features/authentication/module';
-import users from 'features/users/module';
-import navigation from 'features/navigation/module';
+import authentication from 'modules/authentication/module';
+import users from 'modules/users/module';
+import navigation from 'modules/navigation/module';
 
 it('should gather the reducers', () => {
     expect(modules.reducers).toEqual({

@@ -60,9 +60,9 @@ export const buildStore = (preloadedState = {}) => {
       })
         .concat(sagaMiddleware)
   });
-  sagaMiddleware.run(sagas);
   const persistor = persistStore(store);
   sagaMiddleware.setContext({ persistor });
+  sagaMiddleware.run(sagas);
   checkRouter(() => store.dispatch({ type: 'app/routerReady' }));
   return store;
 };

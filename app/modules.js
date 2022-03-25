@@ -1,6 +1,6 @@
-import users from 'features/users/module';
-import authentication from 'features/authentication/module';
-import navigation from 'features/navigation/module';
+import users from 'modules/users/module';
+import authentication from 'modules/authentication/module';
+import navigation from 'modules/navigation/module';
 
 //the order is important do to the inclusion of the wrappers around the _app component
 const modules = [users, authentication, navigation].reduce(

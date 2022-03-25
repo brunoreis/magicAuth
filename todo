@@ -1,10 +1,14 @@
+[] rename Sagas
+ - main module file should be sagas.js and live in the root of the module
+ - sagas that respond to specific actions can share the same name
+
+[] improve saga test: checkIsLoggedInSaga - tests are redundant, testind the same things
+
+
 [] test the decoupling of the modules
-[] review redundant key names and other stuff
+[] review redundant key names and other module code. Make modules as simple and organized as possible. 
 
-[] create a naming pattern to name actions, storeProps, selectors and sagas. Review code. 
-
-[] move router to navigation?
-
+[] move router to navigation module?
 
 [] add e2e testCafe tests 
 [] run tests in the deploy

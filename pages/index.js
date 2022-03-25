@@ -1,4 +1,4 @@
-import WelcomePageContainer from 'features/welcome/components/WelcomePage/WelcomePageContainer'
+import WelcomePageContainer from 'modules/welcome/components/WelcomePage/WelcomePageContainer'
 
 export default function Welcome(props) {
   return (

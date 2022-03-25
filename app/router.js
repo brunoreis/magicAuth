@@ -25,7 +25,7 @@ export const getSearch = () => {
 }
 
 export const getPathname = () => {
-    if(typeof window !== 'undefined') {
+    if(typeof window !== 'undefined' && Router.router) {
         return Router.pathname
     } else {
         return "no Router"
