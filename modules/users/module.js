@@ -1,6 +1,6 @@
 import reducer from './slice/usersSlice'
 import hoc from './hoc';
-import watcher from './sagas/usersWatcher';
+import watcher from './sagas/usersWatcherSaga';
 
 const config = {
   reducer,
