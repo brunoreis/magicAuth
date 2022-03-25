@@ -1,20 +1,21 @@
-[] rename Sagas
- - main module file should be sagas.js and live in the root of the module
- - sagas that respond to specific actions can share the same name
+[] move router to navigation module?
+
+[] navigate to SignUp/Welcome after login
+[] navigate to SignUp/Welcome after checkUserLoggedIn
 
 [] improve saga test: checkIsLoggedInSaga - tests are redundant, testind the same things
 
-
-[] test the decoupling of the modules
+[] test the decoupling of the modules (comment/remove some modules to check if it still works)
 [] review redundant key names and other module code. Make modules as simple and organized as possible. 
 
-[] move router to navigation module?
+[] run tests in the deploy
+[] create a nice report and "auto-publish" it in the repo
+
+[] show message suggesting to close/close the first screen after the authentication/signInSuccess
 
 [] add e2e testCafe tests 
-[] run tests in the deploy
 
 [] show signIn failure messages
-[] show message suggesting to close the first screen after the authentication/signInSuccess
 
 [] move magic.link public key to Vercel
 [] review the layout when the page reduce height
