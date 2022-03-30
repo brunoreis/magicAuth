@@ -20,9 +20,9 @@ const config = {
       module.hoc ? [...hocs, module.hoc] : hocs,
     []
   ),
-  watchers: modules.reduce(
-    (watchers, module) =>
-      module.watcher ? [...watchers, module.watcher] : watchers,
+  sagaWatchers: modules.reduce(
+    (sagaWatchers, module) =>
+      module.sagaWatcher ? [...sagaWatchers, module.sagaWatcher] : sagaWatchers,
     []
   ),
 };

@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import Layout, { HeaderContainer, FooterContainer } from 'components/Layout';
 import Header from 'components/Header'
-import Button from 'components/Button';
+import Button from 'modules/visualComponents/components/Button';
 
 import { WelcomeIconContainer } from './WelcomePage.styles'
 

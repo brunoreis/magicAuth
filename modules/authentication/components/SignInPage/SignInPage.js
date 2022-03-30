@@ -1,8 +1,8 @@
 import Layout, { HeaderContainer, FormContainer, FooterContainer } from 'components/Layout';
 import Header from 'components/Header';
-import TextField from 'components/TextField';
-import Button from 'components/Button';
-import Toggle from 'components/Toggle';
+import TextField from 'modules/visualComponents/components/TextField';
+import Button from 'modules/visualComponents/components/Button';
+import Toggle from '../Toggle/Toggle';
 import { FieldContainer, FieldLabel } from 'components/styles';
 import buildOnEnterKeyDown from 'components/buildOnEnterKeyDown';
 

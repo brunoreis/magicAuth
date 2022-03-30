@@ -1,6 +1,3 @@
-[] refactor app into a module
-[] move components to the app module
-
 [] improve test description of the system
 
 [] navigate to SignUp/Welcome after login

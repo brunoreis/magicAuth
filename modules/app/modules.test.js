@@ -19,9 +19,9 @@ it('should gather the wrappers', () => {
 })
 
 it('should gather the sagas', () => {
-    expect(modules.watchers).toEqual([
-        users.watcher,
-        authentication.watcher,
-        navigation.watcher,
+    expect(modules.sagaWatchers).toEqual([
+        users.sagaWatcher,
+        authentication.sagaWatcher,
+        navigation.sagaWatcher,
     ])
 })

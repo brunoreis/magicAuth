@@ -1,9 +1,9 @@
 
-import watcher from './sagas/navigationWatchersSaga';
+import sagaWatcher from './sagas/navigationWatchersSaga';
 import reducer, { mainStoreKey} from './slice/slice'
 
 const config = {
-  watcher,
+  sagaWatcher,
   reducer,
   key: mainStoreKey
 }
