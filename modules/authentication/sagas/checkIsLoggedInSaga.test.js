@@ -12,7 +12,8 @@ import {
 import checkIsLoggedInSaga from './checkIsLoggedInSaga';
 
 export let mockedQuerySearch = ''; // I'm not sure about this mock strategy. It smells like it can cause concurrency issues
-jest.mock('../../../app/router', () => ({
+
+jest.mock('modules/navigation/util/router', () => ({
   getSearch: () => mockedQuerySearch,
   path: jest.fn(),
 }));

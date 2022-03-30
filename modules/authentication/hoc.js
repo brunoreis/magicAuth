@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { navigate } from 'modules/navigation/slice/slice';
-import { getPathname } from 'app/router';
+import { getPathname } from 'modules/navigation/util/router';
 
 import getCheckIsLoggedInLoading from './selectors/global/getCheckIsLoggedInLoading'
 import getIsLoggedIn from './selectors/global/getIsLoggedIn'

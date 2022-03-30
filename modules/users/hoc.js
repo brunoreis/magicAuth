@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { getPathname } from 'app/router';
+import { getPathname } from 'modules/navigation/util/router';
 import { navigate } from 'modules/navigation/slice/slice';
 
 import getUser from './selectors/global/getUser';

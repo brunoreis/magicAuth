@@ -8,8 +8,8 @@ import { buildStore } from 'app/store';
 import { addUser, receiveUsername } from './slice/usersSlice';
 
 let pathname = 'mock';
-jest.mock('app/router', () => ({
-  ...jest.requireActual('app/router'),
+jest.mock('modules/navigation/util/router', () => ({
+  ...jest.requireActual('modules/navigation/util/router'),
   getPathname: () => pathname,
 }));
 import getNavigatingTo from 'modules/navigation/selectors/global/getNavigatingTo';
