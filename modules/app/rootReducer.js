@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import modules from './modules';
+import modules from 'modules/app/modules';
 
 const reducers = {
   ...modules.reducers,

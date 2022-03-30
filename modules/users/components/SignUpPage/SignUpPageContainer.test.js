@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { addTheme } from 'util/testHelpers'
 import addReduxProvider from "util/testHelpers/addReduxProvider"
 import * as R from 'ramda'
-import { buildStore } from 'app/store';
+import { buildStore } from 'modules/app/store';
 
 import { addUser } from 'modules/users/slice/usersSlice'
 

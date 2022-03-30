@@ -1,7 +1,7 @@
 import { render as tlRender, screen } from '@testing-library/react';
 import * as R from 'ramda';
 
-import { buildStore } from 'app/store';
+import { buildStore } from 'modules/app/store';
 import { addTheme } from 'util/testHelpers';
 import addReduxProvider from 'util/testHelpers/addReduxProvider';
 import { checkIsLoggedInStarted } from 'modules/authentication/slice/authenticationSlice';

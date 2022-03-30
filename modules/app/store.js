@@ -13,7 +13,7 @@ import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 import Router from 'next/router';
 
-import sagas from './sagas';
+import sagas from 'modules/app/sagas/sagas';
 import rootReducer from './rootReducer';
 
 const initialState = null;

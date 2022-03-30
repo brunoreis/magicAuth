@@ -3,7 +3,7 @@ import { render as tlRender, screen } from '@testing-library/react'
 
 import { addTheme } from 'util/testHelpers'
 import addReduxProvider from "util/testHelpers/addReduxProvider"
-import { buildStore } from 'app/store';
+import { buildStore } from 'modules/app/store';
 
 import WelcomePage from './WelcomePage'
 

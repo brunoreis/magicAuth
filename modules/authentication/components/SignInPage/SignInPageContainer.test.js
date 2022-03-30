@@ -5,7 +5,7 @@ import * as R from 'ramda';
 import { addTheme } from 'util/testHelpers';
 import addReduxProvider from 'util/testHelpers/addReduxProvider';
 import getRememberMe from 'modules/authentication/selectors/global/getRememberMe';
-import { buildStore } from 'app/store';
+import { buildStore } from 'modules/app/store';
 
 import getCheckIsLoggedInLoading from '../../selectors/global/getCheckIsLoggedInLoading';
 import getIsLoggedIn from '../../selectors/global/getIsLoggedIn';

@@ -2,9 +2,9 @@ import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import GlobalStyle from 'styles/GlobalStyle';
 import theme from 'styles/theme';
-import { buildStore } from './store';
+import { buildStore } from '../store';
 
-import modules from 'app/modules';
+import modules from 'modules/app/modules';
 
 const hocs = modules.hocs;
 const store = buildStore();
