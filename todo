@@ -19,6 +19,7 @@
 
 [] move magic.link public key to Vercel
 [] review the layout when the page reduce height
+[] add linter to block wrong imports
 
 [] create notification module
 --- 

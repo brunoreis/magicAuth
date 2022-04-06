@@ -5,7 +5,7 @@ import navigationWatchersSaga from 'modules/navigation/sagas/navigationWatchersS
 import usersWatcherSaga from 'modules/users/sagas/usersWatcherSaga';
 
 describe('sagas', () => {
-  it('preload, check log in, redirects and start other sagas', () => {
+  it('run watcher sagas from the other modules', () => {
     const g = sagas();
     expect(g.next().value).toEqual(
       all([
