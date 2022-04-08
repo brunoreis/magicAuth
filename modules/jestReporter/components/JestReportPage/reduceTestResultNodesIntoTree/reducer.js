@@ -8,24 +8,22 @@ const addNewNode = (nestedNodes, path, node, name) => {
 
   const newNestedNodes = [...nestedNodes];
   if (path.length === 0) {
+    const repeated = newNestedNodes.find((node) => node.name === newNode.name);
+    if(repeated) {
+      if(repeated.type !== newNode.type) throw new Error('Something wrong in the tree')
+      return newNestedNodes;
+    }
     newNestedNodes.push(newNode);
   } else {
     const next = path.shift();
     const nodeIndex = newNestedNodes.findIndex(({ name }) => name === next);
-    if (path.length === 0) {
-      newNestedNodes[nodeIndex] = { ...newNestedNodes[nodeIndex] };
-      newNestedNodes[nodeIndex].nodes = [...newNestedNodes[nodeIndex].nodes];
-      newNestedNodes[nodeIndex].nodes.push(newNode);
-      return newNestedNodes;
-    } else {
-      newNestedNodes[nodeIndex] = { ...newNestedNodes[nodeIndex] };
-      newNestedNodes[nodeIndex].nodes = addNewNode(
-        newNestedNodes[nodeIndex].nodes,
-        path,
-        node,
-        name
-      );
-    }
+    newNestedNodes[nodeIndex] = { ...newNestedNodes[nodeIndex] };
+    newNestedNodes[nodeIndex].nodes = addNewNode(
+      newNestedNodes[nodeIndex].nodes,
+      path,
+      node,
+      name
+    );
   }
 
   return newNestedNodes;
