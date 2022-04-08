@@ -1,3 +1,5 @@
+const clone = (original) => JSON.parse(JSON.stringify(original));
+
 export const testResults = [
   {
     testFilePath:
@@ -24,208 +26,70 @@ export const expectedFirstIteration = [
   },
 ];
 
-export const expectedSecondIteration = [
+export const expectedSecondIteration = clone(expectedFirstIteration);
+expectedSecondIteration[0].nodes = [
   {
-    fullName: 'modules',
-    type: 'folderPath',
-    name: 'modules',
-    nodes: [
-      {
-        fullName: 'modules AppWithModulesHocs.test.js',
-        type: 'file',
-        name: 'AppWithModulesHocs.test.js',
-        nodes: [],
-      },
-    ],
+    fullName: 'modules AppWithModulesHocs.test.js',
+    type: 'file',
+    name: 'AppWithModulesHocs.test.js',
+    nodes: [],
   },
 ];
 
-export const expectedThirdIteration = [
+export const expectedThirdIteration = clone(expectedSecondIteration);
+expectedThirdIteration[0].nodes[0].nodes = [
   {
-    fullName: 'modules',
-    type: 'folderPath',
-    name: 'modules',
-    nodes: [
-      {
-        fullName: 'modules AppWithModulesHocs.test.js',
-        type: 'file',
-        name: 'AppWithModulesHocs.test.js',
-        nodes: [
-          {
-            fullName: 'modules AppWithModulesHocs.test.js renders',
-            type: 'namePath',
-            name: 'renders',
-            nodes: [],
-          },
-        ],
-      },
-    ],
+    fullName: 'modules AppWithModulesHocs.test.js renders',
+    type: 'namePath',
+    name: 'renders',
+    nodes: [],
   },
 ];
 
-export const expectedFourthIteration = [
+export const expectedFourthIteration = clone(expectedThirdIteration);
+expectedFourthIteration[0].nodes[0].nodes[0].nodes = [
   {
-    fullName: 'modules',
-    type: 'folderPath',
-    name: 'modules',
-    nodes: [
-      {
-        fullName: 'modules AppWithModulesHocs.test.js',
-        type: 'file',
-        name: 'AppWithModulesHocs.test.js',
-        nodes: [
-          {
-            fullName: 'modules AppWithModulesHocs.test.js renders',
-            type: 'namePath',
-            name: 'renders',
-            nodes: [
-              {
-                fullName:
-                  'modules AppWithModulesHocs.test.js renders successfully',
-                type: 'testResult',
-                name: 'successfully',
-                nodes: [],
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    fullName: 'modules AppWithModulesHocs.test.js renders successfully',
+    type: 'testResult',
+    name: 'successfully',
+    nodes: [],
   },
 ];
 
 // the first emmited node will be "modules", that already exists, so nothing should change
 export const expectedFirstIterationForSecondTest = expectedFourthIteration;
 
-export const expectedSecondIterationForSecondTest = [
+export const expectedSecondIterationForSecondTest = clone(
+  expectedFirstIterationForSecondTest
+);
+expectedSecondIterationForSecondTest[0].nodes[1] = {
+  fullName: 'modules AppWithModulesSagas.test.js',
+  name: 'AppWithModulesSagas.test.js',
+  nodes: [],
+  type: 'file',
+};
+
+export const expectedThirdIterationForSecondTest = clone(
+  expectedSecondIterationForSecondTest
+);
+expectedThirdIterationForSecondTest[0].nodes[1].nodes = [
   {
-    fullName: 'modules',
-    name: 'modules',
-    nodes: [
-      {
-        fullName: 'modules AppWithModulesHocs.test.js',
-        name: 'AppWithModulesHocs.test.js',
-        nodes: [
-          {
-            fullName: 'modules AppWithModulesHocs.test.js renders',
-            name: 'renders',
-            nodes: [
-              {
-                fullName:
-                  'modules AppWithModulesHocs.test.js renders successfully',
-                name: 'successfully',
-                nodes: [],
-                type: 'testResult',
-              },
-            ],
-            type: 'namePath',
-          },
-        ],
-        type: 'file',
-      },
-      {
-        fullName: 'modules AppWithModulesSagas.test.js',
-        name: 'AppWithModulesSagas.test.js',
-        nodes: [],
-        type: 'file',
-      },
-    ],
-    type: 'folderPath',
+    fullName: 'modules AppWithModulesSagas.test.js register',
+    name: 'register',
+    nodes: [],
+    type: 'namePath',
   },
 ];
 
-export const expectedThirdIterationForSecondTest = [
-  {
-    fullName: 'modules',
-    name: 'modules',
-    nodes: [
-      {
-        fullName: 'modules AppWithModulesHocs.test.js',
-        name: 'AppWithModulesHocs.test.js',
-        nodes: [
-          {
-            fullName: 'modules AppWithModulesHocs.test.js renders',
-            name: 'renders',
-            nodes: [
-              {
-                fullName:
-                  'modules AppWithModulesHocs.test.js renders successfully',
-                name: 'successfully',
-                nodes: [],
-                type: 'testResult',
-              },
-            ],
-            type: 'namePath',
-          },
-        ],
-        type: 'file',
-      },
-      {
-        fullName: 'modules AppWithModulesSagas.test.js',
-        name: 'AppWithModulesSagas.test.js',
-        nodes: [
-          {
-            fullName: 'modules AppWithModulesSagas.test.js register',
-            name: 'register',
-            nodes: [],
-            type: 'namePath',
-          },
-        ],
-        type: 'file',
-      },
-    ],
-    type: 'folderPath',
-  },
-];
+export const expectedFourthIterationForSecondTest = clone(
+  expectedThirdIterationForSecondTest
+);
 
-export const expectedFourthIterationForSecondTest = [
+expectedFourthIterationForSecondTest[0].nodes[1].nodes[0].nodes = [
   {
-    fullName: 'modules',
-    name: 'modules',
-    nodes: [
-      {
-        fullName: 'modules AppWithModulesHocs.test.js',
-        name: 'AppWithModulesHocs.test.js',
-        nodes: [
-          {
-            fullName: 'modules AppWithModulesHocs.test.js renders',
-            name: 'renders',
-            nodes: [
-              {
-                fullName:
-                  'modules AppWithModulesHocs.test.js renders successfully',
-                name: 'successfully',
-                nodes: [],
-                type: 'testResult',
-              },
-            ],
-            type: 'namePath',
-          },
-        ],
-        type: 'file',
-      },
-      {
-        fullName: 'modules AppWithModulesSagas.test.js',
-        name: 'AppWithModulesSagas.test.js',
-        nodes: [
-          {
-            fullName: 'modules AppWithModulesSagas.test.js register',
-            name: 'register',
-            nodes: [
-              {
-                fullName:
-                  'modules AppWithModulesSagas.test.js register watchers',
-                name: 'watchers',
-                nodes: [],
-                type: 'testResult',
-              },
-            ],
-            type: 'namePath',
-          },
-        ],
-        type: 'file',
-      },
-    ],
-    type: 'folderPath',
+    fullName: 'modules AppWithModulesSagas.test.js register watchers',
+    name: 'watchers',
+    nodes: [],
+    type: 'testResult',
   },
 ];
