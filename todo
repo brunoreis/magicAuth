@@ -1,4 +1,8 @@
-[] improve test description of the system
+[] improve test description of the system - using the new jest reporting tool
+
+[] move the components folder content to one or more module folders to keep as most as we can inside the modular structure
+[] maybe the util content can go inside the app module
+[] styles can go inside the app module
 
 [] navigate to SignUp/Welcome after login
 [] navigate to SignUp/Welcome after checkUserLoggedIn

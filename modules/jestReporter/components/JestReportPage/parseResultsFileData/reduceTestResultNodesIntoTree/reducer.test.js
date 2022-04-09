@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import mapTestResultIntoNodes from '../mapTestResultIntoNodes/mapTestResultIntoNodes';
+import mapTestResultIntoNodes from './mapTestResultIntoNodes/mapTestResultIntoNodes';
 import {
   testResults,
   expectedFirstIteration,
@@ -13,7 +13,7 @@ import {
 } from './testData';
 
 describe('reducer', () => {
-  describe('first test result', () => {
+  describe('reduce the first test result into the node tree', () => {
     const testResultNodes = mapTestResultIntoNodes(testResults[0]);
     describe('first iteration', () => {
       const nestedNodes = reducer([], testResultNodes[0]);
@@ -28,7 +28,7 @@ describe('reducer', () => {
     describe('second iteration', () => {
       const nestedNodes = reducer(expectedFirstIteration, testResultNodes[1]);
 
-      it('should not alter the passed tree', () => {
+      it('should not alter the passed tree (immutability)', () => {
         expect(expectedFirstIteration[0].nodes.length).toBe(0);
       });
       it('should create one nested second level node', () => {
@@ -42,7 +42,7 @@ describe('reducer', () => {
     describe('third iteration', () => {
       const nestedNodes = reducer(expectedSecondIteration, testResultNodes[2]);
 
-      it('should not alter the passed tree', () => {
+      it('should not alter the passed tree (immutability)', () => {
         expect(expectedSecondIteration[0].nodes[0].nodes.length).toBe(0);
       });
       it('creates a nested node', () => {
@@ -69,7 +69,7 @@ describe('reducer', () => {
       });
     });
   });
-  describe.only('second test result', () => {
+  describe('reduce the second test result into the node tree', () => {
     const testResultNodes = mapTestResultIntoNodes(testResults[1]);
     describe('first iteration', () => {
       const nestedNodes = reducer(expectedFourthIteration, testResultNodes[0]);
@@ -101,7 +101,7 @@ describe('reducer', () => {
       });
     });
 
-    describe.only('fourth iteration', () => {
+    describe('fourth iteration', () => {
       const nestedNodes = reducer(expectedThirdIterationForSecondTest, testResultNodes[3]);
      
       it('should create another fourth level node', () => {

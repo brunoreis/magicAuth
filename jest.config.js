@@ -13,11 +13,11 @@ const customJestConfig = {
     '^styles/(.*)$': '<rootDir>/styles/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
-  // modulePathIgnorePatterns: ["./modules/jestReporter/out/*"],
-  // reporters: [
-  //   "default", 
-  //   "./modules/jestReporter/customReporter.js"
-  // ],
+  modulePathIgnorePatterns: ["./modules/jestReporter/out/*"],
+  reporters: [
+    "default", 
+    "./modules/jestReporter/customReporter.js"
+  ],
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test|tst).[tj]s?(x)"]
 }
 

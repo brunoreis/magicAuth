@@ -9,21 +9,23 @@ const addNewNode = (nestedNodes, path, node, name) => {
   const newNestedNodes = [...nestedNodes];
   if (path.length === 0) {
     const repeated = newNestedNodes.find((node) => node.name === newNode.name);
-    if(repeated) {
-      if(repeated.type !== newNode.type) throw new Error('Something wrong in the tree')
+    const hasSameNameAndSameType = repeated && repeated.type === newNode.type
+    if(hasSameNameAndSameType) {
       return newNestedNodes;
     }
     newNestedNodes.push(newNode);
   } else {
     const next = path.shift();
     const nodeIndex = newNestedNodes.findIndex(({ name }) => name === next);
-    newNestedNodes[nodeIndex] = { ...newNestedNodes[nodeIndex] };
-    newNestedNodes[nodeIndex].nodes = addNewNode(
-      newNestedNodes[nodeIndex].nodes,
-      path,
-      node,
-      name
-    );
+    // if(nodeIndex !== -1) {
+      newNestedNodes[nodeIndex] = { ...newNestedNodes[nodeIndex] };
+      newNestedNodes[nodeIndex].nodes = addNewNode(
+        newNestedNodes[nodeIndex].nodes,
+        path,
+        node,
+        name
+      );
+    // }
   }
 
   return newNestedNodes;

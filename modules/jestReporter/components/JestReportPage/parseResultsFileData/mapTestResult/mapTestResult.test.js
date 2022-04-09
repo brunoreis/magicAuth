@@ -1,9 +1,9 @@
-import mapFileResultIntoFlatTestResults from './mapFileResultIntoFlatTestResults';
+import mapTestResult from './mapTestResult';
 import fileResult from './fileResult.mock';
 
-describe('mapFileResultIntoFlatTestResults', () => {
+describe('mapTestResult', () => {
   const rootDir = '/Users/scalablepath/magic_auth';
-  const flatTests = mapFileResultIntoFlatTestResults(fileResult, rootDir);
+  const flatTests = mapTestResult(fileResult, rootDir);
   it('should map into 4 tests', () => {
     expect(flatTests.length).toBe(3);
   });
