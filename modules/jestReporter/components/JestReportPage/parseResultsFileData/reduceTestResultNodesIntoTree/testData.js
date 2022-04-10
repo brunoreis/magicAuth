@@ -15,6 +15,13 @@ export const testResults = [
     fullName: 'register watchers',
     title: 'register watchers',
   },
+  {
+    testFilePath:
+      '/Users/scalablepath/magic_auth/modules/AppWithModulesHocs.test.js',
+    cleanFilePath: 'modules AppWithModulesSagas.test.js',
+    fullName: 'register new watchers',
+    title: 'register new watchers',
+  },
 ];
 
 export const expectedFirstIteration = [
@@ -93,3 +100,34 @@ expectedFourthIterationForSecondTest[0].nodes[1].nodes[0].nodes = [
     type: 'testResult',
   },
 ];
+
+export const expectedFirstIterationForThirdTest = clone(
+  expectedFourthIterationForSecondTest
+);
+export const expectedSecondIterationForThirdTest = clone(
+  expectedFirstIterationForThirdTest
+);
+export const expectedThirdIterationForThirdTest = clone(
+  expectedSecondIterationForThirdTest
+);
+export const expectedFourthIterationForThirdTest = clone(
+  expectedThirdIterationForThirdTest
+);
+expectedFourthIterationForThirdTest[0].nodes[1].nodes[0].nodes = [
+  ...expectedFourthIterationForThirdTest[0].nodes[1].nodes[0].nodes,
+  {
+    fullName: 'modules AppWithModulesSagas.test.js register new',
+    name: 'new',
+    nodes: [],
+    type: 'namePath',
+  },
+];
+export const expectedFifthIterationForThirdTest = clone(expectedFourthIterationForThirdTest)
+expectedFifthIterationForThirdTest[0].nodes[1].nodes[0].nodes[1].nodes = [
+  {
+    fullName: 'modules AppWithModulesSagas.test.js register new watchers',
+    name: 'watchers',
+    nodes: [],
+    type: 'testResult',
+  }
+]

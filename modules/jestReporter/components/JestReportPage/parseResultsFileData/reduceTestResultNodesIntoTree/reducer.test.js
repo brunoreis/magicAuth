@@ -9,7 +9,12 @@ import {
   expectedFirstIterationForSecondTest,
   expectedSecondIterationForSecondTest,
   expectedThirdIterationForSecondTest,
-  expectedFourthIterationForSecondTest
+  expectedFourthIterationForSecondTest,
+  expectedFirstIterationForThirdTest,
+  expectedSecondIterationForThirdTest,
+  expectedThirdIterationForThirdTest,
+  expectedFourthIterationForThirdTest,
+  expectedFifthIterationForThirdTest
 } from './testData';
 
 describe('reducer', () => {
@@ -109,6 +114,61 @@ describe('reducer', () => {
       });
       it('should create the correct node structure', () => {
         expect(nestedNodes).toStrictEqual(expectedFourthIterationForSecondTest);
+      });
+    });
+
+  });
+
+  describe('reduce the third test result into the node tree', () => {
+    const testResultNodes = mapTestResultIntoNodes(testResults[2]);
+    describe('first iteration', () => {
+      const nestedNodes = reducer(expectedFourthIterationForSecondTest, testResultNodes[0]);
+      it('should keep one first level node', () => {
+        expect(nestedNodes.length).toBe(1);
+      });
+      it('should create the correct node structure (no changes)', () => {
+        expect(nestedNodes).toStrictEqual(expectedFirstIterationForThirdTest);
+      });
+    });
+
+    describe('second iteration', () => {
+      const nestedNodes = reducer(expectedFirstIterationForThirdTest, testResultNodes[1]);
+      it('should create another second level node', () => {
+        expect(nestedNodes[0].nodes.length).toBe(2);
+      });
+      it('should create the correct node structure', () => {
+        expect(nestedNodes).toStrictEqual(expectedSecondIterationForThirdTest);
+      });
+    });
+
+    describe('third iteration', () => {
+      const nestedNodes = reducer(expectedSecondIterationForThirdTest, testResultNodes[2]);
+      it('should create another third level node', () => {
+        expect(nestedNodes[0].nodes[1].nodes.length).toBe(1);
+      });
+      it('should create the correct node structure', () => {
+        expect(nestedNodes).toStrictEqual(expectedThirdIterationForThirdTest);
+      });
+    });
+
+    describe('fourth iteration', () => {
+      const nestedNodes = reducer(expectedThirdIterationForThirdTest, testResultNodes[3]);
+      it('should create another fourth level node', () => {
+        expect(nestedNodes[0].nodes[1].nodes[0].nodes.length).toBe(2);
+      });
+      it('should create the correct node structure', () => {
+        expect(nestedNodes).toStrictEqual(expectedFourthIterationForThirdTest);
+      });
+    });
+
+    describe('fifth iteration', () => {
+      const nestedNodes = reducer(expectedFourthIterationForThirdTest, testResultNodes[4]);
+      it('should create another fourth level node', () => {
+        expect(nestedNodes[0].nodes[1].nodes[0].nodes.length).toBe(2);
+        expect(nestedNodes[0].nodes[1].nodes[0].nodes[1].nodes.length).toBe(1);
+      });
+      it('should create the correct node structure', () => {
+        expect(nestedNodes).toStrictEqual(expectedFifthIterationForThirdTest);
       });
     });
 

@@ -9,5 +9,6 @@ export default (nestedNodes, flatTestResults) => {
     },
     [] 
   )
-  return flatTestResultNodes.reduce(reducer, nestedNodes);
+  const normalizedTree = flatTestResultNodes.reduce(reducer, nestedNodes);
+  return normalizedTree;
 };
