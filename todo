@@ -1,9 +1,7 @@
 JEST REPORT
-[] use different styles for different types
-[] remove open/close icon from leafs
-[] remove the layout (auto margin) from the jest report
 [] "glue"/denormalize/flatten the words that only have one child node 
-
+[] keyboard navigation
+[] remove the layout (auto margin) from the jest report page
 [] improve test description of the system - using the new jest reporting tool
 
 

@@ -7,5 +7,6 @@ export const Wrapper = styled.div`
 
 export const Icon = styled.div`
   color: ${({theme}) => theme.colors.silver};
+  display: ${({show}) => show ? 'block' : 'none'};
   transform: ${({open}) => open ? 'rotate(180deg) translate(0.1rem, 0rem)' : 'rotate(90deg) translate(0.3rem, 0)'};
 `;

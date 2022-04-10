@@ -6,14 +6,15 @@ import OpenCloseIcon from './OpenCloseIcon';
 export default function TestNode({ node }) {
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen(!open)
+  const hasNodes = node.nodes.length > 0
   return (
     <div>
       <TitleWrapper onClick={toggle}>
-        <OpenCloseIcon open={open} />
-        <Title>{node.name}</Title>{' '}
-        <Small>
-            {node.type} - {node.fullName}
-        </Small>
+        <OpenCloseIcon open={open} show={hasNodes} />
+        <Title type={node.type}>{node.name}</Title>{' '}
+        {/* <Small>
+          {node.fullName}
+        </Small> */}
       </TitleWrapper>
       {open && (
         <TestNodeListWrapper>

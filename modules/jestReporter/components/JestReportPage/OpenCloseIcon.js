@@ -1,9 +1,9 @@
 import { Wrapper, Icon } from './OpenCloseIcon.styles';
 
-const OpenCloseIcon = ({ open }) => {
+const OpenCloseIcon = ({ open, show }) => {
     return (
         <Wrapper>
-            <Icon open={open}>^</Icon>
+            <Icon show={show} open={open}>^</Icon>
         </Wrapper>
     )
 }
