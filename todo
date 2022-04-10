@@ -1,4 +1,13 @@
+JEST REPORT
+[] use different styles for different types
+[] remove open/close icon from leafs
+[] remove the layout (auto margin) from the jest report
+[] "glue"/denormalize/flatten the words that only have one child node 
+
 [] improve test description of the system - using the new jest reporting tool
+
+
+/JEST REPORT
 
 [] move the components folder content to one or more module folders to keep as most as we can inside the modular structure
 [] maybe the util content can go inside the app module

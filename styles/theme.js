@@ -7,6 +7,7 @@ const theme = {
     error: '#CC5552',
     success: '#799B67',
     border: '#999',
+    silver: '#999',
     light: '#eee',
     disabled: '#eee',
   },
