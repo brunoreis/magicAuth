@@ -122,12 +122,50 @@ expectedFourthIterationForThirdTest[0].nodes[1].nodes[0].nodes = [
     type: 'namePath',
   },
 ];
-export const expectedFifthIterationForThirdTest = clone(expectedFourthIterationForThirdTest)
+export const expectedFifthIterationForThirdTest = clone(
+  expectedFourthIterationForThirdTest
+);
 expectedFifthIterationForThirdTest[0].nodes[1].nodes[0].nodes[1].nodes = [
   {
     fullName: 'modules AppWithModulesSagas.test.js register new watchers',
     name: 'watchers',
     nodes: [],
     type: 'testResult',
-  }
-]
+  },
+];
+
+export const denormalizedTree = [
+  {
+    fullName: 'modules',
+    type: 'folderPath',
+    name: 'modules',
+    nodes: [
+      {
+        fullName: 'modules AppWithModulesHocs.test.js renders successfully',
+        type: 'testResult',
+        name: 'AppWithModulesHocs.test.js renders successfully',
+        nodes: [],
+      },
+      {
+        fullName: 'modules AppWithModulesSagas.test.js register',
+        name: 'AppWithModulesSagas.test.js register',
+        nodes: [
+          {
+            fullName: 'modules AppWithModulesSagas.test.js register watchers',
+            name: 'watchers',
+            nodes: [],
+            type: 'testResult',
+          },
+          {
+            fullName:
+              'modules AppWithModulesSagas.test.js register new watchers',
+            name: 'new watchers',
+            nodes: [],
+            type: 'testResult',
+          },
+        ],
+        type: 'namePath',
+      },
+    ],
+  },
+];
